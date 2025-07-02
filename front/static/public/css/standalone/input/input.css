@@ -1,0 +1,16 @@
+.input {
+    border: 2px solid var(--gray20);
+    font-weight: bold;
+    color: var(--gray200);
+    transition: 0.3s;
+}
+
+.input--error {
+    border: 2px solid var(--red100);
+}
+
+.input::placeholder {
+    text-align: center;
+    color: var(--gray100);
+    font-weight: bold;
+}

@@ -1,0 +1,12 @@
+.login-container__input-container-error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: auto;
+    height: 30px;
+    padding: 0px 10px;
+    color: var(--red100);
+    transition: 0.2s;
+    font-family: Helvetica;
+    font-weight: bold;
+}

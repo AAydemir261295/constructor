@@ -1,0 +1,8 @@
+.login-container__btns{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+}

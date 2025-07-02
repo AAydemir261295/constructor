@@ -1,0 +1,11 @@
+@import url("./__loader/loader-container__loader.css");
+@import url("/css/animations/loader/animations.css");
+
+.loader-container {
+    position: relative;
+    display: block;
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    font-family: initial;
+}

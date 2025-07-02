@@ -1,0 +1,11 @@
+.pincode-container__input {
+  text-align: center;
+  border-radius: 8px;
+  width: 30px;
+  height: 28px;
+}
+
+.pincode-container__inpur--error {
+  border: 2px solid var(--red200);
+  box-shadow: inset 1px 1px 2px 0px var(--red100), inset -1px -1px 2px 0px var(--red100);
+}

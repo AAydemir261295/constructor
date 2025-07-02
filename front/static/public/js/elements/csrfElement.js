@@ -1,0 +1,1 @@
+export const csrfElement = { ele: "input", options: { type: "hidden", id: "csrf" } }

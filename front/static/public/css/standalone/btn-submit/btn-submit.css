@@ -1,0 +1,11 @@
+.btn-submit {
+    border: 2px solid transparent;
+    background-color: var(--gray20);
+    color: var(--gray200);
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    border: 1px solid var(--blue200);
+}

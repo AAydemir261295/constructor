@@ -1,0 +1,23 @@
+@import url("/css/blocks/login-container/login-container.css");
+@import url("/css/blocks/login-container/__form/login-container__form.css");
+@import url("/css/blocks/login-container/__input-container/login-container__input-container.css");
+@import url("/css/blocks/login-container/__input/login-container__input.css");
+@import url("/css/blocks/login-container/__btns/login-container__btns.css");
+@import url("/css/blocks/login-container/__btn/login-container__btn.css");
+@import url("/css/blocks/login-container/__success/login-container__success.css");
+@import url("/css/blocks/login-container/__input-container-error/login-container__input-container-error.css");
+
+@import url("/css/standalone/pincode-container/pincode-container.css");
+@import url("/css/standalone/pincode-container/__input/pincode-container__input.css");
+
+
+@import url("/css/standalone/btn-submit/btn-submit.css");
+@import url("/css/standalone/input/input.css");
+
+
+@import url("/css/animations/login/loginForm.css");
+
+
+.main {
+    opacity: 0;
+}

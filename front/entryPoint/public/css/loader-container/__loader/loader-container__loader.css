@@ -1,0 +1,24 @@
+.loader-container__loader {
+    position: relative;
+    float: left;
+    width: 40px;
+    height: 40px;
+    background-color: var(--blue200);
+    /* transition: 0.3s; */
+}
+
+.loader-container__loader:first-child {
+    border-top-left-radius: 30px;
+}
+
+.loader-container__loader:nth-child(5) {
+    border-top-right-radius: 30px;
+}
+
+.loader-container__loader:nth-child(21) {
+    border-bottom-left-radius: 30px;
+}
+
+.loader-container__loader:last-child {
+    border-bottom-right-radius: 30px;
+}
