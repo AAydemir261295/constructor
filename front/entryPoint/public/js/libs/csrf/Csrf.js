@@ -8,7 +8,6 @@ export class Csrf {
 
     update(value) {
         this.csrf.value = value;
-        console.log(this.csrf.value);
     }
 
     get() {

@@ -12,10 +12,12 @@ export class RegisterForm extends Form {
     isValid;
     isRegistered;
     errorContainer;
+    returnBtn;
 
     constructor(elements) {
         super(elements.ref.registerForm, [elements.ref.emailInput]);
         this.emailInput = new RegisterInput(this.form.elements[elements.ref.emailInput], elements.ref.errorContainer);
+        this.returnBtn = document.querySelector(elements.ref.btn);
         this.onSubmit();
     }
 

@@ -12,7 +12,6 @@ export default class MyDom extends EventEmitter {
 
     async addStyles(styles, urlPath) {
         var that = this;
-        console.log(styles);
         styles.forEach((css) => {
             const element = { ele: "link", options: { rel: 'stylesheet', href: `http://localhost:3001/css/${css}`, type: 'text/css' } }
             let cssLink = that.createElement(element);
@@ -48,6 +47,17 @@ export default class MyDom extends EventEmitter {
             }
         }
     }
+
+    editRegisterTree(elements, changes) {
+        var result = elements;
+
+        elements.tree.childs[0].childs[0].classList = [...elements.tree.childs[0].childs[0].classList, ...changes];
+        elements.tree.childs[0].childs[1].classList = elements.tree.childs[0].childs[1].classList.filter((v) => v != changes[0] || v != changes[1]);
+
+        return result;
+    }
+
+
 
     createElement(eleData) {
         var ele = document.createElement(eleData.ele);

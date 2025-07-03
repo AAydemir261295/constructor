@@ -1,70 +1,65 @@
 import crypto from "crypto";
 import { setCredentials, tokenIsExist } from "../db/cookie";
-import { csrfIsExist, setCsrf, updateCsrf } from "../db/csrf";
-
-export class Security {
+import { csrfIsExist, setCsrf, updateCsrf as updateStoredCsrf } from "../db/csrf";
 
 
-    constructor() { }
-
-    async initCookie() {
-        let expiry = this.getExpiry(1);
-        let token = this.getToken();
-        let tokenNotExist = await tokenIsExist(token, Date.now());
-        if (tokenNotExist) {
-            let isSaved = await setCredentials(token, { expiry: expiry });
-            if (isSaved) {
-                return { token: token, values: { expiry: expiry } };
-            } else {
-                return false;
-            }
+export async function initCookie() {
+    let expiry = getExpiry(1);
+    let token = getToken();
+    let tokenNotExist = await tokenIsExist(token, Date.now());
+    if (tokenNotExist) {
+        let isSaved = await setCredentials(token, { expiry: expiry });
+        if (isSaved) {
+            return { token: token, values: { expiry: expiry } };
         } else {
-            this.initCookie();
+            return false;
         }
+    } else {
+        initCookie();
     }
+}
 
 
-    async initCsrf(token) {
-        let expiry = this.getExpiry(1);
-        let csrf = this.getCsrf();
-        let csrfNotExist = await csrfIsExist(csrf);
-        if (csrfNotExist) {
-            let isSaved = await setCsrf(token, csrf, expiry);
-            if (isSaved) {
-                return { csrf: csrf, expiry: expiry };
-            } else {
-                return false;
-            }
-        } else {
-            this.initCsrf(token);
-        }
-    }
-
-    async updateCsrf(token) {
-        let expiry = this.getExpiry(1);
-        let csrf = this.getCsrf();
-        let isSaved = await updateCsrf(token, csrf, expiry);
+export async function initCsrf(token) {
+    let expiry = getExpiry(1);
+    let csrf = getCsrf();
+    let csrfNotExist = await csrfIsExist(csrf);
+    if (csrfNotExist) {
+        let isSaved = await setCsrf(token, csrf, expiry);
         if (isSaved) {
             return { csrf: csrf, expiry: expiry };
         } else {
             return false;
         }
+    } else {
+        initCsrf(token);
     }
-
-
-    getExpiry(hours: number) {
-        return Date.now() + hours * 60 * 60 * 1000;
-    }
-
-    getCsrf() {
-        return crypto.randomBytes(32).toString("hex");
-    }
-
-    getToken() {
-        return crypto.randomBytes(32).toString("hex");
-    }
-
-
 }
+
+export async function updateCsrf(token) {
+    let expiry = getExpiry(1);
+    let csrf = getCsrf();
+    let isSaved = await updateStoredCsrf(token, csrf, expiry);
+    if (isSaved) {
+        return { csrf: csrf, expiry: expiry };
+    } else {
+        return false;
+    }
+}
+
+
+function getExpiry(hours: number) {
+    return Date.now() + hours * 60 * 60 * 1000;
+}
+
+function getCsrf() {
+    return crypto.randomBytes(32).toString("hex");
+}
+
+function getToken() {
+    return crypto.randomBytes(32).toString("hex");
+}
+
+
 
 

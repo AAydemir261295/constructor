@@ -39,9 +39,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var usersRepo_1 = require("../src/db/repos/usersRepo");
 var security_1 = require("../src/security");
+var csrf_1 = require("../src/middlewares/csrf");
 var router = (0, express_1.Router)();
 var security = new security_1.Security();
-router.get('/:csrf/:email', security.compareCsrf, function (req, res, next) {
+router.get('/:csrf/:email', csrf_1.csrf, function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
         var email, pincode, isPincodeSaved, userId;
         return __generator(this, function (_a) {

@@ -39,100 +39,51 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.initCookie = initCookie;
-exports.initCsrf = initCsrf;
-exports.updateCsrf = updateCsrf;
+exports.csrf = csrf;
+var cookieRepo_1 = require("../db/repos/cookieRepo");
+var csrfRepo_1 = require("../db/repos/csrfRepo");
 var crypto_1 = __importDefault(require("crypto"));
-var cookie_1 = require("../db/cookie");
-var csrf_1 = require("../db/csrf");
-function initCookie() {
+function csrf(req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var expiry, token, tokenNotExist, isSaved;
+        var clientCsrf, clientCookie, timeStamp, tmp1, tmp, serverCsrf, serverCookies, expiry, csrf_1, isSaved;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    expiry = getExpiry(1);
-                    token = getToken();
-                    return [4 /*yield*/, (0, cookie_1.tokenIsExist)(token, Date.now())];
+                    clientCsrf = req.params.csrf;
+                    clientCookie = req.cookies;
+                    timeStamp = Date.now();
+                    return [4 /*yield*/, (0, cookieRepo_1.getCredentials)(clientCookie.token, timeStamp)];
                 case 1:
-                    tokenNotExist = _a.sent();
-                    if (!tokenNotExist) return [3 /*break*/, 3];
-                    return [4 /*yield*/, (0, cookie_1.setCredentials)(token, { expiry: expiry })];
+                    tmp1 = _a.sent();
+                    return [4 /*yield*/, (0, csrfRepo_1.getCsrf)(clientCookie.token, timeStamp)];
                 case 2:
-                    isSaved = _a.sent();
-                    if (isSaved) {
-                        return [2 /*return*/, { token: token, values: { expiry: expiry } }];
-                    }
-                    else {
-                        return [2 /*return*/, false];
-                    }
-                    return [3 /*break*/, 4];
+                    tmp = _a.sent();
+                    if (!(tmp.length == 1 && tmp1.length == 1)) return [3 /*break*/, 6];
+                    serverCsrf = tmp[0].csrf;
+                    serverCookies = tmp1[0];
+                    if (!(serverCsrf == clientCsrf)) return [3 /*break*/, 4];
+                    expiry = Date.now() + 1 * 60 * 60 * 1000;
+                    csrf_1 = crypto_1.default.randomBytes(32).toString("hex");
+                    return [4 /*yield*/, (0, csrfRepo_1.updateCsrf)(serverCookies.token, csrf_1, expiry)];
                 case 3:
-                    initCookie();
-                    _a.label = 4;
-                case 4: return [2 /*return*/];
-            }
-        });
-    });
-}
-function initCsrf(token) {
-    return __awaiter(this, void 0, void 0, function () {
-        var expiry, csrf, csrfNotExist, isSaved;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    expiry = getExpiry(1);
-                    csrf = getCsrf();
-                    return [4 /*yield*/, (0, csrf_1.csrfIsExist)(csrf)];
-                case 1:
-                    csrfNotExist = _a.sent();
-                    if (!csrfNotExist) return [3 /*break*/, 3];
-                    return [4 /*yield*/, (0, csrf_1.setCsrf)(token, csrf, expiry)];
-                case 2:
                     isSaved = _a.sent();
                     if (isSaved) {
-                        return [2 /*return*/, { csrf: csrf, expiry: expiry }];
+                        req["newCsrf"] = csrf_1;
+                        next();
                     }
                     else {
-                        return [2 /*return*/, false];
+                        next();
                     }
-                    return [3 /*break*/, 4];
-                case 3:
-                    initCsrf(token);
-                    _a.label = 4;
-                case 4: return [2 /*return*/];
+                    return [3 /*break*/, 5];
+                case 4:
+                    next();
+                    _a.label = 5;
+                case 5: return [3 /*break*/, 7];
+                case 6:
+                    next();
+                    _a.label = 7;
+                case 7: return [2 /*return*/];
             }
         });
     });
-}
-function updateCsrf(token) {
-    return __awaiter(this, void 0, void 0, function () {
-        var expiry, csrf, isSaved;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    expiry = getExpiry(1);
-                    csrf = getCsrf();
-                    return [4 /*yield*/, (0, csrf_1.updateCsrf)(token, csrf, expiry)];
-                case 1:
-                    isSaved = _a.sent();
-                    if (isSaved) {
-                        return [2 /*return*/, { csrf: csrf, expiry: expiry }];
-                    }
-                    else {
-                        return [2 /*return*/, false];
-                    }
-                    return [2 /*return*/];
-            }
-        });
-    });
-}
-function getExpiry(hours) {
-    return Date.now() + hours * 60 * 60 * 1000;
-}
-function getCsrf() {
-    return crypto_1.default.randomBytes(32).toString("hex");
-}
-function getToken() {
-    return crypto_1.default.randomBytes(32).toString("hex");
 }

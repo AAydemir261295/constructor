@@ -11,5 +11,5 @@ var app = (0, express_1.default)();
 app.set('view engine', 'ejs');
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.static(staticPath));
-app.use("/", index_1.default);
+app.use(index_1.default);
 app.listen(3000, function () { return console.log("Running on port ".concat(3000)); });

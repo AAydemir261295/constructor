@@ -18,4 +18,5 @@ app.use(cookieParser());
 app.use('/auth', authRoute);
 
 
+
 app.listen(port, () => console.log(`Running on port ${port}`));

@@ -62,10 +62,11 @@ export const loginElements =
                                     { ele: "p", options: { innerText: "Электронная почта уже используется" } },
                                 ]
                             },
-
                             {
                                 ele: "div", classList: ["login-container__btns"], childs: [
                                     { ele: "button", classList: ["login-container__btn", "btn-submit", "nostyle-btn"], options: { id: "submit-btn", type: "submit", innerText: "Зарегистрироваться" } },
+                                    { ele: "button", classList: ["login-container__btn", "btn-submit", "nostyle-btn"], options: { id: "return-btn", type: "button", innerText: "Войти" } },
+
                                 ]
                             },
                         ]
@@ -73,7 +74,7 @@ export const loginElements =
                     {
                         ele: "div", classList: ["login-container__success", "hidden", "invisible"], childs: [
                             { ele: "p", classList: ["login-container__success-msg"], options: { innerText: "Вы успешно зарегистрировались!" } },
-                            { ele: "button", classList: ["login-container__btn", "btn-submit", "nostyle-btn"], options: { id: "return-btn", innerText: "Войти" } }
+                            { ele: "button", classList: ["login-container__btn", "btn-submit", "nostyle-btn"], options: { id: "to-login-btn", innerText: "Войти" } }
                         ]
                     }
                 ]
@@ -99,12 +100,14 @@ export const loginElements =
                 registerForm: "register-form",
                 emailInput: "register-input",
                 errorContainer: "login-container__input-container-error",
+                btn: "#return-btn"
+
             }
         },
         success: {
             ref: {
                 container: "login-container__success",
-                btn: "return-btn"
+                btn: "to-login-btn"
             }
         }
 

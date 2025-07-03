@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import { setPincodeByEmail } from '../src/db/repos/usersRepo';
 import { Security } from '../src/security';
+import { csrf } from '../src/middlewares/csrf';
 
 var router = Router();
 var security = new Security();
 
 
-router.get('/:csrf/:email', security.compareCsrf, async function (req, res, next) {
+router.get('/:csrf/:email', csrf, async function (req, res, next) {
 
     if (req.hasOwnProperty("newCsrf")) {
         let email = req.params.email;

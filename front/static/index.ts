@@ -1,7 +1,9 @@
 import express from 'express'
-import indexRoute from "./routes/login/index";
 import cors from "cors";
 import cookieParser from 'cookie-parser';
+import loginRoute from "./routes/login";
+import registerRoute from "./routes/register";
+
 
 
 const app = express();
@@ -18,6 +20,8 @@ app.use(cookieParser());
 app.use(express.static("public"));
 
 
-app.use("/login", indexRoute);
+app.use("/login", loginRoute);
+app.use("/register", registerRoute);
+
 
 app.listen(port, () => console.log(`Running on port ${port}`));

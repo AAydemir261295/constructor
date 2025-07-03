@@ -39,104 +39,100 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Security = void 0;
+exports.initCookie = initCookie;
+exports.initCsrf = initCsrf;
+exports.updateCsrf = updateCsrf;
 var crypto_1 = __importDefault(require("crypto"));
 var cookie_1 = require("../db/cookie");
 var csrf_1 = require("../db/csrf");
-var Security = /** @class */ (function () {
-    function Security() {
-    }
-    Security.prototype.initCookie = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var expiry, token, tokenNotExist, isSaved;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        expiry = this.getExpiry(1);
-                        token = this.getToken();
-                        return [4 /*yield*/, (0, cookie_1.tokenIsExist)(token, Date.now())];
-                    case 1:
-                        tokenNotExist = _a.sent();
-                        if (!tokenNotExist) return [3 /*break*/, 3];
-                        return [4 /*yield*/, (0, cookie_1.setCredentials)(token, { expiry: expiry })];
-                    case 2:
-                        isSaved = _a.sent();
-                        if (isSaved) {
-                            return [2 /*return*/, { token: token, values: { expiry: expiry } }];
-                        }
-                        else {
-                            return [2 /*return*/, false];
-                        }
-                        return [3 /*break*/, 4];
-                    case 3:
-                        this.initCookie();
-                        _a.label = 4;
-                    case 4: return [2 /*return*/];
-                }
-            });
+function initCookie() {
+    return __awaiter(this, void 0, void 0, function () {
+        var expiry, token, tokenNotExist, isSaved;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expiry = getExpiry(1);
+                    token = getToken();
+                    return [4 /*yield*/, (0, cookie_1.tokenIsExist)(token, Date.now())];
+                case 1:
+                    tokenNotExist = _a.sent();
+                    if (!tokenNotExist) return [3 /*break*/, 3];
+                    return [4 /*yield*/, (0, cookie_1.setCredentials)(token, { expiry: expiry })];
+                case 2:
+                    isSaved = _a.sent();
+                    if (isSaved) {
+                        return [2 /*return*/, { token: token, values: { expiry: expiry } }];
+                    }
+                    else {
+                        return [2 /*return*/, false];
+                    }
+                    return [3 /*break*/, 4];
+                case 3:
+                    initCookie();
+                    _a.label = 4;
+                case 4: return [2 /*return*/];
+            }
         });
-    };
-    Security.prototype.initCsrf = function (token) {
-        return __awaiter(this, void 0, void 0, function () {
-            var expiry, csrf, csrfNotExist, isSaved;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        expiry = this.getExpiry(1);
-                        csrf = this.getCsrf();
-                        return [4 /*yield*/, (0, csrf_1.csrfIsExist)(csrf)];
-                    case 1:
-                        csrfNotExist = _a.sent();
-                        if (!csrfNotExist) return [3 /*break*/, 3];
-                        return [4 /*yield*/, (0, csrf_1.setCsrf)(token, csrf, expiry)];
-                    case 2:
-                        isSaved = _a.sent();
-                        if (isSaved) {
-                            return [2 /*return*/, { csrf: csrf, expiry: expiry }];
-                        }
-                        else {
-                            return [2 /*return*/, false];
-                        }
-                        return [3 /*break*/, 4];
-                    case 3:
-                        this.initCsrf(token);
-                        _a.label = 4;
-                    case 4: return [2 /*return*/];
-                }
-            });
+    });
+}
+function initCsrf(token) {
+    return __awaiter(this, void 0, void 0, function () {
+        var expiry, csrf, csrfNotExist, isSaved;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expiry = getExpiry(1);
+                    csrf = getCsrf();
+                    return [4 /*yield*/, (0, csrf_1.csrfIsExist)(csrf)];
+                case 1:
+                    csrfNotExist = _a.sent();
+                    if (!csrfNotExist) return [3 /*break*/, 3];
+                    return [4 /*yield*/, (0, csrf_1.setCsrf)(token, csrf, expiry)];
+                case 2:
+                    isSaved = _a.sent();
+                    if (isSaved) {
+                        return [2 /*return*/, { csrf: csrf, expiry: expiry }];
+                    }
+                    else {
+                        return [2 /*return*/, false];
+                    }
+                    return [3 /*break*/, 4];
+                case 3:
+                    initCsrf(token);
+                    _a.label = 4;
+                case 4: return [2 /*return*/];
+            }
         });
-    };
-    Security.prototype.updateCsrf = function (token) {
-        return __awaiter(this, void 0, void 0, function () {
-            var expiry, csrf, isSaved;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        expiry = this.getExpiry(1);
-                        csrf = this.getCsrf();
-                        return [4 /*yield*/, (0, csrf_1.updateCsrf)(token, csrf, expiry)];
-                    case 1:
-                        isSaved = _a.sent();
-                        if (isSaved) {
-                            return [2 /*return*/, { csrf: csrf, expiry: expiry }];
-                        }
-                        else {
-                            return [2 /*return*/, false];
-                        }
-                        return [2 /*return*/];
-                }
-            });
+    });
+}
+function updateCsrf(token) {
+    return __awaiter(this, void 0, void 0, function () {
+        var expiry, csrf, isSaved;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expiry = getExpiry(1);
+                    csrf = getCsrf();
+                    return [4 /*yield*/, (0, csrf_1.updateCsrf)(token, csrf, expiry)];
+                case 1:
+                    isSaved = _a.sent();
+                    if (isSaved) {
+                        return [2 /*return*/, { csrf: csrf, expiry: expiry }];
+                    }
+                    else {
+                        return [2 /*return*/, false];
+                    }
+                    return [2 /*return*/];
+            }
         });
-    };
-    Security.prototype.getExpiry = function (hours) {
-        return Date.now() + hours * 60 * 60 * 1000;
-    };
-    Security.prototype.getCsrf = function () {
-        return crypto_1.default.randomBytes(32).toString("hex");
-    };
-    Security.prototype.getToken = function () {
-        return crypto_1.default.randomBytes(32).toString("hex");
-    };
-    return Security;
-}());
-exports.Security = Security;
+    });
+}
+function getExpiry(hours) {
+    return Date.now() + hours * 60 * 60 * 1000;
+}
+function getCsrf() {
+    return crypto_1.default.randomBytes(32).toString("hex");
+}
+function getToken() {
+    return crypto_1.default.randomBytes(32).toString("hex");
+}

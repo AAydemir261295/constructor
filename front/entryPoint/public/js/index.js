@@ -16,23 +16,16 @@ class App {
 
 
     constructor() {
-        this.urlPathname = window.location.pathname;
+        this.urlPathname = window.location.pathname == "/" ? "/login" : window.location.pathname;
         this.body = document.querySelector('.body');
-        this.router = new Router(this.urlPathname);
-
-
+        
         this.loader = new Loader();
         this.loader.start();
-
         
-        this.router.subscribe("resolved", () => {
-            this.loader.stop();
-        })
-
-
+        this.router = new Router(this.urlPathname, this.loader);
+        
         this.domInteractions = new MyDom();
     }
-
 }
 
 export const app = new App();

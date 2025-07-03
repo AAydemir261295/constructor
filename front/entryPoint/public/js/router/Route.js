@@ -1,18 +1,18 @@
 import { Csrf } from "/js/libs/csrf/Csrf.js";
 import MyDom from "/js/libs/dom/index.js";
 import { request } from "/js/libs/request/fetch.js";
-
+import { EventEmitter } from "/js/libs/eventEmitter/EventEmitter.js";
 
 const url = "http://localhost:3000";
 
 const dataUrls = {
     "/": "",
     "/login": (csrf) => `http://localhost:3001/login/${csrf}`,
+    "/register": (csrf) => `http://localhost:3001/register/${csrf}`,
+
 }
 
-const moduleUrls = {
-    "/login": "http://localhost:3001/js/pages/login/LoginPage.js"
-}
+
 
 const animations = {
     show: "show 0.2s linear forwards"
@@ -24,44 +24,46 @@ export default class Route {
     title;
     domInteractions;
     PageModule;
+    page;
     pageData;
+    router;
 
-    constructor(pathName, title) {
+
+    constructor(pathName, title, router, module) {
+        this.router = router;
         this.pathName = pathName;
         this.title = title;
         this.domInteractions = new MyDom();
+        this.PageModule = module;
     }
 
-
-    getModuleName() {
-        let prefix = this.title.substring(0, 1).toUpperCase() + this.title.substring(1, this.title.length);
-        console.log(prefix);
-        return `${prefix}Page`;
-    }
-
-    async setModule() {
-        let module = await import(moduleUrls[this.pathName])
-        this.PageModule = module[this.getModuleName()];
-        await this.domInteractions.addStyles(this.data.elements.styles, this.pathName);
-    }
-
-    setHistory() {
-        history.pushState(this.data, "", `${url}${this.pathName}`);
+    updateHistory() {
+        history.pushState({ ...this.data, ...{ csrf: this.data.csrf }, path: this.pathName }, "", this.pathName);
         document.title = this.title;
     }
 
-    async resolve() {
-        let csrf = new Csrf();
-        this.data = await request(dataUrls[this.pathName](csrf.get()));
-        csrf.update(this.data.csrf);
+    async getRouteData() {
+        let cache = history.state;
 
-        this.setHistory();
-        await this.setModule();
+        if (cache) {
+            this.data = cache;
+        } else {
+            let csrf = new Csrf();
+            this.data = await request(dataUrls[this.pathName](csrf.get()));
+            csrf.update(this.data.csrf);
+            this.updateHistory();
+        }
+    }
 
+    async resolve(withStyles) {
+        await this.getRouteData();
+        if (withStyles) {
+            await this.domInteractions.addStyles(this.data.elements.styles, this.pathName);
+        }
 
         setTimeout(() => {
-            this.currentPage = new this.PageModule(this.data.elements);
-            this.currentPage.container.style.animation = animations.show;
+            this.page = new this.PageModule(this.data.elements, this.router);
+            this.page.container.style.animation = animations.show;
         }, 1500)
     }
 

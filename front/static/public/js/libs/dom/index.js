@@ -48,6 +48,25 @@ export default class MyDom extends EventEmitter {
         }
     }
 
+    editRegisterTree(elements, changes) {
+        var result = elements;
+
+        result.tree.childs[0].childs[0].classList = [...elements.tree.childs[0].childs[0].classList, ...changes];
+        result.tree.childs[0].childs[1].classList = elements.tree.childs[0].childs[1].classList.filter((v) => changes.indexOf(v) == -1);
+        return result;
+    }
+
+    editLoginTree(elements, changes) {
+        var result = elements;
+
+        result.tree.childs[0].childs[0].classList = elements.tree.childs[0].childs[1].classList.filter((v) => changes.indexOf(v) == -1);
+        result.tree.childs[0].childs[1].classList = [...elements.tree.childs[0].childs[0].classList, ...changes];
+
+        return result;
+    }
+
+
+
     createElement(eleData) {
         var ele = document.createElement(eleData.ele);
         if (eleData.hasOwnProperty("classList")) {

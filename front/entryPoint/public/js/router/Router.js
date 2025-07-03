@@ -1,50 +1,69 @@
 import { EventEmitter } from "/js/libs/eventEmitter/EventEmitter.js";
 import Route from "/js/router/Route.js";
 import { AuthGuard } from "/js/libs/guards/AuthGuard.js";
+import { getRouteTitle } from "/js/router/libs/getRouteTitle.js";
+import { Modules } from "/js/libs/Modules/Modules.js";
+
 
 
 
 export class Router extends EventEmitter {
 
-    history;
     // localStorage;
     cached;
     currentRoute;
     authGuard;
     body;
+    modules;
 
 
-
-    constructor(pathname) {
+    constructor(pathname, loader) {
         super();
+        this.loader = loader;
         this.authGuard = new AuthGuard();
         this.body = document.querySelector(".body");
         this.pathname = pathname;
+        this.modules = new Modules();
 
         // this.localStorage = new LocalStorage();
         // this.cached = this.local.getItem(this.pathname);
 
-        this.resolvePath(pathname, this.getRouteTitle(pathname));
+        this.resolvePath(pathname, getRouteTitle(pathname));
+        this.routeChanges();
     }
 
+    routeChanges() {
+        window.addEventListener('popstate', async (event) => {
+            const data = event.state;
+            let module = this.modules.get(data.path);
+            this.body.innerHTML = "";
+            this.currentRoute = new Route(data.path, getRouteTitle(data.path), this, module);
+            await this.currentRoute.resolve(false);
+            document.title = getRouteTitle(data.path);
+        });
+    }
 
-    async resolvePath(url, title) {
+    redirect(data, isNestedRoute) {
+        if (!isNestedRoute) {
+            this.resolvePath(data.path, getRouteTitle(data.path));
+        } else {
+            history.pushState(data, "", data.path);
+            document.title = getRouteTitle(data.path);
+        }
+    }
+
+    async resolvePath(path, title) {
         let isLogined = await this.authGuard.checkAuth();
         if (isLogined) {
 
         } else {
-            // this.currentRoute = new Route(url, title);
-            this.currentRoute = new Route("/login", "login");
-            await this.currentRoute.resolve();
-            this.emit("resolved");
+            let module = await this.modules.set(path);
+            this.currentRoute = new Route(path, title, this, module.value);
+            await this.currentRoute.resolve(true);
+            this.loader.stop();
         }
     }
 
-    redirect(url) { }
 
-    getRouteTitle(pathname) {
-        let tmp = pathname.split("/");
-        return tmp[1];
-    }
 }
 

@@ -65,7 +65,7 @@ exports.loginElements = {
                             {
                                 ele: "div", classList: ["login-container__btns"], childs: [
                                     { ele: "button", classList: ["login-container__btn", "btn-submit", "nostyle-btn"], options: { id: "submit-btn", type: "submit", innerText: "Зарегистрироваться" } },
-                                    { ele: "button", classList: ["login-container__btn", "btn-submit", "nostyle-btn"], options: { id: "return-btn", type: "submit", innerText: "Назад" } },
+                                    { ele: "button", classList: ["login-container__btn", "btn-submit", "nostyle-btn"], options: { id: "return-btn", type: "button", innerText: "Войти" } },
                                 ]
                             },
                         ]

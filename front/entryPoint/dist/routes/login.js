@@ -41,58 +41,7 @@ var cookie_1 = require("../src/db/cookie");
 var firstCookie_1 = require("../src/middlewares/firstCookie");
 var security_1 = require("../src/security");
 var router = (0, express_1.Router)();
-router.get("/", firstCookie_1.firstVisitCookie, function (req, res, next) {
-    return __awaiter(this, void 0, void 0, function () {
-        var timeStamp, clientCookie, cookieIsExist, serverCookie, newCsrf, cookie, csrf;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    timeStamp = Date.now();
-                    clientCookie = req.cookies;
-                    return [4 /*yield*/, (0, cookie_1.isLogined)(clientCookie.token, timeStamp)];
-                case 1:
-                    cookieIsExist = _a.sent();
-                    if (!(cookieIsExist.length == 1)) return [3 /*break*/, 2];
-                    res.redirect('/home');
-                    return [3 /*break*/, 9];
-                case 2: return [4 /*yield*/, (0, cookie_1.getCredentials)(clientCookie.token, timeStamp)];
-                case 3:
-                    serverCookie = _a.sent();
-                    if (!(serverCookie.length == 1)) return [3 /*break*/, 5];
-                    return [4 /*yield*/, (0, security_1.updateCsrf)(serverCookie[0].token)];
-                case 4:
-                    newCsrf = _a.sent();
-                    if (newCsrf) {
-                        res.render("index", { csrf: newCsrf.csrf });
-                    }
-                    else {
-                        res.sendStatus(404);
-                    }
-                    return [3 /*break*/, 9];
-                case 5: return [4 /*yield*/, (0, security_1.initCookie)()];
-                case 6:
-                    cookie = _a.sent();
-                    if (!cookie) return [3 /*break*/, 8];
-                    return [4 /*yield*/, (0, security_1.initCsrf)(cookie.token)];
-                case 7:
-                    csrf = _a.sent();
-                    if (csrf) {
-                        res.cookie("token", cookie.token, { httpOnly: true });
-                        res.render("index", { csrf: csrf.csrf });
-                    }
-                    else {
-                        res.sendStatus(404);
-                    }
-                    return [3 /*break*/, 9];
-                case 8:
-                    res.sendStatus(404);
-                    _a.label = 9;
-                case 9: return [2 /*return*/];
-            }
-        });
-    });
-});
-router.get("/*splat", firstCookie_1.firstVisitCookie, function (req, res, next) {
+router.get('/login', firstCookie_1.firstVisitCookie, function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
         var timeStamp, clientCookie, cookieIsExist, serverCookie, newCsrf, cookie, csrf;
         return __generator(this, function (_a) {

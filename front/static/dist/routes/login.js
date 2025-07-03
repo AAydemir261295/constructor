@@ -37,36 +37,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
-var usersRepo_1 = require("../src/db/repos/usersRepo");
-var security_1 = require("../src/security");
+var loginElements_1 = require("../src/elements/loginElements");
 var csrf_1 = require("../src/middlewares/csrf");
 var router = (0, express_1.Router)();
-var security = new security_1.Security();
-router.get('/:csrf/:email', csrf_1.csrf, function (req, res, next) {
+router.get('/:csrf', csrf_1.csrf, function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var email, isCreated;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    console.log(req.params);
-                    if (!req.hasOwnProperty("newCsrf")) return [3 /*break*/, 2];
-                    email = req.params.email;
-                    return [4 /*yield*/, (0, usersRepo_1.createUser)({ email: email, data: {} })];
-                case 1:
-                    isCreated = _a.sent();
-                    if (isCreated.length == 1) {
-                        res.send(JSON.stringify({ result: true, csrf: req["newCsrf"] }));
-                    }
-                    else {
-                        res.send(JSON.stringify({ result: false, csrf: req["newCsrf"], error: "email error" }));
-                    }
-                    return [3 /*break*/, 3];
-                case 2:
-                    console.log("here2");
-                    res.sendStatus(404);
-                    _a.label = 3;
-                case 3: return [2 /*return*/];
-            }
+            res.send(JSON.stringify({ elements: loginElements_1.loginElements, csrf: req['newCsrf'] }));
+            return [2 /*return*/];
         });
     });
 });

@@ -38,67 +38,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var loginElements_1 = require("../../src/elements/login/loginElements");
-var security_1 = require("../../src/security");
-var cookie_1 = require("../../src/db/cookie");
-var csrf_1 = require("../../src/db/csrf");
+var csrf_1 = require("../../src/middlewares/csrf");
 var router = (0, express_1.Router)();
-var security = new security_1.Security();
-router.get('/:csrf', function (req, res, next) {
+router.get('/:csrf', csrf_1.csrf, function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var clientCookies, timeStamp, clientCsrf, cookieIsExist, serverCookies, storedCsrf, serverCsrf, newCsrf;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    clientCookies = req.cookies;
-                    timeStamp = Date.now();
-                    if (!clientCookies) return [3 /*break*/, 10];
-                    clientCsrf = req.params.csrf;
-                    console.log(clientCsrf);
-                    console.log("clientCsrf");
-                    return [4 /*yield*/, (0, cookie_1.getCredentials)(clientCookies.token, timeStamp)];
-                case 1:
-                    cookieIsExist = _a.sent();
-                    if (!(cookieIsExist.length == 1)) return [3 /*break*/, 8];
-                    serverCookies = cookieIsExist[0];
-                    return [4 /*yield*/, (0, csrf_1.isNotExpiried)(clientCsrf, timeStamp)];
-                case 2:
-                    storedCsrf = _a.sent();
-                    if (!(storedCsrf.length > 0)) return [3 /*break*/, 6];
-                    serverCsrf = storedCsrf[0].csrf;
-                    if (!(clientCsrf == serverCsrf)) return [3 /*break*/, 4];
-                    return [4 /*yield*/, security.updateCsrf(serverCookies.token)];
-                case 3:
-                    newCsrf = _a.sent();
-                    console.log(newCsrf);
-                    console.log("newCsrf");
-                    if (newCsrf) {
-                        res.send(JSON.stringify({ elements: loginElements_1.loginElements, csrf: newCsrf.csrf }));
-                    }
-                    else {
-                        res.send({ result: false });
-                    }
-                    return [3 /*break*/, 5];
-                case 4:
-                    console.log(1);
-                    res.sendStatus(404);
-                    _a.label = 5;
-                case 5: return [3 /*break*/, 7];
-                case 6:
-                    console.log(2);
-                    res.sendStatus(404);
-                    _a.label = 7;
-                case 7: return [3 /*break*/, 9];
-                case 8:
-                    console.log(3);
-                    res.sendStatus(404);
-                    _a.label = 9;
-                case 9: return [3 /*break*/, 11];
-                case 10:
-                    console.log(4);
-                    res.sendStatus(404);
-                    _a.label = 11;
-                case 11: return [2 /*return*/];
-            }
+            res.send(JSON.stringify({ elements: loginElements_1.loginElements, csrf: req['newCsrf'] }));
+            return [2 /*return*/];
         });
     });
 });

@@ -1,21 +1,16 @@
-export class RegisterInput {
+import { EmailInput } from "/js/pages/login/libs/EmailInput.js";
 
-    input;
-    animation;
+export class RegisterInput extends EmailInput {
+
+
     errorContainer;
-    emailPattern = new RegExp(
-        /^((?:[A-Za-z0-9!#$%&'*+\-\/=?^_`{|}~]|(?<=^|\.)"|"(?=$|\.|@)|(?<=".*)[ .](?=.*")|(?<!\.)\.){1,64})(@)((?:[A-Za-z0-9.\-])*(?:[A-Za-z0-9])\.(?:[A-Za-z0-9]){2,})$/
-    );
 
     constructor(element, errorContainer) {
-        this.input = element;
+        super(element);
         this.errorContainer = document.querySelector(`.${errorContainer}`);
         this.onChange();
     }
 
-    getValue() {
-        return this.input.value;
-    }
 
     showContainerError() {
         this.errorContainer.classList.remove("hidden");
@@ -31,38 +26,9 @@ export class RegisterInput {
         }, 200);
     }
 
-
-    showInputError() {
-        this.input.classList.add("input--error");
-    }
-
-    hideError() {
-        this.input.classList.remove("input--error");
-
-    }
-
-    validate() {
-        let email = this.input.value;
-        let isValid = this.emailPattern.test(email);
-        if (isValid) {
-            return true;
-        } else {
-            this.showInputError();
-            return false;
-        }
-    }
-
-    hide() {
-        this.input.style.animation = this.animation;
-        setTimeout(() => {
-            this.input.classList.add("hidden");
-        }, 100)
-    }
-
-
     onChange() {
         this.input.addEventListener("input", (ev) => {
-            this.hideError();
+            this.hideInputError();
             this.hideContainerError();
         })
     }

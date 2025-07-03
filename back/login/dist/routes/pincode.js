@@ -39,9 +39,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var security_1 = require("../src/security");
 var usersRepo_1 = require("../src/db/repos/usersRepo");
+var csrf_1 = require("../src/middlewares/csrf");
 var router = (0, express_1.Router)();
 var security = new security_1.Security();
-router.get('/:csrf/:email/:pincode', security.compareCsrf, function (req, res, next) {
+router.get('/:csrf/:email/:pincode', csrf_1.csrf, function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
         var email, pincode, isEqual, userId;
         return __generator(this, function (_a) {
@@ -50,13 +51,9 @@ router.get('/:csrf/:email/:pincode', security.compareCsrf, function (req, res, n
                     if (!req.hasOwnProperty("newCsrf")) return [3 /*break*/, 2];
                     email = req.params.email;
                     pincode = req.params.pincode;
-                    console.log(pincode);
-                    console.log("pincode");
                     return [4 /*yield*/, (0, usersRepo_1.comparePincode)(email, +pincode)];
                 case 1:
                     isEqual = _a.sent();
-                    console.log(isEqual);
-                    console.log("isEqual");
                     if (isEqual.length == 1) {
                         userId = isEqual[0].id;
                         res.cookie("userId", userId, { httpOnly: true });

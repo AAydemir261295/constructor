@@ -11,7 +11,7 @@ const urls = {
 };
 
 export class LoginForm extends Form {
-    constructor(elements) {
+    constructor(elements, router) {
         super(elements.ref.loginForm, [elements.ref.emailInput, ...elements.ref.pincodesIds]);
         this.emailInput = new EmailInput(this.form.elements[elements.ref.emailInput], elements.animations.hide);
         this.pincodeContainer = new PincodeContainer(elements.ref.pincodeContainer,
@@ -49,10 +49,10 @@ export class LoginForm extends Form {
                     let csrf = new Csrf();
                     let pincode = this.pincodeContainer.getValue();
                     let response = await request(urls.pincode(csrf.get(), this.email, pincode));
-                    console.log(response);
+
                     if (response) {
                         if (response.result) {
-                                
+                            window.location.href = "http://localhost:3002/home";
                         } else {
                             this.pincodeContainer.showError();
                         }
@@ -75,7 +75,7 @@ export class LoginForm extends Form {
                             this.pincodeContainer.show();
                             this.hideRegisterBtn();
                         } else {
-                            this.emailInput.showError();
+                            this.emailInput.showInputError();
                         }
                         csrf.update(response.csrf);
                     }

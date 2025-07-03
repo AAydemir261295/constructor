@@ -41,7 +41,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Security = void 0;
 var crypto_1 = __importDefault(require("crypto"));
-var cookieRepo_1 = require("../db/repos/cookieRepo");
 var csrfRepo_1 = require("../db/repos/csrfRepo");
 var Security = /** @class */ (function () {
     function Security() {
@@ -76,65 +75,6 @@ var Security = /** @class */ (function () {
     //         this.initCsrf(token);
     //     }
     // }
-    Security.prototype.compareCsrf = function (req, res, next) {
-        return __awaiter(this, void 0, void 0, function () {
-            var clientCsrf, clientCookie, timeStamp, tmp1, tmp, serverCsrf, serverCookies, expiry, csrf, isSaved;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        clientCsrf = req.params.csrf;
-                        clientCookie = req.cookies;
-                        console.log(clientCookie);
-                        console.log("clientCookie");
-                        timeStamp = Date.now();
-                        return [4 /*yield*/, (0, cookieRepo_1.getCredentials)(clientCookie.token, timeStamp)];
-                    case 1:
-                        tmp1 = _a.sent();
-                        return [4 /*yield*/, (0, csrfRepo_1.getCsrf)(clientCookie.token, timeStamp)];
-                    case 2:
-                        tmp = _a.sent();
-                        console.log(tmp);
-                        console.log("tmp");
-                        console.log(tmp1);
-                        console.log("tmp1");
-                        if (!(tmp.length == 1 && tmp1.length == 1)) return [3 /*break*/, 6];
-                        serverCsrf = tmp[0].csrf;
-                        console.log(tmp);
-                        console.log("tmp");
-                        console.log(serverCsrf);
-                        console.log("serverCsrf");
-                        console.log(clientCsrf);
-                        console.log("clientCsrf");
-                        serverCookies = tmp1[0];
-                        if (!(serverCsrf == clientCsrf)) return [3 /*break*/, 4];
-                        expiry = Date.now() + 1 * 60 * 60 * 1000;
-                        csrf = crypto_1.default.randomBytes(32).toString("hex");
-                        return [4 /*yield*/, (0, csrfRepo_1.updateCsrf)(serverCookies.token, csrf, expiry)];
-                    case 3:
-                        isSaved = _a.sent();
-                        if (isSaved) {
-                            req["newCsrf"] = csrf;
-                            console.log("1");
-                            next();
-                        }
-                        else {
-                            next();
-                        }
-                        return [3 /*break*/, 5];
-                    case 4:
-                        console.log("2");
-                        next();
-                        _a.label = 5;
-                    case 5: return [3 /*break*/, 7];
-                    case 6:
-                        console.log("3");
-                        next();
-                        _a.label = 7;
-                    case 7: return [2 /*return*/];
-                }
-            });
-        });
-    };
     Security.prototype.updateCsrf = function (token) {
         return __awaiter(this, void 0, void 0, function () {
             var expiry, csrf, isSaved;

@@ -16,11 +16,11 @@ export class EmailInput {
         return this.input.value;
     }
 
-    showError() {
+    showInputError() {
         this.input.classList.add("input--error");
     }
 
-    hideError() {
+    hideInputError() {
         this.input.classList.remove("input--error");
 
     }
@@ -31,7 +31,7 @@ export class EmailInput {
         if (isValid) {
             return true;
         } else {
-            this.showError();
+            this.showInputError();
             return false;
         }
     }
@@ -46,7 +46,7 @@ export class EmailInput {
 
     onChange() {
         this.input.addEventListener("input", (ev) => {
-            this.hideError();
+            this.hideInputError();
         })
     }
 

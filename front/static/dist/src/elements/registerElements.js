@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginElements = void 0;
-exports.loginElements = {
+exports.registerElements = void 0;
+exports.registerElements = {
     tree: {
         ele: "main", classList: ["main"], childs: [
             {
                 ele: "div", classList: ["login-container"], childs: [
                     {
-                        ele: "form", classList: ["login-container__form"], options: { id: "login-form" }, childs: [
+                        ele: "form", classList: ["login-container__form", "hidden", "invisible"], options: { id: "login-form" }, childs: [
                             {
                                 ele: "div", classList: ["login-container__input-container"], childs: [
                                     { ele: "input", classList: ["login-container__input", "input", "nostyle-input"], options: { placeholder: "Электронная почта", type: "text", name: "login-input" } },
@@ -51,7 +51,7 @@ exports.loginElements = {
                         ]
                     },
                     {
-                        ele: "form", classList: ["login-container__form", "hidden", "invisible"], options: { id: "register-form" }, childs: [
+                        ele: "form", classList: ["login-container__form"], options: { id: "register-form" }, childs: [
                             {
                                 ele: "div", classList: ["login-container__input-container"], childs: [
                                     { ele: "input", classList: ["login-container__input", "input", "nostyle-input"], options: { placeholder: "Электронная почта", type: "text", name: "register-input" } },
@@ -65,7 +65,7 @@ exports.loginElements = {
                             {
                                 ele: "div", classList: ["login-container__btns"], childs: [
                                     { ele: "button", classList: ["login-container__btn", "btn-submit", "nostyle-btn"], options: { id: "submit-btn", type: "submit", innerText: "Зарегистрироваться" } },
-                                    { ele: "button", classList: ["login-container__btn", "btn-submit", "nostyle-btn"], options: { id: "return-btn", type: "submit", innerText: "Назад" } },
+                                    { ele: "button", classList: ["login-container__btn", "btn-submit", "nostyle-btn"], options: { id: "return-btn", type: "button", innerText: "Войти" } },
                                 ]
                             },
                         ]
