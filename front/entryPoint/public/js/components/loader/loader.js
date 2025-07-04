@@ -1,6 +1,40 @@
 import MyDom from "/js/libs/dom/index.js";
 
 
+const loaderEle = {
+    tree:
+    {
+        ele: "div", classList: ["loader-container"], childs: [
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+            { ele: "div", classList: ["loader-container__loader"] },
+
+        ]
+    }
+}
+
 export class Loader {
     constructor() {
         this.loaderContainer = document.querySelector(".loader-container");
@@ -8,6 +42,7 @@ export class Loader {
     }
 
 
+    body;
     loaderContainer;
     childs;
     interval;
