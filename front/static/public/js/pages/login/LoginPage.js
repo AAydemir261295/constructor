@@ -14,7 +14,7 @@ export class LoginPage extends EventEmitter {
         this.router = router;
         this.elements = loginElements;
         this.body = document.querySelector('.body');
-        this.domInteractions = new MyDom();
+        this.domInteractions = new MyDom(loginElements.stylez);
         this.domInteractions.buildTree(loginElements.tree, this.body);
         this.container = document.querySelector(".main");
         this.successContainer = new SuccessMessage(loginElements.elements.success);

@@ -1,0 +1,10 @@
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 100%;
+    width: 90%;
+    min-height: 850px;
+    min-width: 1500px;
+    border-radius: 30px;
+    border: 2px solid var(--gray20);
+}

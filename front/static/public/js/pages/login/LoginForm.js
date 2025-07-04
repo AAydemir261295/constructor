@@ -52,7 +52,7 @@ export class LoginForm extends Form {
 
                     if (response) {
                         if (response.result) {
-                            window.location.href = "http://localhost:3002/home";
+                            window.location.href = "/home";
                         } else {
                             this.pincodeContainer.showError();
                         }

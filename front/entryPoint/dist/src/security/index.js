@@ -45,19 +45,19 @@ exports.updateCsrf = updateCsrf;
 var crypto_1 = __importDefault(require("crypto"));
 var cookie_1 = require("../db/cookie");
 var csrf_1 = require("../db/csrf");
-function initCookie() {
+function initCookie(timeStamp) {
     return __awaiter(this, void 0, void 0, function () {
         var expiry, token, tokenNotExist, isSaved;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    expiry = getExpiry(1);
+                    expiry = getExpiry(1, timeStamp);
                     token = getToken();
                     return [4 /*yield*/, (0, cookie_1.tokenIsExist)(token, Date.now())];
                 case 1:
                     tokenNotExist = _a.sent();
                     if (!tokenNotExist) return [3 /*break*/, 3];
-                    return [4 /*yield*/, (0, cookie_1.setCredentials)(token, { expiry: expiry })];
+                    return [4 /*yield*/, (0, cookie_1.setCredentials)(token, { expiry: expiry.getTime() })];
                 case 2:
                     isSaved = _a.sent();
                     if (isSaved) {
@@ -68,26 +68,26 @@ function initCookie() {
                     }
                     return [3 /*break*/, 4];
                 case 3:
-                    initCookie();
+                    initCookie(timeStamp);
                     _a.label = 4;
                 case 4: return [2 /*return*/];
             }
         });
     });
 }
-function initCsrf(token) {
+function initCsrf(token, timeStamp) {
     return __awaiter(this, void 0, void 0, function () {
         var expiry, csrf, csrfNotExist, isSaved;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    expiry = getExpiry(1);
+                    expiry = getExpiry(1, timeStamp);
                     csrf = getCsrf();
                     return [4 /*yield*/, (0, csrf_1.csrfIsExist)(csrf)];
                 case 1:
                     csrfNotExist = _a.sent();
                     if (!csrfNotExist) return [3 /*break*/, 3];
-                    return [4 /*yield*/, (0, csrf_1.setCsrf)(token, csrf, expiry)];
+                    return [4 /*yield*/, (0, csrf_1.setCsrf)(token, csrf, expiry.getTime())];
                 case 2:
                     isSaved = _a.sent();
                     if (isSaved) {
@@ -98,22 +98,22 @@ function initCsrf(token) {
                     }
                     return [3 /*break*/, 4];
                 case 3:
-                    initCsrf(token);
+                    initCsrf(token, timeStamp);
                     _a.label = 4;
                 case 4: return [2 /*return*/];
             }
         });
     });
 }
-function updateCsrf(token) {
+function updateCsrf(token, timeStamp) {
     return __awaiter(this, void 0, void 0, function () {
         var expiry, csrf, isSaved;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    expiry = getExpiry(1);
+                    expiry = getExpiry(1, timeStamp);
                     csrf = getCsrf();
-                    return [4 /*yield*/, (0, csrf_1.updateCsrf)(token, csrf, expiry)];
+                    return [4 /*yield*/, (0, csrf_1.updateCsrf)(token, csrf, expiry.getTime())];
                 case 1:
                     isSaved = _a.sent();
                     if (isSaved) {
@@ -127,8 +127,8 @@ function updateCsrf(token) {
         });
     });
 }
-function getExpiry(hours) {
-    return Date.now() + hours * 60 * 60 * 1000;
+function getExpiry(hours, timeStamp) {
+    return new Date(timeStamp + hours * 60 * 60 * 1000);
 }
 function getCsrf() {
     return crypto_1.default.randomBytes(32).toString("hex");

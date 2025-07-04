@@ -59,6 +59,8 @@ export default class MyDom extends EventEmitter {
 
 
 
+
+
     createElement(eleData) {
         var ele = document.createElement(eleData.ele);
         if (eleData.hasOwnProperty("classList")) {

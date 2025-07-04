@@ -40,6 +40,7 @@ exports.tokenIsExist = tokenIsExist;
 exports.getCredentials = getCredentials;
 exports.setCredentials = setCredentials;
 exports.isLogined = isLogined;
+exports.updateUserId = updateUserId;
 exports.updateCredentials = updateCredentials;
 var authClient_1 = require("../clients/authClient");
 var queries = {
@@ -47,7 +48,8 @@ var queries = {
     checkIfIsExist: "SELECT id FROM cookie WHERE token = $1 AND value ->> 'expiry' > $2",
     insertNewRow: "INSERT INTO cookie(token, value) VALUES($1, $2)",
     isLogined: "SELECT * FROM cookie WHERE token = $1 AND value ->> 'expiry' > $2 AND value ->> 'userId' IS NOT NULL",
-    updateUserId: "UPDATE cookie SET value = value || $1 where token = $2"
+    updateUserId: "UPDATE cookie SET value = value || $1 where token = $2",
+    updateToken: "UPDATE cookie SET token = $1, value = value || $2 WHERE token = $3",
 };
 function tokenIsExist(token, expiry) {
     return __awaiter(this, void 0, void 0, function () {
@@ -129,7 +131,7 @@ function isLogined(token, expiry) {
         });
     });
 }
-function updateCredentials(token, userData) {
+function updateUserId(token, userData) {
     return __awaiter(this, void 0, void 0, function () {
         var result, err_5;
         return __generator(this, function (_a) {
@@ -143,6 +145,26 @@ function updateCredentials(token, userData) {
                 case 2:
                     err_5 = _a.sent();
                     console.log(err_5);
+                    return [2 /*return*/, false];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function updateCredentials(oldToken, newToken, cookieData) {
+    return __awaiter(this, void 0, void 0, function () {
+        var result, err_6;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, authClient_1.pool.query(queries.updateToken, [newToken, cookieData, oldToken])];
+                case 1:
+                    result = _a.sent();
+                    return [2 /*return*/, result];
+                case 2:
+                    err_6 = _a.sent();
+                    console.log(err_6);
                     return [2 /*return*/, false];
                 case 3: return [2 /*return*/];
             }

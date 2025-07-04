@@ -41,33 +41,44 @@ var security_1 = require("../src/security");
 var usersRepo_1 = require("../src/db/repos/usersRepo");
 var csrf_1 = require("../src/middlewares/csrf");
 var router = (0, express_1.Router)();
-var security = new security_1.Security();
 router.get('/:csrf/:email/:pincode', csrf_1.csrf, function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var email, pincode, isEqual, userId;
+        var email, pincode, token, isEqual, userId, cookieExpiry, newToken;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (!req.hasOwnProperty("newCsrf")) return [3 /*break*/, 2];
+                    if (!req.hasOwnProperty("newCsrf")) return [3 /*break*/, 5];
                     email = req.params.email;
                     pincode = req.params.pincode;
+                    token = req.cookies.token;
                     return [4 /*yield*/, (0, usersRepo_1.comparePincode)(email, +pincode)];
                 case 1:
                     isEqual = _a.sent();
-                    if (isEqual.length == 1) {
-                        userId = isEqual[0].id;
-                        res.cookie("userId", userId, { httpOnly: true });
+                    if (!(isEqual.length == 1)) return [3 /*break*/, 3];
+                    userId = isEqual[0].id;
+                    cookieExpiry = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+                    return [4 /*yield*/, (0, security_1.initAuthorizedCookie)(token)];
+                case 2:
+                    newToken = _a.sent();
+                    if (newToken) {
+                        res.cookie("token", newToken.token, { httpOnly: true, expires: newToken.values.expiry });
+                        res.cookie("userId", userId, { httpOnly: true, expires: cookieExpiry });
                         res.send(JSON.stringify({ result: true, csrf: req['newCsrf'] }));
                     }
                     else {
-                        res.send(JSON.stringify({ result: false, csrf: req['newCsrf'] }));
+                        console.log("here22222");
+                        res.send(JSON.stringify({ result: false, csrf: req['newCsrf'], error: "new token error" }));
                     }
-                    return [3 /*break*/, 3];
-                case 2:
+                    return [3 /*break*/, 4];
+                case 3:
+                    res.send(JSON.stringify({ result: false, csrf: req['newCsrf'] }));
+                    _a.label = 4;
+                case 4: return [3 /*break*/, 6];
+                case 5:
                     console.log("here2");
                     res.sendStatus(404);
-                    _a.label = 3;
-                case 3: return [2 /*return*/];
+                    _a.label = 6;
+                case 6: return [2 /*return*/];
             }
         });
     });

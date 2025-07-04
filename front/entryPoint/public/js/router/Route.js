@@ -63,7 +63,7 @@ export default class Route {
 
         setTimeout(() => {
             this.page = new this.PageModule(this.data.elements, this.router);
-            this.page.container.style.animation = animations.show;
+            // this.page.container.style.animation = animations.show;
         }, 1500)
     }
 

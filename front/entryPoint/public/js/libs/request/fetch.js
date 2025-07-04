@@ -6,7 +6,11 @@ export async function request(url) {
             throw new Error(`Response status: ${response.status}`);
         }
 
-        return await response.json();
+        let result = await response.json();
+        console.log(result);
+        return result;
+
+        // return await response.json();
     } catch (error) {
         console.error(error.message);
     }

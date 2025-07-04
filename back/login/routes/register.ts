@@ -1,11 +1,8 @@
 import { Router } from 'express';
-import { updateCredentials } from '../src/db/repos/cookieRepo';
 import { createUser } from '../src/db/repos/usersRepo';
-import { Security } from '../src/security';
 import { csrf } from '../src/middlewares/csrf';
 
 var router = Router();
-var security = new Security();
 
 
 router.get('/:csrf/:email', csrf, async function (req, res, next) {

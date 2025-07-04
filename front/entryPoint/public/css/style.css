@@ -1,13 +1,35 @@
 @import url("/css/variables/colors.css");
 @import url("/css/mixins/nostyle.css");
 @import url("/css/mixins/mixins.css");
-@import url("/css/loader-container/loader-container.css");
+@import url("/css/blocks/loader-container/loader-container.css");
+
+@import url("/css/blocks/home-header/home-header.css");
+
+@import url("/css/blocks/logo/logo.css");
+
+@import url("/css/blocks/nav/nav.css");
+
+@import url("/css/blocks/nav/__list/nav__list.css");
+@import url("/css/blocks/nav/__list-item/nav__list-item.css");
+@import url("/css/blocks/nav/__list-item-logo/nav__list-item-logo.css");
+@import url("/css/blocks/nav/__logo/nav__logo.css");
+@import url("/css/blocks/nav/__list-item-btn/nav__list-item-btn.css");
+@import url("/css/blocks/nav/__list-items-wrapp/nav__list-items-wrapp.css");
+
+@import url("/css/blocks/container/container.css");
+
+@import url("/css/blocks/nav-btn/nav-btn.css");
+
+@import url("/css/blocks/btn-submit/btn-submit.css");
+
+@import url("/css/fonts/fonts.css");
 
 html,
 body {
     max-width: 100vw;
     overflow: hidden;
     background-color: var(--gray10);
+    margin: 0px;
 }
 
 
@@ -17,4 +39,25 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+
+}
+
+
+.main-home {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    min-height: 900px;
+    /* opacity: 0; */
+}
+
+
+
+.input::placeholder {
+    text-align: center;
+    color: var(--gray100);
+    font-weight: bold;
 }

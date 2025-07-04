@@ -4,9 +4,11 @@ export default class MyDom extends EventEmitter {
 
     head;
 
-    constructor() {
+    constructor(stylez) {
         super();
         this.head = document.querySelector(".head");
+        this.styles = stylez;
+        console.log(stylez);
     }
 
 
@@ -65,12 +67,28 @@ export default class MyDom extends EventEmitter {
         return result;
     }
 
-
+    setStyles(ele, classList) {
+        classList.forEach((className) => {
+            var cssBlock = this.styles[className];
+            if(cssBlock == undefined){
+                console.log(className);
+                console.log(classList);
+            }
+            var cssPropertiesKeys = Object.keys(cssBlock);
+            for (const propertyKey of cssPropertiesKeys) {
+                
+                ele.style[propertyKey] = cssBlock[propertyKey];
+            }
+        })
+    }
 
     createElement(eleData) {
         var ele = document.createElement(eleData.ele);
         if (eleData.hasOwnProperty("classList")) {
-            ele.classList.add(...eleData.classList)
+            if (eleData.hasOwnProperty("css")) {
+                ele.classList.add(...eleData.css)
+            }
+            this.setStyles(ele, eleData.classList);
         }
         if (eleData.hasOwnProperty("options")) {
             let options = eleData.options;

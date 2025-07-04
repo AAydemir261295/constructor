@@ -44,21 +44,17 @@ var router = (0, express_1.Router)();
 var security = new security_1.Security();
 router.get('/:csrf/:email', csrf_1.csrf, function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var email, pincode, isPincodeSaved, userId;
+        var email, pincode, isPincodeSaved;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!req.hasOwnProperty("newCsrf")) return [3 /*break*/, 2];
                     email = req.params.email;
                     pincode = security.getPincode();
-                    console.log(pincode);
-                    console.log("pincode");
                     return [4 /*yield*/, (0, usersRepo_1.setPincodeByEmail)(email, { pincode: pincode })];
                 case 1:
                     isPincodeSaved = _a.sent();
-                    if (isPincodeSaved.length == 1) {
-                        userId = isPincodeSaved[0].id;
-                        res.cookie("userId", userId, { httpOnly: true });
+                    if (isPincodeSaved) {
                         res.send(JSON.stringify({ result: true, csrf: req['newCsrf'] }));
                     }
                     else {

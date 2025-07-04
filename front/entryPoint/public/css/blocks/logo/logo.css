@@ -1,0 +1,8 @@
+.logo {
+    line-height: 0px;
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    color: var(--gray200);
+    font-family: bold;
+}

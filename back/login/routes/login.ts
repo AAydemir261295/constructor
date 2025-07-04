@@ -12,12 +12,8 @@ router.get('/:csrf/:email', csrf, async function (req, res, next) {
     if (req.hasOwnProperty("newCsrf")) {
         let email = req.params.email;
         let pincode = security.getPincode();
-        console.log(pincode);
-        console.log("pincode");
         let isPincodeSaved = await setPincodeByEmail(email, { pincode: pincode })
-        if (isPincodeSaved.length == 1) {
-            let userId = isPincodeSaved[0].id;
-            res.cookie("userId", userId, { httpOnly: true });
+        if (isPincodeSaved) {
             res.send(JSON.stringify({ result: true, csrf: req['newCsrf'] }))
         } else {
             res.send(JSON.stringify({ result: false, csrf: req['newCsrf'] }))

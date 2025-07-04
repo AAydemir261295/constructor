@@ -1,0 +1,16 @@
+.nav-btn {
+    font-family: bold;
+    height: 60px;
+    font-size: 20px;
+    transition: 0.3s;
+    border: 4px solid transparent;
+}
+
+
+.nav-btn--active {
+    border-bottom: 4px solid var(--blue200);
+}
+
+.nav-btn:hover {
+    border-bottom: 4px solid var(--blue200);
+}

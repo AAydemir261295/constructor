@@ -42,7 +42,7 @@ exports.comparePincode = comparePincode;
 var usersClient_1 = require("../clients/usersClient");
 var queries = {
     create: "INSERT INTO users(email, data) VALUES($1, $2) RETURNING id",
-    updateDataByEmail: "UPDATE users SET data = data || $1 WHERE email = $2 RETURNING id",
+    updateDataByEmail: "UPDATE users SET data = data || $1 WHERE email = $2",
     comparePincode: "UPDATE users SET data = data - 'pincode' WHERE email = $1 AND data ->> 'pincode' = $2 RETURNING id"
 };
 function createUser(user) {
@@ -75,7 +75,7 @@ function setPincodeByEmail(email, pincode) {
                     return [4 /*yield*/, usersClient_1.pool.query(queries.updateDataByEmail, [pincode, email])];
                 case 1:
                     result = _a.sent();
-                    return [2 /*return*/, result.rows];
+                    return [2 /*return*/, result];
                 case 2:
                     err_2 = _a.sent();
                     console.log(err_2);

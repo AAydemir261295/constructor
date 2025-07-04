@@ -37,39 +37,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.firstVisitCookie = firstVisitCookie;
-var security_1 = require("../security");
 function firstVisitCookie(req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var cookie, csrf;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    if (!(Object.keys(req.cookies).length === 0)) return [3 /*break*/, 5];
-                    return [4 /*yield*/, (0, security_1.initCookie)()];
-                case 1:
-                    cookie = _a.sent();
-                    if (!cookie) return [3 /*break*/, 3];
-                    return [4 /*yield*/, (0, security_1.initCsrf)(cookie.token)];
-                case 2:
-                    csrf = _a.sent();
-                    if (csrf) {
-                        res.cookie("token", cookie.token, { httpOnly: true });
-                        req['newCsrf'] = csrf.csrf;
-                        res.render("index", { csrf: csrf.csrf });
-                    }
-                    else {
-                        res.sendStatus(404);
-                    }
-                    return [3 /*break*/, 4];
-                case 3:
-                    res.sendStatus(404);
-                    _a.label = 4;
-                case 4: return [3 /*break*/, 6];
-                case 5:
-                    next();
-                    _a.label = 6;
-                case 6: return [2 /*return*/];
-            }
+            return [2 /*return*/];
         });
     });
 }

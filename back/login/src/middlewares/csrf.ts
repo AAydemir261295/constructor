@@ -10,7 +10,7 @@ export async function csrf(req: Request, res: Response, next: NextFunction) {
     let clientCookie = req.cookies;
 
 
-    let timeStamp = Date.now()
+    let timeStamp = Date.now();
     let tmp1 = await getCredentials(clientCookie.token, timeStamp);
     let tmp = await getCsrf(clientCookie.token, timeStamp);
 

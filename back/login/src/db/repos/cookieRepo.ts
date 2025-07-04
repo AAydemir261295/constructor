@@ -6,7 +6,8 @@ const queries = {
     checkIfIsExist: "SELECT id FROM cookie WHERE token = $1 AND value ->> 'expiry' > $2",
     insertNewRow: "INSERT INTO cookie(token, value) VALUES($1, $2)",
     isLogined: "SELECT * FROM cookie WHERE token = $1 AND value ->> 'expiry' > $2 AND value ->> 'userId' IS NOT NULL",
-    updateUserId: "UPDATE cookie SET value = value || $1 where token = $2"
+    updateUserId: "UPDATE cookie SET value = value || $1 where token = $2",
+    updateToken: "UPDATE cookie SET token = $1, value = value || $2 WHERE token = $3",
 };
 
 
@@ -51,9 +52,19 @@ export async function isLogined(token: string, expiry: number) {
 }
 
 
-export async function updateCredentials(token: string, userData: UserData) {
+export async function updateUserId(token: string, userData: UserData) {
     try {
         var result = await pool.query(queries.updateUserId, [userData, token]);
+        return result;
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+export async function updateCredentials(oldToken: string, newToken: string, cookieData: { expiry: number, userId: number }) {
+    try {
+        var result = await pool.query(queries.updateToken, [newToken, cookieData, oldToken]);
         return result;
     } catch (err) {
         console.log(err);

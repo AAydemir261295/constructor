@@ -9,8 +9,8 @@
     border: 2px solid var(--red100);
 }
 
-.input::placeholder {
+/* .input::placeholder {
     text-align: center;
     color: var(--gray100);
     font-weight: bold;
-}
+} */

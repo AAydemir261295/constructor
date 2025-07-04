@@ -40,8 +40,44 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Security = void 0;
+exports.initAuthorizedCookie = initAuthorizedCookie;
 var crypto_1 = __importDefault(require("crypto"));
 var csrfRepo_1 = require("../db/repos/csrfRepo");
+var cookieRepo_1 = require("../db/repos/cookieRepo");
+function initAuthorizedCookie(oldToken) {
+    return __awaiter(this, void 0, void 0, function () {
+        var expiry, token, tokenNotExist, isSaved;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expiry = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+                    token = getToken();
+                    return [4 /*yield*/, (0, cookieRepo_1.tokenIsExist)(token, Date.now())];
+                case 1:
+                    tokenNotExist = _a.sent();
+                    if (!tokenNotExist) return [3 /*break*/, 3];
+                    return [4 /*yield*/, (0, cookieRepo_1.updateCredentials)(oldToken, token, { expiry: expiry.getTime() })];
+                case 2:
+                    isSaved = _a.sent();
+                    if (isSaved) {
+                        return [2 /*return*/, { token: token, values: { expiry: expiry } }];
+                    }
+                    else {
+                        return [2 /*return*/, false];
+                    }
+                    return [3 /*break*/, 4];
+                case 3:
+                    this.initCookie();
+                    _a.label = 4;
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+;
+function getToken() {
+    return crypto_1.default.randomBytes(32).toString("hex");
+}
 var Security = /** @class */ (function () {
     function Security() {
     }

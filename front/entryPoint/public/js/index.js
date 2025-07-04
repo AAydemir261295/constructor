@@ -7,7 +7,7 @@ class App {
     router;
 
     constructor() {
-        let pathName = window.location.pathname == "/" ? "/login" : window.location.pathname;
+        let pathName = window.location.pathname;
         var loader = new Loader();
         loader.start();
         this.router = new Router(pathName, loader);

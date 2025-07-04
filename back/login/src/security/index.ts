@@ -1,5 +1,29 @@
 import crypto from "crypto";
 import { updateCsrf } from "../db/repos/csrfRepo";
+import { tokenIsExist, updateCredentials } from "../db/repos/cookieRepo";
+
+
+export async function initAuthorizedCookie(oldToken, userId) {
+    let expiry = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    let token = getToken();
+    let tokenNotExist = await tokenIsExist(token, Date.now());
+    if (tokenNotExist) {
+        let isSaved = await updateCredentials(oldToken, token, { expiry: expiry.getTime(), userId: userId });
+        if (isSaved) {
+            return { token: token, values: { expiry: expiry } };
+        } else {
+            return false;
+        }
+    } else {
+        this.initCookie();
+    }
+};
+
+
+function getToken() {
+    return crypto.randomBytes(32).toString("hex");
+}
+
 
 export class Security {
 
@@ -38,7 +62,7 @@ export class Security {
     //     }
     // }
 
-    
+
 
     async updateCsrf(token) {
         let expiry = this.getExpiry(1);
