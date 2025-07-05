@@ -14,16 +14,6 @@ export default class MyDom extends EventEmitter {
         this.stylez = styles;
     }
 
-
-    // async addStyles(styles, urlPath) {
-    //     var that = this;
-    //     styles.forEach((css) => {
-    //         const element = { ele: "link", options: { rel: 'stylesheet', href: `http://localhost:3001/css/${css}`, type: 'text/css' } }
-    //         let cssLink = that.createElement(element);
-    //         that.head.appendChild(cssLink);
-    //     })
-    // }
-
     async buildTree(eleArr, parentEle) {
         if (eleArr.hasOwnProperty("childs")) {
             var child = parentEle.appendChild(await this.createElement(eleArr));
@@ -55,7 +45,9 @@ export default class MyDom extends EventEmitter {
 
     registerTree(elements, changes) {
         var result = elements;
+        console.log(result.tree.childs[0].childs[0]);
         result.tree.childs[0].childs[0].css = [...elements.tree.childs[0].childs[0].css, ...changes];
+
         result.tree.childs[0].childs[1].css = elements.tree.childs[0].childs[1].css.filter((v) => changes.indexOf(v) == -1);
         return result;
     }
@@ -81,8 +73,8 @@ export default class MyDom extends EventEmitter {
 
     async createElement(eleData) {
         var ele = document.createElement(eleData.ele);
-        if (eleData.hasOwnProperty("classList")) {
-            await this.addStyles(ele, eleData.classList);
+        if (eleData.hasOwnProperty("styles")) {
+            await this.addStyles(ele, eleData.styles);
         }
         if (eleData.hasOwnProperty("css")) {
             ele.classList.add(...eleData.css)

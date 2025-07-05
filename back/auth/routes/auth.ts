@@ -1,11 +1,8 @@
 import { Router } from 'express';
-import { getCredentials, isLogined } from '../src/db/cookie';
+import { getCredentials } from '../src/db/cookie';
 import { getCsrf } from '../src/db/csrf';
-import { Security } from '../src/security';
 
 var router = Router();
-var security = new Security();
-
 
 router.get('/:csrf', async function (req, res, next) {
     let clientCookie = req.cookies;

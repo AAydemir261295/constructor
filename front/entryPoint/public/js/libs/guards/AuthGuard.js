@@ -12,7 +12,6 @@ export class AuthGuard {
     async checkAuth() {
         let csrf = new Csrf();
         let isLogined = await request(urls.auth(csrf.get()));
-
         return isLogined ? isLogined.result : false;
     }
 }

@@ -5,6 +5,9 @@ import { getRouteTitle } from "/js/router/libs/getRouteTitle.js";
 import { Modules } from "/js/libs/Modules/Modules.js";
 
 
+const notLoginedPaths = [
+    "/", "/login", "/register"
+]
 
 
 export class Router extends EventEmitter {
@@ -64,10 +67,16 @@ export class Router extends EventEmitter {
         if (isLogined) {
             this.setRoute("/home", title)
         } else {
-            if (path == "/") {
-                this.setRoute("/login", title)
+
+            if (!isLogined && notLoginedPaths.indexOf(path) == -1) {
+                window.location.replace("http://localhost:3000/login");
             } else {
-                this.setRoute(path, title)
+                if (path == "/") {
+                    console.log("?");
+                    this.setRoute("/login", title)
+                } else {
+                    this.setRoute(path, title)
+                }
             }
         }
     }

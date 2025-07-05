@@ -17,12 +17,6 @@ export class LoginPage {
         // this.domInteractions.setStylez(loginElements.stylez);
         // this.domInteractions.buildTree(loginElements.tree, this.body);
         // this.container = document.querySelector(".main");
-
-
-
-
-
-
     }
 
     router;

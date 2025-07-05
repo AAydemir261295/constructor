@@ -65,6 +65,7 @@ router.get('/:csrf', function (req, res, next) {
                                 res.redirect("/home");
                             }
                             else {
+                                // res.redirect()
                                 res.send({ result: false });
                             }
                         }
