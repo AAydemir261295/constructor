@@ -15,8 +15,12 @@ router.get('/:csrf', async function (req, res, next) {
         if (serverCsrf.length == 1) {
             if (clientCsrf == serverCsrf[0].csrf) {
                 if (serverCookie.value.hasOwnProperty("userId")) {
-                    res.redirect("/home");
+                    // res.redirect("/home");
+                    console.log("HERE");
+                    res.send({ result: true });
                 } else {
+                    console.log("HERE!!!!!!!!!!!");
+
                     res.send({ result: false });
                 }
             } else {

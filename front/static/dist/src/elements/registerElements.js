@@ -4,7 +4,7 @@ exports.registerElements = void 0;
 exports.registerElements = {
     tree: {
         // styles: ["main"]
-        ele: "main", css: ["main", "hidden"], styles: [], childs: [
+        ele: "main", css: ["main", "hidden"], options: { id: "main" }, styles: [], childs: [
             {
                 ele: "div", styles: ["loginContainer"], childs: [
                     {
@@ -13,7 +13,7 @@ exports.registerElements = {
                                 ele: "div", styles: ["loginContainerInputContainer"], childs: [
                                     { ele: "input", styles: ["loginContainerInput"], css: ['input', "nostyle-input"], options: { placeholder: "Электронная почта", type: "text", name: "login-input" } },
                                     {
-                                        ele: 'div', css: ["hidden"], styles: ["pincodeContainer"],
+                                        ele: 'div', css: ["hidden"], styles: ["pincodeContainer"], options: { id: "pincode-container" },
                                         childs: [
                                             {
                                                 ele: "input", styles: ["pincodeContainerInput"],
@@ -59,7 +59,7 @@ exports.registerElements = {
                                 ]
                             },
                             {
-                                ele: "div", css: ["hidden", "invisible"], styles: ["loginContainerInputContainerError"], childs: [
+                                ele: "div", css: ["hidden", "invisible"], styles: ["loginContainerInputContainerError"], options: { id: "register-error-container" }, childs: [
                                     { ele: "p", options: { innerText: "Электронная почта уже используется" } },
                                 ]
                             },
@@ -72,7 +72,7 @@ exports.registerElements = {
                         ]
                     },
                     {
-                        ele: "div", css: ["hidden", "invisible"], styles: ["loginContainerSuccess"], childs: [
+                        ele: "div", css: ["hidden", "invisible"], styles: ["loginContainerSuccess"], options: { id: "register-success-container" }, childs: [
                             { ele: "p", options: { innerText: "Вы успешно зарегистрировались!" } },
                             { ele: "button", css: ["nostyle-btn"], styles: ["loginContainerBtn"], options: { id: "to-login-btn", innerText: "Войти" } }
                         ]
@@ -82,12 +82,16 @@ exports.registerElements = {
         ],
     },
     elements: {
+        main: {
+            ref: "#main"
+        },
         loginForm: {
             ref: {
-                loginForm: "login-form",
+                loginForm: "#login-form",
                 emailInput: "login-input",
                 pincodesIds: ["pincode0", "pincode1", "pincode2", "pincode3", "pincode4", "pincode5"],
-                pincodeContainer: "pincode-container"
+                pincodeContainer: "#pincode-container",
+                registerBtn: "#register-btn"
             },
             animations: {
                 show: "show 0.1s linear 0.1s forwards",
@@ -96,16 +100,16 @@ exports.registerElements = {
         },
         registerForm: {
             ref: {
-                registerForm: "register-form",
+                registerForm: "#register-form",
                 emailInput: "register-input",
-                errorContainer: "login-container__input-container-error",
+                errorContainer: "#register-error-container",
                 btn: "#return-btn"
             }
         },
         success: {
             ref: {
-                container: "login-container__success",
-                btn: "to-login-btn"
+                container: "#register-success-container",
+                btn: "#to-login-btn"
             }
         }
     },

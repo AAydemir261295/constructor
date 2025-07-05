@@ -7,6 +7,7 @@ const queries = {
     isNotExpiried: "SELECT csrf from csrf where csrf = $1 and expiry > $2",
     updateCsrf: "UPDATE csrf SET csrf = $1, expiry = $2 WHERE token = $3",
     selectByToken: "SELECT csrf, expiry FROM csrf WHERE token = $1 AND expiry > $2",
+    updateToken: "UPDATE csrf SET token = $1 WHERE token = $2",
 };
 
 
@@ -51,11 +52,20 @@ export async function updateCsrf(token: string, csrf: string, expiry: number) {
 }
 
 
-
 export async function getCsrf(token: string, expiry: number) {
     try {
         var result = await pool.query(queries.selectByToken, [token, expiry]);
         return result.rows;
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+export async function updateToken(oldToken: string, newToken: string) {
+    try {
+        var result = await pool.query(queries.updateToken, [newToken, oldToken]);
+        return result;
     } catch (err) {
         console.log(err);
         return false;

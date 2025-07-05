@@ -69,7 +69,7 @@ export class Router extends EventEmitter {
         } else {
 
             if (!isLogined && notLoginedPaths.indexOf(path) == -1) {
-                window.location.replace("http://localhost:3000/login");
+                window.location.replace("/login");
             } else {
                 if (path == "/") {
                     console.log("?");

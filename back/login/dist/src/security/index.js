@@ -44,9 +44,9 @@ exports.initAuthorizedCookie = initAuthorizedCookie;
 var crypto_1 = __importDefault(require("crypto"));
 var csrfRepo_1 = require("../db/repos/csrfRepo");
 var cookieRepo_1 = require("../db/repos/cookieRepo");
-function initAuthorizedCookie(oldToken) {
+function initAuthorizedCookie(oldToken, userId) {
     return __awaiter(this, void 0, void 0, function () {
-        var expiry, token, tokenNotExist, isSaved;
+        var expiry, token, tokenNotExist, isSaved, csrfTokenIsSaved;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -55,21 +55,24 @@ function initAuthorizedCookie(oldToken) {
                     return [4 /*yield*/, (0, cookieRepo_1.tokenIsExist)(token, Date.now())];
                 case 1:
                     tokenNotExist = _a.sent();
-                    if (!tokenNotExist) return [3 /*break*/, 3];
-                    return [4 /*yield*/, (0, cookieRepo_1.updateCredentials)(oldToken, token, { expiry: expiry.getTime() })];
+                    if (!tokenNotExist) return [3 /*break*/, 4];
+                    return [4 /*yield*/, (0, cookieRepo_1.updateCredentials)(oldToken, token, { expiry: expiry.getTime(), userId: userId })];
                 case 2:
                     isSaved = _a.sent();
-                    if (isSaved) {
+                    return [4 /*yield*/, (0, csrfRepo_1.updateToken)(oldToken, token)];
+                case 3:
+                    csrfTokenIsSaved = _a.sent();
+                    if (isSaved && csrfTokenIsSaved) {
                         return [2 /*return*/, { token: token, values: { expiry: expiry } }];
                     }
                     else {
                         return [2 /*return*/, false];
                     }
-                    return [3 /*break*/, 4];
-                case 3:
+                    return [3 /*break*/, 5];
+                case 4:
                     this.initCookie();
-                    _a.label = 4;
-                case 4: return [2 /*return*/];
+                    _a.label = 5;
+                case 5: return [2 /*return*/];
             }
         });
     });

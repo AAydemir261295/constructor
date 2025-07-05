@@ -57,9 +57,13 @@ router.get('/:csrf/:email/:pincode', csrf_1.csrf, function (req, res, next) {
                     if (!(isEqual.length == 1)) return [3 /*break*/, 3];
                     userId = isEqual[0].id;
                     cookieExpiry = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-                    return [4 /*yield*/, (0, security_1.initAuthorizedCookie)(token)];
+                    console.log(token);
+                    console.log("token");
+                    return [4 /*yield*/, (0, security_1.initAuthorizedCookie)(token, userId)];
                 case 2:
                     newToken = _a.sent();
+                    console.log(newToken);
+                    console.log("newToken");
                     if (newToken) {
                         res.cookie("token", newToken.token, { httpOnly: true, expires: newToken.values.expiry });
                         res.cookie("userId", userId, { httpOnly: true, expires: cookieExpiry });

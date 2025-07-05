@@ -13,7 +13,8 @@ const urls = {
 export class LoginForm extends Form {
 
 
-    constructor(elements, router) {
+    constructor(elements) {
+        console.log(elements);
         super(elements.ref.loginForm, [elements.ref.emailInput, ...elements.ref.pincodesIds]);
         this.emailInput = new EmailInput(this.form.elements[elements.ref.emailInput], elements.animations.hide);
         this.pincodeContainer = new PincodeContainer(elements.ref.pincodeContainer,
@@ -24,7 +25,7 @@ export class LoginForm extends Form {
             this.form.elements[elements.ref.pincodesIds[4]],
             this.form.elements[elements.ref.pincodesIds[5]]],
             elements.animations.show);
-        this.registerBtn = document.getElementById("register-btn");
+        this.registerBtn = document.querySelector(elements.ref.registerBtn);
         this.onSubmit();
     }
 
@@ -51,17 +52,15 @@ export class LoginForm extends Form {
                     let csrf = new Csrf();
                     let pincode = this.pincodeContainer.getValue();
                     let response = await request(urls.pincode(csrf.get(), this.email, pincode));
-
+                    console.log(response);
                     if (response) {
                         if (response.result) {
-                            window.location.href = "/home";
+                            window.location.replace("/home");
                         } else {
                             this.pincodeContainer.showError();
                         }
                         csrf.update(response.csrf);
                     }
-                } else {
-
                 }
             } else {
                 let isValid = this.emailInput.validate();

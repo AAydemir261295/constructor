@@ -5,9 +5,9 @@ export class RegisterInput extends EmailInput {
 
     errorContainer;
 
-    constructor(element, errorContainer) {
+    constructor(element, id) {
         super(element);
-        this.errorContainer = document.querySelector(`.${errorContainer}`);
+        this.errorContainer = document.querySelector(id);
         this.onChange();
     }
 

@@ -11,12 +11,6 @@ export class LoginPage {
         this.elements = loginElements;
         this.domInteractions = domInteractions;
         this.domInteractions.setStylez(loginElements.stylez);
-
-        // this.body = document.querySelector('.body');
-
-        // this.domInteractions.setStylez(loginElements.stylez);
-        // this.domInteractions.buildTree(loginElements.tree, this.body);
-        // this.container = document.querySelector(".main");
     }
 
     router;
@@ -31,7 +25,7 @@ export class LoginPage {
 
     async drawPage(parent, loginElements) {
         await this.domInteractions.buildTree(loginElements.tree, parent);
-        this.container = document.querySelector(".main");
+        this.container = document.querySelector(loginElements.elements.main.ref);
         this.successContainer = new SuccessMessage(loginElements.elements.success);
         this.loginForm = new LoginForm(loginElements.elements.loginForm, this.router);
         this.registerForm = new RegisterForm(loginElements.elements.registerForm);

@@ -6,7 +6,7 @@ class Form {
     #formData;
 
     constructor(id, inputNames) {
-        this.#form = document.querySelector(`#${id}`);
+        this.#form = document.querySelector(id);
         // var event = new Event("submitted");
         var that = this;
         

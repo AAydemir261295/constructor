@@ -39,9 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var cookie_1 = require("../src/db/cookie");
 var csrf_1 = require("../src/db/csrf");
-var security_1 = require("../src/security");
 var router = (0, express_1.Router)();
-var security = new security_1.Security();
 router.get('/:csrf', function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
         var clientCookie, clientCsrf, timeStamp, cookieIsExist, serverCookie, serverCsrf;
@@ -62,10 +60,12 @@ router.get('/:csrf', function (req, res, next) {
                     if (serverCsrf.length == 1) {
                         if (clientCsrf == serverCsrf[0].csrf) {
                             if (serverCookie.value.hasOwnProperty("userId")) {
-                                res.redirect("/home");
+                                // res.redirect("/home");
+                                console.log("HERE");
+                                res.send({ result: true });
                             }
                             else {
-                                // res.redirect()
+                                console.log("HERE!!!!!!!!!!!");
                                 res.send({ result: false });
                             }
                         }

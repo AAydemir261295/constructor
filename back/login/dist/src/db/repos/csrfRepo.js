@@ -41,6 +41,7 @@ exports.csrfIsExist = csrfIsExist;
 exports.setCsrf = setCsrf;
 exports.updateCsrf = updateCsrf;
 exports.getCsrf = getCsrf;
+exports.updateToken = updateToken;
 var authClient_1 = require("../clients/authClient");
 var queries = {
     setCsrf: "INSERT INTO csrf(token, csrf, expiry) VALUES($1, $2, $3)",
@@ -48,6 +49,7 @@ var queries = {
     isNotExpiried: "SELECT csrf from csrf where csrf = $1 and expiry > $2",
     updateCsrf: "UPDATE csrf SET csrf = $1, expiry = $2 WHERE token = $3",
     selectByToken: "SELECT csrf, expiry FROM csrf WHERE token = $1 AND expiry > $2",
+    updateToken: "UPDATE csrf SET token = $1 WHERE token = $2",
 };
 function isNotExpiried(csrf, expiry) {
     return __awaiter(this, void 0, void 0, function () {
@@ -143,6 +145,26 @@ function getCsrf(token, expiry) {
                 case 2:
                     err_5 = _a.sent();
                     console.log(err_5);
+                    return [2 /*return*/, false];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function updateToken(oldToken, newToken) {
+    return __awaiter(this, void 0, void 0, function () {
+        var result, err_6;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, authClient_1.pool.query(queries.updateToken, [newToken, oldToken])];
+                case 1:
+                    result = _a.sent();
+                    return [2 /*return*/, result];
+                case 2:
+                    err_6 = _a.sent();
+                    console.log(err_6);
                     return [2 /*return*/, false];
                 case 3: return [2 /*return*/];
             }

@@ -6,9 +6,8 @@ export class SuccessMessage {
 
 
     constructor(elements) {
-        console.log(elements);
-        this.container = document.querySelector(`.${elements.ref.container}`);
-        this.btn = document.querySelector(`#${elements.ref.btn}`);
+        this.container = document.querySelector(elements.ref.container);
+        this.btn = document.querySelector(elements.ref.btn);
     }
 
 

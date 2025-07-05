@@ -11,8 +11,8 @@ export class PincodeContainer {
   result = [];
 
 
-  constructor(className, pincodeInputs, animation) {
-    this.pincodeContainer = document.querySelector(`.${className}`);
+  constructor(id, pincodeInputs, animation) {
+    this.pincodeContainer = document.querySelector(id);
     this.inputs = pincodeInputs;
     this.animation = animation;
     this.onInput();
@@ -73,6 +73,13 @@ export class PincodeContainer {
     return this.regex1.indexOf(numb) != -1;
   }
 
+  resetInputs() {
+    for (let q = 0; q < this.inputs.length; q++) {
+      const input = this.inputs[q];
+      input.value = "";
+    }
+  }
+
   inputRules(input, idx) {
     var that = this;
     input.addEventListener("keypress", function (ev) {
@@ -111,6 +118,7 @@ export class PincodeContainer {
 
       let pasted = ev.clipboardData.getData("text");
       let splitted = pasted.split("");
+      that.resetInputs();
       that.setPincode(splitted);
     });
 

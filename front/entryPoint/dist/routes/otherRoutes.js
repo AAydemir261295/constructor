@@ -42,12 +42,10 @@ var security_1 = require("../src/security");
 var router = (0, express_1.Router)();
 router.get("/*splat", function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var clientCookie, timeStamp, cookie, csrf, cookieIsExist, serverCookie, newCsrf, cookie, csrf;
+        var clientCookie, timeStamp, cookie, csrf, serverCookie, newCsrf, cookie, csrf;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    console.log(req.url);
-                    console.log("req.url1111111");
                     clientCookie = req.cookies;
                     timeStamp = Date.now();
                     console.log(1);
@@ -72,23 +70,14 @@ router.get("/*splat", function (req, res, next) {
                 case 3:
                     res.sendStatus(404);
                     _a.label = 4;
-                case 4: return [3 /*break*/, 14];
-                case 5: return [4 /*yield*/, (0, cookie_1.isLogined)(clientCookie.token, timeStamp)];
+                case 4: return [3 /*break*/, 12];
+                case 5: return [4 /*yield*/, (0, cookie_1.getCredentials)(clientCookie.token, timeStamp)];
                 case 6:
-                    cookieIsExist = _a.sent();
-                    if (!(clientCookie.hasOwnProperty("userId") &&
-                        cookieIsExist.length == 1 &&
-                        clientCookie.userId == cookieIsExist[0].value.userId)) return [3 /*break*/, 7];
-                    console.log("here?????");
-                    res.redirect('/home');
-                    return [3 /*break*/, 14];
-                case 7: return [4 /*yield*/, (0, cookie_1.getCredentials)(clientCookie.token, timeStamp)];
-                case 8:
                     serverCookie = _a.sent();
-                    if (!(serverCookie.length == 1)) return [3 /*break*/, 10];
+                    if (!(serverCookie.length == 1)) return [3 /*break*/, 8];
                     console.log("1here!!!");
                     return [4 /*yield*/, (0, security_1.updateCsrf)(serverCookie[0].token, timeStamp)];
-                case 9:
+                case 7:
                     newCsrf = _a.sent();
                     console.log(newCsrf);
                     console.log("newCsrf");
@@ -98,15 +87,15 @@ router.get("/*splat", function (req, res, next) {
                     else {
                         res.sendStatus(404);
                     }
-                    return [3 /*break*/, 14];
-                case 10:
+                    return [3 /*break*/, 12];
+                case 8:
                     console.log("1here");
                     return [4 /*yield*/, (0, security_1.initCookie)(timeStamp)];
-                case 11:
+                case 9:
                     cookie = _a.sent();
-                    if (!cookie) return [3 /*break*/, 13];
+                    if (!cookie) return [3 /*break*/, 11];
                     return [4 /*yield*/, (0, security_1.initCsrf)(cookie.token, timeStamp)];
-                case 12:
+                case 10:
                     csrf = _a.sent();
                     if (csrf) {
                         res.cookie("token", cookie.token, { httpOnly: true, expires: cookie.values.expiry });
@@ -115,11 +104,11 @@ router.get("/*splat", function (req, res, next) {
                     else {
                         res.sendStatus(404);
                     }
-                    return [3 /*break*/, 14];
-                case 13:
+                    return [3 /*break*/, 12];
+                case 11:
                     res.sendStatus(404);
-                    _a.label = 14;
-                case 14: return [2 /*return*/];
+                    _a.label = 12;
+                case 12: return [2 /*return*/];
             }
         });
     });
