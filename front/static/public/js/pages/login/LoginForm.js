@@ -11,6 +11,8 @@ const urls = {
 };
 
 export class LoginForm extends Form {
+
+
     constructor(elements, router) {
         super(elements.ref.loginForm, [elements.ref.emailInput, ...elements.ref.pincodesIds]);
         this.emailInput = new EmailInput(this.form.elements[elements.ref.emailInput], elements.animations.hide);

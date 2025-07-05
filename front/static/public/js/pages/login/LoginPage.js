@@ -1,29 +1,28 @@
 import { RegisterForm } from "/js/pages/login/RegisterForm.js";
-import MyDom from "/js/libs/dom/index.js";
 import { LoginForm } from "/js/pages/login/LoginForm.js";
 import { SuccessMessage } from "/js/pages/login/SuccessMessage.js";
-import { EventEmitter } from "/js/libs/eventEmitter/EventEmitter.js";
 
 const changes = ["hidden", "invisible"];
 
-export class LoginPage extends EventEmitter {
+export class LoginPage {
 
-
-    constructor(loginElements, router) {
-        super();
+    constructor(loginElements, router, domInteractions) {
         this.router = router;
         this.elements = loginElements;
-        this.body = document.querySelector('.body');
-        this.domInteractions = new MyDom(loginElements.stylez);
-        this.domInteractions.buildTree(loginElements.tree, this.body);
-        this.container = document.querySelector(".main");
-        this.successContainer = new SuccessMessage(loginElements.elements.success);
-        this.loginForm = new LoginForm(loginElements.elements.loginForm, router);
-        this.registerForm = new RegisterForm(loginElements.elements.registerForm);
+        this.domInteractions = domInteractions;
+        this.domInteractions.setStylez(loginElements.stylez);
 
-        this.changeForm();
-        this.onSuccessRegister();
-        this.onSuccessReturnToLogin();
+        // this.body = document.querySelector('.body');
+
+        // this.domInteractions.setStylez(loginElements.stylez);
+        // this.domInteractions.buildTree(loginElements.tree, this.body);
+        // this.container = document.querySelector(".main");
+
+
+
+
+
+
     }
 
     router;
@@ -35,6 +34,24 @@ export class LoginPage extends EventEmitter {
     successContainer;
     returnBtn;
     container;
+
+    async drawPage(parent, loginElements) {
+        await this.domInteractions.buildTree(loginElements.tree, parent);
+        this.container = document.querySelector(".main");
+        this.successContainer = new SuccessMessage(loginElements.elements.success);
+        this.loginForm = new LoginForm(loginElements.elements.loginForm, this.router);
+        this.registerForm = new RegisterForm(loginElements.elements.registerForm);
+
+        this.changeForm();
+        this.onSuccessRegister();
+        this.onSuccessReturnToLogin();
+    }
+
+
+    showPage() {
+        this.container.classList.remove("hidden");
+        this.container.style.animation = "show 0.1s linear forwards";
+    }
 
     onSuccessReturnToLogin() {
         this.successContainer.btn.addEventListener("click", () => {
@@ -57,14 +74,14 @@ export class LoginPage extends EventEmitter {
         this.loginForm.registerBtn.addEventListener("click", (e) => {
             this.loginForm.hide();
             this.registerForm.show();
-            let newElements = this.domInteractions.editRegisterTree(this.elements, changes)
+            let newElements = this.domInteractions.registerTree(this.elements, changes)
             this.router.redirect({ elements: newElements, path: "/register", moduleName: "/login" }, true);
         })
 
         this.registerForm.returnBtn.addEventListener("click", () => {
             this.registerForm.hide();
             this.loginForm.show();
-            let newElements = this.domInteractions.editLoginTree(this.elements, changes)
+            let newElements = this.domInteractions.loginTree(this.elements, changes)
             this.router.redirect({ elements: newElements, path: "/login", moduleName: "/login" }, true);
         })
     }

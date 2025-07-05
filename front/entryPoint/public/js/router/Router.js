@@ -38,7 +38,7 @@ export class Router extends EventEmitter {
             let module = this.modules.get(data.path);
             this.body.innerHTML = "";
             this.currentRoute = new Route(data.path, getRouteTitle(data.path), this, module);
-            await this.currentRoute.resolve(false);
+            await this.currentRoute.resolve();
             document.title = getRouteTitle(data.path);
         });
     }
@@ -55,7 +55,7 @@ export class Router extends EventEmitter {
     async setRoute(path, title) {
         let module = await this.modules.set(path);
         this.currentRoute = new Route(path, title, this, module.value);
-        await this.currentRoute.resolve(true);
+        await this.currentRoute.resolve();
         this.loader.stop();
     }
 
@@ -63,24 +63,11 @@ export class Router extends EventEmitter {
         let isLogined = await this.authGuard.checkAuth();
         if (isLogined) {
             this.setRoute("/home", title)
-            // let module = await this.modules.set("/home");
-            // this.currentRoute = new Route(path, title, this, module.value);
-            // await this.currentRoute.resolve(true);
-            // this.loader.stop();
         } else {
             if (path == "/") {
                 this.setRoute("/login", title)
-
-                // let module = await this.modules.set("/login");
-                // this.currentRoute = new Route("/login", "Вход", this, module.value);
-                // await this.currentRoute.resolve(true);
-                // this.loader.stop();
             } else {
                 this.setRoute(path, title)
-                // let module = await this.modules.set(path);
-                // this.currentRoute = new Route(path, title, this, module.value);
-                // await this.currentRoute.resolve(true);
-                // this.loader.stop();
             }
         }
     }

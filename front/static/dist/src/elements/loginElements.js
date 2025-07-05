@@ -4,7 +4,7 @@ exports.loginElements = void 0;
 exports.loginElements = {
     tree: {
         // classList: ["main"]
-        ele: "main", classList: [], childs: [
+        ele: "main", css: ["main", "hidden"], classList: [], childs: [
             {
                 ele: "div", classList: ["loginContainer"], childs: [
                     {

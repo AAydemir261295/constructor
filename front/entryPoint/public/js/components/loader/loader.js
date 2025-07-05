@@ -107,7 +107,7 @@ export class Loader {
 
     start() {
         this.blocksOnStart();
-        this.loaderContainer.style.animation = "start 0.2s linear forwards";
+        this.loaderContainer.style.animation = "show 0.2s linear forwards";
         this.startAnimation();
         this.interval = setInterval(this.startAnimation.bind(this), 1000);
     }
@@ -116,7 +116,7 @@ export class Loader {
         clearInterval(this.interval);
         this.endAnimation();
         setTimeout(() => {
-            this.loaderContainer.style.animation = "stop 0.2s linear forwards";
+            this.loaderContainer.style.animation = "hide 0.2s linear forwards";
             setTimeout(() => {
                 this.loaderContainer.remove();
             }, 200)

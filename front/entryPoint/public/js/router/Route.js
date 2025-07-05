@@ -27,9 +27,11 @@ export default class Route {
     page;
     pageData;
     router;
+    body
 
 
     constructor(pathName, title, router, module) {
+        this.body = document.querySelector(".body");
         this.router = router;
         this.pathName = pathName;
         this.title = title;
@@ -55,14 +57,14 @@ export default class Route {
         }
     }
 
-    async resolve(withStyles) {
+    async resolve() {
         await this.getRouteData();
-        if (withStyles) {
-            await this.domInteractions.addStyles(this.data.elements.styles, this.pathName);
-        }
 
-        setTimeout(() => {
-            this.page = new this.PageModule(this.data.elements, this.router);
+
+        setTimeout(async () => {
+            this.page = new this.PageModule(this.data.elements, this.router, this.domInteractions);
+            await this.page.drawPage(this.body, this.data.elements);
+            this.page.showPage();
             // this.page.container.style.animation = animations.show;
         }, 1500)
     }

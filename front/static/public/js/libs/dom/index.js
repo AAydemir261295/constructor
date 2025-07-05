@@ -70,13 +70,9 @@ export default class MyDom extends EventEmitter {
     setStyles(ele, classList) {
         classList.forEach((className) => {
             var cssBlock = this.styles[className];
-            if(cssBlock == undefined){
-                console.log(className);
-                console.log(classList);
-            }
             var cssPropertiesKeys = Object.keys(cssBlock);
             for (const propertyKey of cssPropertiesKeys) {
-                
+
                 ele.style[propertyKey] = cssBlock[propertyKey];
             }
         })

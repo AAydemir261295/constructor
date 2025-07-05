@@ -1,7 +1,4 @@
-@import url("/css/variables/colors.css");
-@import url("/css/mixins/nostyle.css");
-@import url("/css/mixins/mixins.css");
-@import url("/css/blocks/loader-container/loader-container.css");
+/* @import url("/css/blocks/loader-container/loader-container.css");
 
 @import url("/css/blocks/home-header/home-header.css");
 
@@ -18,11 +15,35 @@
 
 @import url("/css/blocks/container/container.css");
 
-@import url("/css/blocks/nav-btn/nav-btn.css");
+@import url("/css/blocks/nav-btn/nav-btn.css"); */
 
-@import url("/css/blocks/btn-submit/btn-submit.css");
+
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+
 
 @import url("/css/fonts/fonts.css");
+@import url("/css/variables/colors.css");
+@import url("/css/mixins/nostyle.css");
+@import url("/css/mixins/mixins.css");
+
+@import url("/css/animations/animations.css");
+
+
+@import url("/css/blocks/loader-container/loader-container.css");
+/* @import url(""); */
+
+
+@import url("/css/blocks/btn-submit/btn-submit.css");
+@import url("/css/blocks/input/input.css");
+
+
+
+
 
 html,
 body {
@@ -43,6 +64,12 @@ body {
 }
 
 
+.main {
+    opacity: 0;
+    /* transition: 0.2s; */
+}
+
+
 .main-home {
     display: flex;
     flex-direction: column;
@@ -52,12 +79,4 @@ body {
     height: 100vh;
     min-height: 900px;
     /* opacity: 0; */
-}
-
-
-
-.input::placeholder {
-    text-align: center;
-    color: var(--gray100);
-    font-weight: bold;
 }

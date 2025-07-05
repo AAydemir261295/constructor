@@ -1,5 +1,5 @@
 @import url("./__loader/loader-container__loader.css");
-@import url("/css/animations/loader/animations.css");
+/* @import url("/css/animations/loader/animations.css"); */
 
 .loader-container {
     position: relative;

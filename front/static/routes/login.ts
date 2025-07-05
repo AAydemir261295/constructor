@@ -6,7 +6,9 @@ var router = Router();
 
 
 router.get('/:csrf', csrf, async function (req, res, next) {
-  res.send(JSON.stringify({ elements: loginElements, csrf: req['newCsrf'] }));
+  setTimeout(() => {
+    res.send(JSON.stringify({ elements: loginElements, csrf: req['newCsrf'] }));
+  }, 2000);
 });
 
 

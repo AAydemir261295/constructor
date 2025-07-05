@@ -43,7 +43,9 @@ var router = (0, express_1.Router)();
 router.get('/:csrf', csrf_1.csrf, function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            res.send(JSON.stringify({ elements: loginElements_1.loginElements, csrf: req['newCsrf'] }));
+            setTimeout(function () {
+                res.send(JSON.stringify({ elements: loginElements_1.loginElements, csrf: req['newCsrf'] }));
+            }, 2000);
             return [2 /*return*/];
         });
     });
