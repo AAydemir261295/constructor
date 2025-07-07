@@ -1,6 +1,6 @@
-import MyDom from "/js/libs/dom/index.js";
 import { Router } from "/js/router/Router.js";
 import { Loader } from "/js/components/loader/loader.js";
+import { Csrf } from "/js/libs/csrf/Csrf.js";
 
 class App {
 
@@ -10,7 +10,8 @@ class App {
         let pathName = window.location.pathname;
         var loader = new Loader();
         loader.start();
-        this.router = new Router(pathName, loader);
+        this.csrf = new Csrf();
+        this.router = new Router(pathName, loader, this.csrf);
     }
 }
 

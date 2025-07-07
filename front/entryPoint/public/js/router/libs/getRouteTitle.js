@@ -8,6 +8,8 @@ export function getRouteTitle(pathName) {
             return "Регистрация";
         case "/":
             return "Конструктор";
+        case "/home":
+            return "Главная";
     }
 
 }

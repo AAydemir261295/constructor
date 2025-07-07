@@ -12,7 +12,6 @@ const notLoginedPaths = [
 
 export class Router extends EventEmitter {
 
-    // localStorage;
     cached;
     currentRoute;
     authGuard;
@@ -20,24 +19,22 @@ export class Router extends EventEmitter {
     modules;
 
 
-    constructor(pathname, loader) {
+    constructor(pathname, loader, csrf) {
         super();
         this.loader = loader;
         this.authGuard = new AuthGuard();
         this.body = document.querySelector(".body");
         this.pathname = pathname;
         this.modules = new Modules();
-
-        // this.localStorage = new LocalStorage();
-        // this.cached = this.local.getItem(this.pathname);
-
-        this.resolvePath(pathname, getRouteTitle(pathname));
+        this.csrf = csrf;
+        this.resolveRoute(pathname, getRouteTitle(pathname));
         this.routeChanges();
     }
 
     routeChanges() {
         window.addEventListener('popstate', async (event) => {
             const data = event.state;
+            
             let module = this.modules.get(data.path);
             this.body.innerHTML = "";
             this.currentRoute = new Route(data.path, getRouteTitle(data.path), this, module);
@@ -46,36 +43,38 @@ export class Router extends EventEmitter {
         });
     }
 
-    redirect(data, isNestedRoute) {
-        if (!isNestedRoute) {
-            this.resolvePath(data.path, getRouteTitle(data.path));
-        } else {
-            history.pushState(data, "", data.path);
-            document.title = getRouteTitle(data.path);
-        }
+    redirect(data) {
+        history.pushState(data, "", data.path);
+        document.title = getRouteTitle(data.path);
     }
 
     async setRoute(path, title) {
         let module = await this.modules.set(path);
-        this.currentRoute = new Route(path, title, this, module.value);
+        this.currentRoute = new Route(path, title, this, module.value, this.csrf);
         await this.currentRoute.resolve();
         this.loader.stop();
     }
 
-    async resolvePath(path, title) {
+
+    async resolveNestedRoute(path, title) {
+
+    }
+
+
+    async resolveRoute(path, title) {
         let isLogined = await this.authGuard.checkAuth();
         if (isLogined) {
-            this.setRoute("/home", title)
+            await this.setRoute("/home", title);
+            this.currentRoute.updateHistory();
         } else {
 
             if (!isLogined && notLoginedPaths.indexOf(path) == -1) {
                 window.location.replace("/login");
             } else {
                 if (path == "/") {
-                    console.log("?");
-                    this.setRoute("/login", title)
+                    await this.setRoute("/login", title)
                 } else {
-                    this.setRoute(path, title)
+                    await this.setRoute(path, title)
                 }
             }
         }

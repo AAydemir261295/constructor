@@ -1,6 +1,3 @@
-import MyDom from "/js/libs/dom/index.js";
-
-
 const loaderEle = {
     tree:
     {

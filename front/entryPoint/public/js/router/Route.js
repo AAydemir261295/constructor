@@ -1,22 +1,13 @@
-import { Csrf } from "/js/libs/csrf/Csrf.js";
-import MyDom from "/js/libs/dom/index.js";
+import MyDom from "/js/libs/dom/dom.js";
 import { request } from "/js/libs/request/fetch.js";
-import { EventEmitter } from "/js/libs/eventEmitter/EventEmitter.js";
-
-const url = "http://localhost:3000";
 
 const dataUrls = {
     "/": "",
     "/login": (csrf) => `http://localhost:3001/login/${csrf}`,
     "/register": (csrf) => `http://localhost:3001/register/${csrf}`,
-
+    "/home": (csrf) => `http://localhost:3001/home/${csrf}`
 }
 
-
-
-const animations = {
-    show: "show 0.2s linear forwards"
-}
 
 export default class Route {
 
@@ -30,12 +21,14 @@ export default class Route {
     body
 
 
-    constructor(pathName, title, router, module) {
+    constructor(pathName, title, router, module, csrf) {
         this.body = document.querySelector(".body");
         this.router = router;
+        this.csrf = csrf;
         this.pathName = pathName;
         this.title = title;
         this.domInteractions = new MyDom();
+
         this.PageModule = module;
     }
 
@@ -44,28 +37,32 @@ export default class Route {
         document.title = this.title;
     }
 
+    replateHistory() {
+        history.replaceState({ ...this.data, ...{ csrf: this.data.csrf }, path: this.pathName }, "", this.pathName);
+        document.title = this.title;
+    }
+
     async getRouteData() {
         let cache = history.state;
-
         if (cache) {
             this.data = cache;
         } else {
-            let csrf = new Csrf();
-            this.data = await request(dataUrls[this.pathName](csrf.get()));
-            csrf.update(this.data.csrf);
+            this.data = await request(dataUrls[this.pathName](this.csrf.get()));
+
+            this.csrf.update(this.data.csrf);
             this.updateHistory();
         }
     }
+
 
     async resolve() {
         await this.getRouteData();
 
 
         setTimeout(async () => {
-            this.page = new this.PageModule(this.data.elements, this.router, this.domInteractions);
-            await this.page.drawPage(this.body, this.data.elements);
-            this.page.showPage();
-            // this.page.container.style.animation = animations.show;
+            this.page = new this.PageModule(this.data.elements, this.router, this.domInteractions, this.csrf);
+            await this.page.renderPage(this.pathName);
+            // this.page.showPage();
         }, 1500)
     }
 

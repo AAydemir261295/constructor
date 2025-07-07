@@ -3,6 +3,7 @@
 const moduleUrls = {
     "/login": "http://localhost:3001/js/pages/login/LoginPage.js",
     "/register": "http://localhost:3001/js/pages/login/LoginPage.js",
+    "/home": "http://localhost:3001/js/pages/home/HomePage.js",
 }
 
 export class Modules {
