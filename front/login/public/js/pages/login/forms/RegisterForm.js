@@ -6,32 +6,30 @@ import { RegisterInput } from "/js/pages/login/libs/RegisterInput.js";
 const url = (csrf, email) => `http://localhost:4000/register/${csrf}/${email}`;
 
 export class RegisterForm extends MyForm {
-    constructor(elements, router, csrf) {
-        super(elements.ref.registerForm, [elements.ref.emailInput]);
+    constructor(form, elementsRef, router, csrf) {
+        super(form, [elementsRef.emailInput]);
         this.csrf = csrf;
         this.router = router;
-        this.emailInput = new RegisterInput(this.form.elements[elements.ref.emailInput], elements.ref.errorContainer);
-        this.returnBtn = document.querySelector(elements.ref.btn);
+        this.emailInput = new RegisterInput(this.form.elements[elementsRef.emailInput], form.querySelector(elementsRef.errorContainer));
+        this.returnBtn = form.querySelector(elementsRef.btn);
         this.onSubmit();
+        this.toLoginForm();
     }
 
-    email;
-    isValid;
-    isRegistered;
-    errorContainer;
+    emailInput;
     returnBtn;
+    router;
     csrf;
 
     async onSubmit() {
         this.form.addEventListener("submit", async (ev) => {
-            this.isValid = this.emailInput.validate();
-            if (this.isValid) {
-                this.email = this.emailInput.getValue();
-                let response = await request(url(this.csrf.get(), this.email));
+            let isValid = this.emailInput.validate();
+            if (isValid) {
+                let email = this.emailInput.getValue();
+                let response = await request(url(this.csrf.get(), email));
                 if (response) {
                     if (response.result) {
-                        this.isRegistered = true;
-                        // this.router
+                        this.router.redirect({ nested: true, path: "/success", anchorType: "login", anchorName: "success", csrf: this.csrf.get(), email: email })
                     } else {
                         this.emailInput.showContainerError();
                         this.emailInput.showInputError();
@@ -42,11 +40,9 @@ export class RegisterForm extends MyForm {
         })
     }
 
-    hide() {
-        this.form.classList.add("invisible");
-    }
-
-    show() {
-        this.form.classList.remove("invisible");
+    toLoginForm() {
+        this.returnBtn.addEventListener("click", () => {
+            this.router.redirect({ nested: true, path: "/login", anchorType: "login", anchorName: "loginForm", csrf: this.csrf.get() });
+        })
     }
 }

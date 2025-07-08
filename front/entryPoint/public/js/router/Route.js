@@ -32,15 +32,15 @@ export default class Route {
         this.PageModule = module;
     }
 
-    updateHistory() {
-        history.pushState({ ...this.data, ...{ csrf: this.data.csrf }, path: this.pathName }, "", this.pathName);
-        document.title = this.title;
-    }
+    // updateHistory(data) {
+    //     history.pushState(data, "", this.pathName);
+    //     document.title = this.title;
+    // }
 
-    replateHistory() {
-        history.replaceState({ ...this.data, ...{ csrf: this.data.csrf }, path: this.pathName }, "", this.pathName);
-        document.title = this.title;
-    }
+    // replateHistory() {
+    //     history.replaceState({ ...this.data, ...{ csrf: this.data.csrf }, path: this.pathName }, "", this.pathName);
+    //     document.title = this.title;
+    // }
 
     async getRouteData() {
         let cache = history.state;
@@ -48,10 +48,13 @@ export default class Route {
             this.data = cache;
         } else {
             this.data = await request(dataUrls[this.pathName](this.csrf.get()));
-
             this.csrf.update(this.data.csrf);
-            this.updateHistory();
         }
+    }
+
+    async editRoute(data) {
+        this.page.changeAnchorContent(data.anchorType, data.anchorName);
+        this.page.restore(data);
     }
 
 
@@ -62,7 +65,7 @@ export default class Route {
         setTimeout(async () => {
             this.page = new this.PageModule(this.data.elements, this.router, this.domInteractions, this.csrf);
             await this.page.renderPage(this.pathName);
-            // this.page.showPage();
+            this.router.updateHistory({ ...this.data, nested: true, path: this.pathName, anchorType: "login", anchorName: "loginForm", csrf: this.csrf.get() });
         }, 1500)
     }
 

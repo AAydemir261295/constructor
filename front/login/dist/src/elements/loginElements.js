@@ -17,7 +17,7 @@ exports.loginElements = {
         },
         loginForm: {
             tree: {
-                ele: "form", anchor: { active: true, type: "login", name: "login" }, css: ["invisible"], styles: ["loginContainerForm"], options: { id: "login-form" }, childs: [
+                ele: "form", anchor: { type: "login", name: "loginForm" }, css: ["invisible"], styles: ["loginContainerForm"], options: { id: "login-form" }, childs: [
                     {
                         ele: "div", styles: ["loginContainerInputContainer"], childs: [
                             { ele: "input", styles: ["loginContainerInput"], css: ['input', "nostyle-input"], options: { placeholder: "Электронная почта", type: "text", name: "login-input" } },
@@ -36,14 +36,10 @@ exports.loginElements = {
                 emailInput: "login-input",
                 registerBtn: "#register-btn"
             },
-            animations: {
-                show: "show 0.1s linear 0.1s forwards",
-                hide: "hide 0.1s linear forwards",
-            }
         },
         pincodeForm: {
             tree: {
-                ele: "form", anchor: { active: false, type: "login", name: "pincode" }, css: ["invisible"], styles: ["loginContainerForm"], options: { id: "pincode-form" }, childs: [
+                ele: "form", anchor: { type: "login", name: "pincodeForm" }, css: ["invisible"], styles: ["loginContainerForm"], options: { id: "pincode-form" }, childs: [
                     {
                         ele: 'div', styles: ["pincodeContainer"], options: { id: "pincode-container" },
                         childs: [
@@ -84,7 +80,7 @@ exports.loginElements = {
         },
         registerForm: {
             tree: {
-                ele: "form", anchor: { active: false, type: "login", name: "register" }, css: ["invisible"], styles: ["loginContainerForm"], options: { id: "register-form" }, childs: [
+                ele: "form", anchor: { type: "login", name: "registerForm" }, css: ["invisible"], styles: ["loginContainerForm"], options: { id: "register-form" }, childs: [
                     {
                         ele: "div", styles: ["loginContainerInputContainer"], childs: [
                             { ele: "input", css: ["input", "nostyle-input"], styles: ["loginContainerInput"], options: { placeholder: "Электронная почта", type: "text", name: "register-input" } },
@@ -112,9 +108,9 @@ exports.loginElements = {
         },
         success: {
             tree: {
-                ele: "div", anchor: { active: false, type: "login", name: "success" }, css: ["invisible"], styles: ["loginContainerSuccess"], options: { id: "register-success-container" }, childs: [
+                ele: "div", anchor: { type: "login", name: "success" }, css: ["invisible"], styles: ["loginContainerSuccess"], options: { id: "register-success-container" }, childs: [
                     { ele: "p", options: { innerText: "Вы успешно зарегистрировались!" } },
-                    { ele: "button", css: ["nostyle-btn"], styles: ["loginContainerBtn"], options: { id: "to-login-btn", innerText: "Войти" } }
+                    { ele: "button", css: ["nostyle-btn", "btn-submit"], styles: ["loginContainerBtn"], options: { id: "to-login-btn", innerText: "Войти" } }
                 ]
             },
             ref: {
@@ -123,6 +119,7 @@ exports.loginElements = {
             }
         }
     },
+    activeAnchor: "loginForm",
     stylez: {
         loginContainer: {
             "display": "flex",
@@ -156,8 +153,7 @@ exports.loginElements = {
             "flex-direction": "row",
             "justify-content": "space-between",
             "align-items": "center",
-            "opacity": "0",
-            "width": "100%",
+            "width": "220px",
         },
         pincodeContainerInput: {
             "text-align": "center",
@@ -200,5 +196,5 @@ exports.loginElements = {
             "transition": "0.2s",
             "font-family": "bold",
         }
-    },
+    }
 };

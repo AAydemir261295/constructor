@@ -11,10 +11,9 @@ export class PincodeContainer {
   result = [];
 
 
-  constructor(id, pincodeInputs, animation) {
+  constructor(id, pincodeInputs) {
     this.pincodeContainer = document.querySelector(id);
     this.inputs = pincodeInputs;
-    this.animation = animation;
     this.onInput();
   }
 
@@ -164,9 +163,9 @@ export class PincodeContainer {
     }
   }
 
-  show() {
-    this.pincodeContainer.classList.remove("hidden");
-    this.pincodeContainer.style.animation = this.animation;
-  }
+  // show() {
+  //   this.pincodeContainer.classList.remove("hidden");
+  //   this.pincodeContainer.style.animation = this.animation;
+  // }
 
 }

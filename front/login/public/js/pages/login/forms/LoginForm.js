@@ -1,8 +1,6 @@
 import MyForm from "http://localhost:3000/js/core/MyForm.js";
 import { request } from "http://localhost:3000/js/libs/request/fetch.js";
-
 import { EmailInput } from "/js/pages/login/libs/EmailInput.js";
-import { PincodeContainer } from "/js/pages/login/libs/PincodeContainer.js";
 
 
 
@@ -14,54 +12,43 @@ const urls = {
 export class LoginForm extends MyForm {
 
 
-    constructor(elements, redirect, csrf) {
-        super(elements.ref.loginForm, [elements.ref.emailInput]);
-
+    constructor(form, elementsRef, router, csrf) {
+        super(form, [elementsRef.emailInput]);
         this.csrf = csrf;
-        this.redirect = redirect;
-        this.emailInput = new EmailInput(this.form.elements[elements.ref.emailInput], elements.animations.hide);
-        this.registerBtn = document.querySelector(elements.ref.registerBtn);
+        this.router = router;
+        this.emailInput = new EmailInput(this.form.elements[elementsRef.emailInput],);
+        this.registerBtn = document.querySelector(elementsRef.registerBtn);
         this.onSubmit();
+        this.toRegisterForm();
     }
 
     emailInput;
-    isPincodeTime;
-    email;
-    pincode;
     registerBtn;
-    redirect;
+    router;
     csrf;
-
-    toRegisterForm(){
-        
-    }
 
     onSubmit() {
         this.form.addEventListener("submit", async (ev) => {
             let isValid = this.emailInput.validate();
             if (isValid) {
-                this.email = this.emailInput.getValue();
-                let response = await request(urls.login(this.csrf.get(), this.email));
+                let email = this.emailInput.getValue();
+                let response = await request(urls.login(this.csrf.get(), email));
                 if (response) {
                     if (response.result) {
-                        this.redirect("/pincode", "pincode", "login", { email: this.email });
+                        this.router.redirect({ nested: true, path: "/pincode", anchorType: "login", anchorName: "pincodeForm", csrf: this.csrf.get(), email: email })
                     } else {
                         this.emailInput.showInputError();
                     }
                     this.csrf.update(response.csrf);
                 }
             }
-
         })
     }
 
-    hide() {
-        this.form.classList.add("invisible");
-    }
-
-    show() {
-
-        this.form.classList.remove("invisible");
+    toRegisterForm() {
+        this.registerBtn.addEventListener("click", () => {
+            this.router.redirect({ nested: true, path: "/register", anchorType: "login", anchorName: "registerForm", csrf: this.csrf.get() });
+        })
     }
 
 }

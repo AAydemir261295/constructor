@@ -6,14 +6,17 @@ export class EmailInput {
         /^((?:[A-Za-z0-9!#$%&'*+\-\/=?^_`{|}~]|(?<=^|\.)"|"(?=$|\.|@)|(?<=".*)[ .](?=.*")|(?<!\.)\.){1,64})(@)((?:[A-Za-z0-9.\-])*(?:[A-Za-z0-9])\.(?:[A-Za-z0-9]){2,})$/
     );
 
-    constructor(element, animation) {
+    constructor(element) {
         this.input = element;
-        this.animation = animation;
         this.onChange();
     }
 
     getValue() {
         return this.input.value;
+    }
+
+    setValue(value) {
+        this.input.value = value;
     }
 
     showInputError() {
@@ -35,14 +38,6 @@ export class EmailInput {
             return false;
         }
     }
-
-    hide() {
-        this.input.style.animation = this.animation;
-        setTimeout(() => {
-            this.input.classList.add("hidden");
-        }, 100)
-    }
-
 
     onChange() {
         this.input.addEventListener("input", (ev) => {

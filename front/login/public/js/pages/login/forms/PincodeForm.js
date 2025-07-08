@@ -9,38 +9,36 @@ const url = (csrf, email, pincode) => `http://localhost:4000/pincode/${csrf}/${e
 export class PincodeForm extends MyForm {
 
 
-    constructor(elements, router, csrf, email) {
-        super(elements.ref.loginForm, [elements.ref.emailInput, ...elements.ref.pincodesIds]);
+    constructor(form, elementsRef, router, csrf) {
+        super(form, [elementsRef.emailInput, ...elementsRef.pincodesIds]);
         this.csrf = csrf;
         this.router = router;
-        this.email = email;
-        this.pincodeContainer = new PincodeContainer(elements.ref.pincodeContainer,
-            [this.form.elements[elements.ref.pincodesIds[0]],
-            this.form.elements[elements.ref.pincodesIds[1]],
-            this.form.elements[elements.ref.pincodesIds[2]],
-            this.form.elements[elements.ref.pincodesIds[3]],
-            this.form.elements[elements.ref.pincodesIds[4]],
-            this.form.elements[elements.ref.pincodesIds[5]]],
-            elements.animations.show);
+        this.pincodeContainer = new PincodeContainer(elementsRef.pincodeContainer,
+            [this.form.elements[elementsRef.pincodesIds[0]],
+            this.form.elements[elementsRef.pincodesIds[1]],
+            this.form.elements[elementsRef.pincodesIds[2]],
+            this.form.elements[elementsRef.pincodesIds[3]],
+            this.form.elements[elementsRef.pincodesIds[4]],
+            this.form.elements[elementsRef.pincodesIds[5]]]);
         this.onSubmit();
     }
 
     pincodeContainer;
-    pincode;
     router;
     csrf;
-    email;
 
     onSubmit() {
         this.form.addEventListener("submit", async (ev) => {
             let isValid = this.pincodeContainer.validate();
             if (isValid) {
                 let pincode = this.pincodeContainer.getValue();
-                let response = await request(urls.pincode(this.csrf.get(), this.email, pincode));
-                console.log(response);
+                let email = history.state.email;
+                console.log(this.csrf.get(), email, pincode);
+                let response = await request(url(this.csrf.get(), email, pincode));
+
                 if (response) {
                     if (response.result) {
-                        window.location.replace("/home");
+                        // window.location.replace("/home");
                     } else {
                         this.pincodeContainer.showError();
                     }
@@ -49,13 +47,4 @@ export class PincodeForm extends MyForm {
             }
         })
     }
-
-    hide() {
-        this.form.classList.add("invisible");
-    }
-
-    show() {
-        this.form.classList.remove("invisible");
-    }
-
 }

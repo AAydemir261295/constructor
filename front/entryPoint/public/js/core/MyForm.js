@@ -5,8 +5,10 @@ class MyForm {
     #form;
     #formData;
 
-    constructor(id, inputNames) {
-        this.#form = document.querySelector(id);
+    // constructor(id, inputNames) {
+    constructor(form, inputNames) {
+        // this.#form = document.querySelector(id);
+        this.#form = form;
         var that = this;
 
         this.form.addEventListener("submit", (ev) => {
@@ -30,8 +32,11 @@ class MyForm {
         return this.#form;
     }
 
-    set form(id) {
-        this.#form = document.querySelector(`#${id}`)
+    // set form(id) {
+    set form(form) {
+
+        // this.#form = document.querySelector(`#${id}`)
+        this.#form = form;
     }
 
     set formData(formData) {

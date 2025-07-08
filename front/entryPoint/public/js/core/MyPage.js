@@ -4,6 +4,15 @@ class MyPage {
         this.csrf = csrf;
         this.domInteractions = domInteractions;
         this.pageData = pageData;
+        this.body = document.body;
+
+
+        if (pageData.hasOwnProperty("restore") && pageData.nested) {
+            this.anchorParents = pageData.anchorParents;
+            this.pageAnchors = pageData.pageAnchors;
+            this.activeAnchor = pageData.activeAnchor;
+        }
+
 
     }
 
@@ -14,21 +23,15 @@ class MyPage {
     container;
 
 
-
     anchorParents = {};
-    pageElements = {};
-    // activeAnchor = "";
+    pageAnchors = {};
+    activeAnchor = "";
 
-
-    appendChild() {
-
-    }
 
     async buildTree(eleArr, parent) {
         if (eleArr.hasOwnProperty("childs")) {
             if (eleArr.hasOwnProperty("anchorParent")) {
                 var child = parent.appendChild(await this.createElement(eleArr));
-                console.log(child);
                 this.anchorParents[eleArr.anchorParent.type] = child;
                 var childs = eleArr.childs;
                 for (let q = 0; q < childs.length; q++) {
@@ -50,8 +53,6 @@ class MyPage {
                         var childs = child.childs;
                         if (child.hasOwnProperty("anchorParent")) {
                             this.anchorParents[child.anchorParent.type] = innerChild;
-                            console.log(innerChild);
-
                         }
                         for (let q = 0; q < childs.length; q++) {
                             await this.buildTree(child.childs[q], innerChild);
@@ -62,7 +63,10 @@ class MyPage {
                             this.anchorParents[child.anchorParent.type] = anchorParent;
                             return;
                         } else {
-                            parent.appendChild(await this.createElement(child));
+                            for (let q = 0; q < eleArr.length; q++) {
+                                const element = eleArr[q];
+                                parent.appendChild(await this.createElement(element));
+                            }
                             return;
                         }
                     }
@@ -85,6 +89,7 @@ class MyPage {
         })
     }
 
+
     async createElement(eleData) {
         var ele = document.createElement(eleData.ele);
         if (eleData.hasOwnProperty("styles")) {
@@ -103,8 +108,8 @@ class MyPage {
 
 
     async render() {
-        var mainParent = await this.createElement(this.pageData.elements.main.tree);
-        await this.buildTree(this.pageData.elements.main.tree.childs, mainParent);
+        this.container = await this.createElement(this.pageData.elements.main.tree);
+        await this.buildTree(this.pageData.elements.main.tree.childs, this.container);
 
 
         let keys = Object.keys(this.pageData.elements);
@@ -114,51 +119,41 @@ class MyPage {
                 await this.buildTree(this.pageData.elements[key].tree.childs, parent);
                 let tmp = {};
                 tmp[key] = parent;
-                this.pageElements[key] = parent;
-                if (this.pageData.elements[key].tree.hasOwnProperty("anchor") && this.pageData.elements[key].tree.anchor.active) {
-                    let type = this.pageData.elements[key].tree.anchor.type
+                this.pageAnchors[key] = parent;
+                if (this.pageData.elements[key].tree.hasOwnProperty("anchor") && this.pageData.elements[key].tree.anchor.name == this.pageData.activeAnchor) {
+                    let type = this.pageData.elements[key].tree.anchor.type;
                     this.anchorParents[type].appendChild(parent);
+                    this.pageAnchors[key].classList.remove("invisible");
+                    this.activeAnchor = this.pageData.elements[key].tree.anchor.name;
                 }
             }
         }
 
-        console.log(this.pageElements);
-
-        var tmp = document.body;
-        tmp.appendChild(mainParent);
-        mainParent.classList.remove("hidden");
-        mainParent.style.animation = "show 0.1s linear forwards";
+        this.body.appendChild(this.container);
+        this.showPage();
     }
 
-    // showPage() {
-    //     this.container.classList.remove("hidden");
-    //     this.container.style.animation = "show 0.1s linear forwards";
-    // }
-
-
-    async changeAnchorContent(type, anchorName) {
-        // var parentElement = await this.createElement(this.anchors[type].anchors[anchorName]);
-        // await this.buildElement(this.anchors[type].anchors[anchorName].childs, parentElement);
-        // this.anchorParents[type].innerHTML = "";
-        // this.anchorParents[type].appendChild(parentElement);
-        this.anchorParents[type].innerHTML = "";
-        this.anchorParents[type].appendChild(this.pageElements[anchorName]);
-    }
-
-    async nestedRedirect(path, anchorName, anchorType, data) {
-        await this.domInteractions.changeAnchorContent(anchorType, anchorName);
-        await this.domInteractions.setActualPageData(this.pageData.tree, anchorName, anchorType);
-        this.router.redirect({ elements: this.pageData, path: path, data: data });
-    }
-
-    redirect(path, changes) {
-        // let newElements = this.domInteractions.loginTree(this.pageData, changes)
-        // this.router.redirect({ elements: newElements, path: "/login", moduleName: "/login" }, true);
+    showPage() {
+        this.container.classList.remove("hidden");
+        this.container.style.animation = "show 0.1s linear forwards";
     }
 
 
+    async changeAnchorContent(anchorType, anchorName) {
+        this.pageAnchors[this.activeAnchor].classList.add("invisible");
+        this.pageData.activeAnchor = anchorName;
 
 
+        setTimeout(() => {
+            this.anchorParents[anchorType].innerHTML = "";
+            this.anchorParents[anchorType].appendChild(this.pageAnchors[anchorName]);
+        }, 200)
+
+        setTimeout(() => {
+            this.pageAnchors[anchorName].classList.remove("invisible");
+            this.activeAnchor = anchorName;
+        }, 200)
+    }
 }
 
 export default MyPage

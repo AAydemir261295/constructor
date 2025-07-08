@@ -1,29 +1,21 @@
 export class SuccessMessage {
+    constructor(container, elementsRef, router, csrf) {
+        this.container = container;
+        this.router = router;
+        this.csrf = csrf;
+        this.btn = container.querySelector(elementsRef.btn);
+        this.toLoginForm();
+    }
 
-
-    btn;
     container;
+    router;
+    csrf;
+    btn;
 
-
-    constructor(elements) {
-        this.container = document.querySelector(elements.ref.container);
-        this.btn = document.querySelector(elements.ref.btn);
-    }
-
-
-    show() {
-        setTimeout(() => {
-            this.container.classList.remove("hidden");
-        }, 200)
-        setTimeout(() => {
-            this.container.classList.remove("invisible");
-        }, 300)
-    }
-
-    hide() {
-        this.container.classList.add("invisible");
-        setTimeout(() => {
-            this.container.classList.add("hidden");
-        }, 200)
+    toLoginForm() {
+        this.btn.addEventListener("click", () => {
+            let email = history.state.email;
+            this.router.redirect({ nested: true, path: "/login", anchorType: "login", anchorName: "loginForm", csrf: this.csrf.get(), email: email });
+        })
     }
 }

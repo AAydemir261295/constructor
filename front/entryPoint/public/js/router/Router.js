@@ -6,7 +6,7 @@ import { Modules } from "/js/libs/Modules/Modules.js";
 
 
 const notLoginedPaths = [
-    "/", "/login", "/register"
+    "/", "/login", "/register",
 ]
 
 
@@ -24,28 +24,40 @@ export class Router extends EventEmitter {
         this.loader = loader;
         this.authGuard = new AuthGuard();
         this.body = document.querySelector(".body");
-        this.pathname = pathname;
+        this.pathname = this.resolvePath(pathname);
         this.modules = new Modules();
         this.csrf = csrf;
-        this.resolveRoute(pathname, getRouteTitle(pathname));
+        this.resolveRoute(this.pathname, getRouteTitle(this.pathname));
         this.routeChanges();
     }
 
     routeChanges() {
         window.addEventListener('popstate', async (event) => {
             const data = event.state;
-            
-            let module = this.modules.get(data.path);
-            this.body.innerHTML = "";
-            this.currentRoute = new Route(data.path, getRouteTitle(data.path), this, module);
-            await this.currentRoute.resolve();
+            if (data.nested) {
+                this.currentRoute.editRoute(data);
+            } else {
+                // let module = this.modules.get(data.path);
+                // this.body.innerHTML = "";
+                // this.currentRoute = new Route(data.path, getRouteTitle(data.path), this, module);
+                // await this.currentRoute.resolve();
+            }
+
             document.title = getRouteTitle(data.path);
         });
     }
 
-    redirect(data) {
+    updateHistory(data) {
         history.pushState(data, "", data.path);
         document.title = getRouteTitle(data.path);
+
+    }
+
+    redirect(data) {
+        this.updateHistory(data);
+        if (data.nested) {
+            this.currentRoute.editRoute(data);
+        }
     }
 
     async setRoute(path, title) {
@@ -55,26 +67,34 @@ export class Router extends EventEmitter {
         this.loader.stop();
     }
 
-
-    async resolveNestedRoute(path, title) {
-
+    resolvePath(path) {
+        if (path == "/pincode") {
+            path = "/login";
+        } else if (path == "/success") {
+            path = "/login";
+        } else if (path == "/") {
+            path = "/login";
+        }
+        return path;
     }
 
 
     async resolveRoute(path, title) {
+        let resolvedPath = this.resolvePath(path);
+
         let isLogined = await this.authGuard.checkAuth();
         if (isLogined) {
             await this.setRoute("/home", title);
             this.currentRoute.updateHistory();
         } else {
 
-            if (!isLogined && notLoginedPaths.indexOf(path) == -1) {
+            if (!isLogined && notLoginedPaths.indexOf(resolvedPath) == -1) {
                 window.location.replace("/login");
             } else {
-                if (path == "/") {
-                    await this.setRoute("/login", title)
+                if (resolvedPath == "/") {
+                    await this.setRoute(resolvedPath, title)
                 } else {
-                    await this.setRoute(path, title)
+                    await this.setRoute(resolvedPath, title)
                 }
             }
         }
