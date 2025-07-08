@@ -123,8 +123,7 @@ export default class MyDom extends EventEmitter {
 
         setTimeout(() => {
             pageAnchors[anchorName].classList.remove("invisible");
-            activeAnchor = anchorName;
-        }, 200)
+        }, 400)
     }
 
 

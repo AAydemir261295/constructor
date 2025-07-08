@@ -17,7 +17,6 @@ class MyPage {
 
     anchorParents = {};
     pageAnchors = {};
-    activeAnchor = "";
 
 
     async render() {
@@ -25,20 +24,18 @@ class MyPage {
         this.container = data.container;
         this.anchorParents = data.anchorParents;
         this.pageAnchors = data.pageAnchors;
-        this.activeAnchor = data.activeAnchor;
-
         this.showPage();
     }
 
-    nestedRedirect(anchorType, anchorName) {
-        this.domInteractions.
+    async nestedRedirect(anchorType, anchorName) {
+        await this.domInteractions.
             changeAnchorContent(
                 this.pageData,
                 this.anchorParents,
                 this.pageAnchors,
-                this.activeAnchor,
+                this.pageData.activeAnchor,
                 anchorType,
-                anchorName)
+                anchorName);
     }
 
     showPage() {
