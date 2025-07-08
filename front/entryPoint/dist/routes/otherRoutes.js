@@ -48,7 +48,6 @@ router.get("/*splat", function (req, res, next) {
                 case 0:
                     clientCookie = req.cookies;
                     timeStamp = Date.now();
-                    console.log(1);
                     if (!(Object.keys(clientCookie).length === 0)) return [3 /*break*/, 5];
                     return [4 /*yield*/, (0, security_1.initCookie)(timeStamp)];
                 case 1:
@@ -58,7 +57,6 @@ router.get("/*splat", function (req, res, next) {
                 case 2:
                     csrf = _a.sent();
                     if (csrf) {
-                        console.log(11);
                         req['newCsrf'] = csrf.csrf;
                         res.cookie("token", cookie.token, { httpOnly: true, expires: cookie.values.expiry });
                         res.render("index", { csrf: csrf.csrf });
@@ -75,12 +73,9 @@ router.get("/*splat", function (req, res, next) {
                 case 6:
                     serverCookie = _a.sent();
                     if (!(serverCookie.length == 1)) return [3 /*break*/, 8];
-                    console.log("1here!!!");
                     return [4 /*yield*/, (0, security_1.updateCsrf)(serverCookie[0].token, timeStamp)];
                 case 7:
                     newCsrf = _a.sent();
-                    console.log(newCsrf);
-                    console.log("newCsrf");
                     if (newCsrf) {
                         res.render("index", { csrf: newCsrf.csrf });
                     }
@@ -88,9 +83,7 @@ router.get("/*splat", function (req, res, next) {
                         res.sendStatus(404);
                     }
                     return [3 /*break*/, 12];
-                case 8:
-                    console.log("1here");
-                    return [4 /*yield*/, (0, security_1.initCookie)(timeStamp)];
+                case 8: return [4 /*yield*/, (0, security_1.initCookie)(timeStamp)];
                 case 9:
                     cookie = _a.sent();
                     if (!cookie) return [3 /*break*/, 11];

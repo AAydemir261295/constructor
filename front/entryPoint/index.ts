@@ -15,7 +15,6 @@ app.use(express.static(staticPath));
 
 
 app.get("/", function (req, res) {
-    console.log(req.url);
     console.log("req.url2222");
     res.redirect('/login');
 })

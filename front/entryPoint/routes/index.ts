@@ -1,7 +1,4 @@
 import { Router } from 'express';
-import { getCredentials, isLogined } from '../src/db/cookie';
-import { firstVisitCookie } from '../src/middlewares/firstCookie';
-import { initCookie, initCsrf, updateCsrf } from '../src/security';
 
 var router = Router();
 

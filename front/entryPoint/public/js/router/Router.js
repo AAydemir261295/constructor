@@ -80,22 +80,17 @@ export class Router extends EventEmitter {
 
 
     async resolveRoute(path, title) {
-        let resolvedPath = this.resolvePath(path);
-
         let isLogined = await this.authGuard.checkAuth();
         if (isLogined) {
+            console.log("here?");
             await this.setRoute("/home", title);
             this.currentRoute.updateHistory();
         } else {
 
-            if (!isLogined && notLoginedPaths.indexOf(resolvedPath) == -1) {
+            if (!isLogined && notLoginedPaths.indexOf(path) == -1) {
                 window.location.replace("/login");
             } else {
-                if (resolvedPath == "/") {
-                    await this.setRoute(resolvedPath, title)
-                } else {
-                    await this.setRoute(resolvedPath, title)
-                }
+                await this.setRoute(path, title)
             }
         }
     }

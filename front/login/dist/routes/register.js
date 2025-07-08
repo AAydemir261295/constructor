@@ -38,11 +38,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var csrf_1 = require("../src/middlewares/csrf");
-// import { registerElements } from '../src/elements/registerElements';
+var registerElements_1 = require("../src/elements/registerElements");
 var router = (0, express_1.Router)();
 router.get('/:csrf', csrf_1.csrf, function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
+            console.log("here??");
+            res.send(JSON.stringify({ elements: registerElements_1.registerElements, csrf: req['newCsrf'] }));
             return [2 /*return*/];
         });
     });

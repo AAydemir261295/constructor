@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerElements = void 0;
-exports.registerElements = {
+export const registerElements = {
     elements: {
         main: {
             tree: {
@@ -70,6 +67,7 @@ exports.registerElements = {
                         ]
                     },
                     { ele: "button", css: ['btn-submit', "nostyle-btn"], styles: ["loginContainerBtn"], options: { id: "submit-btn", type: "submit", innerText: "Войти" } },
+
                 ]
             },
             ref: {
@@ -104,6 +102,7 @@ exports.registerElements = {
                 emailInput: "register-input",
                 errorContainer: "#register-error-container",
                 btn: "#return-btn"
+
             }
         },
         success: {
@@ -197,4 +196,4 @@ exports.registerElements = {
             "font-family": "bold",
         }
     }
-};
+}
