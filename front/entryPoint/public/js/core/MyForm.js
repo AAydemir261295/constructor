@@ -5,16 +5,13 @@ class MyForm {
     #form;
     #formData;
 
-    // constructor(id, inputNames) {
     constructor(form, inputNames) {
-        // this.#form = document.querySelector(id);
         this.#form = form;
         var that = this;
 
         this.form.addEventListener("submit", (ev) => {
             ev.preventDefault();
             new FormData(this.form);
-            // this.submit
         })
 
         this.form.addEventListener("formdata", (ev) => {

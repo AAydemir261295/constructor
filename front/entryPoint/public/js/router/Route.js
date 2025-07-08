@@ -53,7 +53,7 @@ export default class Route {
     }
 
     async editRoute(data) {
-        this.page.changeAnchorContent(data.anchorType, data.anchorName);
+        this.page.nestedRedirect(data.anchorType, data.anchorName);
         this.page.restore(data);
     }
 
