@@ -12,7 +12,6 @@ class App {
         loader.start();
         this.csrf = new Csrf();
         this.router = new Router(pathName, loader, this.csrf);
-
     }
 }
 

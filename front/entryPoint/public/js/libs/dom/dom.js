@@ -52,6 +52,7 @@ export default class MyDom {
 
 
         let bodyIsExist = this.body.querySelector(".main");
+        
         if (bodyIsExist) {
             this.body.removeChild(bodyIsExist);
         }
@@ -105,8 +106,6 @@ export default class MyDom {
                     }
                 }
             } else {
-                // console.log(eleArr);
-                console.log(parent);
                 parent.appendChild(await this.createElement(eleArr));
                 return;
             }

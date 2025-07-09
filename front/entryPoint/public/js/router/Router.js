@@ -33,7 +33,6 @@ export class Router {
             if (state.data.nested) {
                 this.currentRoute.editRoute(state.data);
             } else {
-                console.log("here");
                 // let path = data.prevPath;
                 // let restricted = ["/login", "/register", "/", "/pincode", "/success"];
                 // let loginedPaths = ['/home'];
@@ -106,6 +105,9 @@ export class Router {
     }
 
     async setRoute(path) {
+        if (this.currentRoute) {
+            this.currentRoute.page.hidePage();
+        }
         let module = await this.modules.set(path);
         this.currentRoute = new Route(path, this, module.value, this.csrf);
         await this.currentRoute.resolve();

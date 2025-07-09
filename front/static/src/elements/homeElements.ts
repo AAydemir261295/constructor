@@ -3,8 +3,8 @@ export const homeElements = {
         main: {
             tree:
             {
-                ele: "main", styles: ["mainHome"], childs: [
-                    { ele: "main", styles: ["container"] },
+                ele: "main", css: ["main", "hidden", "invisible"], styles: ["main"], childs: [
+                    { ele: "main", styles: ["container"], options: { id: "container" } },
                     {
                         ele: "header", styles: ["homeHeader"], childs: [
                             {
@@ -33,11 +33,13 @@ export const homeElements = {
                     },
                 ]
             },
+            ref: {
+                container: "#container",
+            }
         }
     },
-    activeAnchor: "loginForm",
     stylez: {
-        mainHome: {
+        main: {
             "display": "flex",
             "flex-direction": "column",
             "justify-content": "space-between",
@@ -53,7 +55,8 @@ export const homeElements = {
             "height": "100%",
             "width": "90%",
             "min-height": "800px",
-            "min-width": "1500px",
+            "min-width": "1300px",
+            "max-width": "1300px",
             "border-radius": "30px",
             "border": "2px solid var(--gray20)",
         },

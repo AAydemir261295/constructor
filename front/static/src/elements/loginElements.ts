@@ -2,7 +2,7 @@ export const loginElements = {
     elements: {
         main: {
             tree: {
-                ele: "main", css: ["main", "hidden"], options: { id: "main" }, styles: [], childs: [
+                ele: "main", css: ["main", "hidden", "invisible"], options: { id: "main" }, styles: [], childs: [
                     {
                         ele: "div", anchorParent: { type: "login" }, styles: ["loginContainer"]
                     }

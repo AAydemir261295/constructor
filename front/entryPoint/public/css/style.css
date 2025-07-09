@@ -38,18 +38,6 @@ body {
 
 
 .main {
-    opacity: 0;
-    /* transition: 0.2s; */
+    transition: 0.2s;
 }
 
-
-/* .main-home {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    min-height: 900px; */
-    /* opacity: 0; */
-/* } */

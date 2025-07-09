@@ -40,7 +40,17 @@ class MyPage {
 
     showPage() {
         this.container.classList.remove("hidden");
-        this.container.style.animation = "show 0.1s linear forwards";
+        setTimeout(() => {
+            this.container.classList.remove("invisible");
+        }, 1);
+
+    }
+
+    hidePage() {
+        this.container.classList.add("invisible");
+        setTimeout(() => {
+            this.container.classList.add("hidden");
+        }, 200)
     }
 
 }
