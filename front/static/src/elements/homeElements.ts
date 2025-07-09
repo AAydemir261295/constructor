@@ -15,14 +15,14 @@ export const homeElements = {
                                                 ele: "div", styles: ["navListItemsWrapp"], childs: [
                                                     {
                                                         ele: "li", styles: ["navListItem"], childs: [
-                                                            { ele: "button", css: ["nav-btn", "nostyle-btn"] }
+                                                            { ele: "button", css: ["nav-btn", "nostyle-btn"], options: { innerText: "проекты" } }
                                                         ]
                                                     }
                                                 ]
                                             },
                                             {
                                                 ele: "li", styles: ["navListItem"], childs: [
-                                                    { ele: "h6", styles: ["navLogo", "logo"] }
+                                                    { ele: "h6", styles: ["navLogo", "logo"], options: { innerText: "лого" } }
                                                 ]
                                             }
                                         ]
@@ -79,6 +79,7 @@ export const homeElements = {
             "display": "flex",
             "flex-direction": "row",
             "justify-content": "space-between",
+            "width": "auto",
             /* width: 120px; */
         },
         navListItem: {

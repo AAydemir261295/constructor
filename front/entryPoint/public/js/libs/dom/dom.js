@@ -95,21 +95,18 @@ export default class MyDom {
                             await this.buildTree(child.childs[q], innerChild, anchorParents);
                         }
                     } else {
-
                         if (child.hasOwnProperty("anchorParent")) {
                             var anchorParent = parent.appendChild(await this.createElement(child));
                             anchorParents[child.anchorParent.type] = anchorParent;
                             return;
                         } else {
-                            for (let q = 0; q < eleArr.length; q++) {
-                                const element = eleArr[q];
-                                parent.appendChild(await this.createElement(element));
-                            }
-                            return;
+                            parent.appendChild(await this.createElement(child));
                         }
                     }
                 }
             } else {
+                // console.log(eleArr);
+                console.log(parent);
                 parent.appendChild(await this.createElement(eleArr));
                 return;
             }
