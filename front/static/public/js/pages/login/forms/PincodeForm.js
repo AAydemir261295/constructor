@@ -32,13 +32,17 @@ export class PincodeForm extends MyForm {
             let isValid = this.pincodeContainer.validate();
             if (isValid) {
                 let pincode = this.pincodeContainer.getValue();
-                let email = history.state.email;
-                console.log(this.csrf.get(), email, pincode);
+                let email = this.router.history.states[this.router.history.states.length - 1].data.email;
+
+                console.log(this.router.history.states)
                 let response = await request(url(this.csrf.get(), email, pincode));
+
+                console.log(response);
 
                 if (response) {
                     if (response.result) {
-                        // window.location.replace("/home");
+                        this.csrf.update(response.csrf);
+                        this.router.redirect({ permanent: true, nested: false, permanent: true, path: "/home", csrf: this.csrf.get() });
                     } else {
                         this.pincodeContainer.showError();
                     }

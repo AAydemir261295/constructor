@@ -11,9 +11,7 @@ var app = (0, express_1.default)();
 app.set('view engine', 'ejs');
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.static(staticPath));
-// app.use("/", indexRoute);
 app.get("/", function (req, res) {
-    console.log("req.url2222");
     res.redirect('/login');
 });
 app.use("/favicon.ico", function (req, res, next) {

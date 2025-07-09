@@ -1,4 +1,5 @@
 .nav__logo {
+    /* cursor: pointer; */
     position: relative;
     top: -60px;
 }

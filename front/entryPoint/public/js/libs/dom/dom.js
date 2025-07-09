@@ -1,8 +1,5 @@
-import { EventEmitter } from "/js/libs/eventEmitter/EventEmitter.js";
-
-export default class MyDom extends EventEmitter {
+export default class MyDom {
     constructor() {
-        super();
         // this.dom = document;
         this.body = document.body;
     }
@@ -15,7 +12,7 @@ export default class MyDom extends EventEmitter {
     // anchors = {};
     // activeAnchor = "";
 
-    container;
+    // container;
 
     body;
     // anchorParents = {};
@@ -53,7 +50,14 @@ export default class MyDom extends EventEmitter {
             }
         }
 
+
+        let bodyIsExist = this.body.querySelector(".main");
+        if (bodyIsExist) {
+            this.body.removeChild(bodyIsExist);
+        }
+
         this.body.appendChild(container);
+
 
         return { container: container, anchorParents: anchorParents, pageAnchors: pageAnchors, activeAnchor: activeAnchor };
     }
@@ -68,13 +72,13 @@ export default class MyDom extends EventEmitter {
                 anchorParents[eleArr.anchorParent.type] = child;
                 var childs = eleArr.childs;
                 for (let q = 0; q < childs.length; q++) {
-                    await this.buildTree(childs[q], child);
+                    await this.buildTree(childs[q], child, anchorParents);
                 }
             } else {
                 var child = parent.appendChild(await this.createElement(eleArr));
                 var childs = eleArr.childs;
                 for (let q = 0; q < childs.length; q++) {
-                    await this.buildTree(childs[q], child);
+                    await this.buildTree(childs[q], child, anchorParents);
                 }
             }
         } else {
@@ -88,9 +92,10 @@ export default class MyDom extends EventEmitter {
                             anchorParents[child.anchorParent.type] = innerChild;
                         }
                         for (let q = 0; q < childs.length; q++) {
-                            await this.buildTree(child.childs[q], innerChild);
+                            await this.buildTree(child.childs[q], innerChild, anchorParents);
                         }
                     } else {
+
                         if (child.hasOwnProperty("anchorParent")) {
                             var anchorParent = parent.appendChild(await this.createElement(child));
                             anchorParents[child.anchorParent.type] = anchorParent;

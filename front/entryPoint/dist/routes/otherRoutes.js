@@ -48,6 +48,7 @@ router.get("/*splat", function (req, res, next) {
                 case 0:
                     clientCookie = req.cookies;
                     timeStamp = Date.now();
+                    console.log("asdfasdf");
                     if (!(Object.keys(clientCookie).length === 0)) return [3 /*break*/, 5];
                     return [4 /*yield*/, (0, security_1.initCookie)(timeStamp)];
                 case 1:

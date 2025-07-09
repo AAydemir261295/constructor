@@ -37,8 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
-var homeElements_1 = require("../src/elements/homeElements");
 var csrf_1 = require("../src/middlewares/csrf");
+var homeElements_1 = require("../src/elements/homeElements");
 var router = (0, express_1.Router)();
 router.get('/:csrf', csrf_1.csrf, function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {

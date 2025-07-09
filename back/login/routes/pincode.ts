@@ -16,18 +16,11 @@ router.get('/:csrf/:email/:pincode', csrf, async function (req, res, next) {
 
         if (isEqual.length == 1) {
             let userId = isEqual[0].id;
-            let cookieExpiry = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-            console.log(token);
-            console.log("token");
-
             let newToken = await initAuthorizedCookie(token, userId);
-            console.log(newToken);
-            console.log("newToken");
-
 
             if (newToken) {
                 res.cookie("token", newToken.token, { httpOnly: true, expires: newToken.values.expiry });
-                res.cookie("userId", userId, { httpOnly: true, expires: cookieExpiry });
+                res.cookie("userId", userId, { httpOnly: true, expires: newToken.values.expiry });
                 res.send(JSON.stringify({ result: true, csrf: req['newCsrf'] }))
             } else {
                 console.log("here22222");

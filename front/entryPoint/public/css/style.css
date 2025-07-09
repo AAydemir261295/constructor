@@ -1,6 +1,3 @@
-
-
-
 @import url("/css/fonts/fonts.css");
 @import url("/css/variables/colors.css");
 @import url("/css/mixins/nostyle.css");
@@ -10,11 +7,12 @@
 
 
 @import url("/css/blocks/loader-container/loader-container.css");
-/* @import url(""); */
 
 
 @import url("/css/blocks/btn-submit/btn-submit.css");
 @import url("/css/blocks/input/input.css");
+
+@import url("/css/blocks/nav-btn/nav-btn.css");
 
 
 
@@ -45,13 +43,13 @@ body {
 }
 
 
-.main-home {
+/* .main-home {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 100vh;
-    min-height: 900px;
+    min-height: 900px; */
     /* opacity: 0; */
-}
+/* } */

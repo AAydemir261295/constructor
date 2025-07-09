@@ -1,10 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.homeElements = void 0;
-exports.homeElements = {
+export const homeElements = {
     elements: {
         main: {
-            tree: {
+            tree:
+            {
                 ele: "main", styles: ["mainHome"], childs: [
                     { ele: "main", styles: ["container"] },
                     {
@@ -101,5 +99,8 @@ exports.homeElements = {
             "color": "var(--gray200)",
             "font-family": "bold",
         }
+
+
     }
-};
+
+}

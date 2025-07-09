@@ -43,7 +43,7 @@ var csrf_1 = require("../src/middlewares/csrf");
 var router = (0, express_1.Router)();
 router.get('/:csrf/:email/:pincode', csrf_1.csrf, function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var email, pincode, token, isEqual, userId, cookieExpiry, newToken;
+        var email, pincode, token, isEqual, userId, newToken;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -56,17 +56,12 @@ router.get('/:csrf/:email/:pincode', csrf_1.csrf, function (req, res, next) {
                     isEqual = _a.sent();
                     if (!(isEqual.length == 1)) return [3 /*break*/, 3];
                     userId = isEqual[0].id;
-                    cookieExpiry = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-                    console.log(token);
-                    console.log("token");
                     return [4 /*yield*/, (0, security_1.initAuthorizedCookie)(token, userId)];
                 case 2:
                     newToken = _a.sent();
-                    console.log(newToken);
-                    console.log("newToken");
                     if (newToken) {
                         res.cookie("token", newToken.token, { httpOnly: true, expires: newToken.values.expiry });
-                        res.cookie("userId", userId, { httpOnly: true, expires: cookieExpiry });
+                        res.cookie("userId", userId, { httpOnly: true, expires: newToken.values.expiry });
                         res.send(JSON.stringify({ result: true, csrf: req['newCsrf'] }));
                     }
                     else {

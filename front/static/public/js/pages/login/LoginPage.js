@@ -9,7 +9,6 @@ import { SuccessMessage } from "/js/pages/login/SuccessMessage.js";
 export class LoginPage extends MyPage {
     constructor(loginElements, router, domInteractions, csrf) {
         super(loginElements, router, domInteractions, csrf);
-        // this.domInteractions.setStylez(loginElements.stylez);
     }
 
     pincodeForm;

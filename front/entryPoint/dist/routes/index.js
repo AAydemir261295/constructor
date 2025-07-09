@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var router = (0, express_1.Router)();
 router.get("/", function (req, res) {
-    res.redirect('/login');
+    console.log("here");
+    res.redirect('/entry');
 });
 // router.get("/", async function (req, res, next) {
 //     let clientCookie = req.cookies;

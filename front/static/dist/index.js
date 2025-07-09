@@ -8,6 +8,7 @@ var cors_1 = __importDefault(require("cors"));
 var cookie_parser_1 = __importDefault(require("cookie-parser"));
 var routes_1 = __importDefault(require("./routes"));
 var register_1 = __importDefault(require("./routes/register"));
+var home_1 = __importDefault(require("./routes/home"));
 var app = (0, express_1.default)();
 var port = 3001;
 var corsOptions = {
@@ -20,4 +21,5 @@ app.use(express_1.default.static("public"));
 app.use("/login", routes_1.default);
 // app.use("/login", loginRoute);
 app.use("/register", register_1.default);
+app.use("/home", home_1.default);
 app.listen(port, function () { return console.log("Running on port ".concat(port)); });

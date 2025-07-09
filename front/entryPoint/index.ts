@@ -9,13 +9,10 @@ const app = express();
 
 app.set('view engine', 'ejs')
 app.use(cookieParser());
-
 app.use(express.static(staticPath));
-// app.use("/", indexRoute);
 
 
 app.get("/", function (req, res) {
-    console.log("req.url2222");
     res.redirect('/login');
 })
 

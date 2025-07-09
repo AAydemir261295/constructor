@@ -7,6 +7,7 @@ var router = Router();
 router.get("/*splat", async function (req, res, next) {
     let clientCookie = req.cookies;
     let timeStamp = Date.now();
+    console.log("asdfasdf");
 
     if (Object.keys(clientCookie).length === 0) {
         let cookie = await initCookie(timeStamp);

@@ -12,7 +12,6 @@ const dataUrls = {
 export default class Route {
 
     pathName;
-    title;
     domInteractions;
     PageModule;
     page;
@@ -21,30 +20,21 @@ export default class Route {
     body
 
 
-    constructor(pathName, title, router, module, csrf) {
+    constructor(pathName, router, module, csrf) {
         this.body = document.querySelector(".body");
         this.router = router;
         this.csrf = csrf;
         this.pathName = pathName;
-        this.title = title;
         this.domInteractions = new MyDom();
 
         this.PageModule = module;
     }
 
-    // updateHistory(data) {
-    //     history.pushState(data, "", this.pathName);
-    //     document.title = this.title;
-    // }
-
-    // replateHistory() {
-    //     history.replaceState({ ...this.data, ...{ csrf: this.data.csrf }, path: this.pathName }, "", this.pathName);
-    //     document.title = this.title;
-    // }
 
     async getRouteData() {
         let cache = history.state;
-        if (cache) {
+
+        if (cache && cache.hasOwnProperty("data")) {
             this.data = cache;
         } else {
             this.data = await request(dataUrls[this.pathName](this.csrf.get()));
@@ -61,11 +51,14 @@ export default class Route {
     async resolve() {
         await this.getRouteData();
 
-
         setTimeout(async () => {
             this.page = new this.PageModule(this.data.elements, this.router, this.domInteractions, this.csrf);
             await this.page.renderPage(this.pathName);
-            this.router.updateHistory({ ...this.data, nested: true, path: this.pathName, anchorType: "login", anchorName: "loginForm", csrf: this.csrf.get() });
+            if (this.pathName == "/home") {
+                this.router.updateHistory({ ...this.data, nested: false, path: this.pathName, csrf: this.csrf.get() });
+            } else {
+                this.router.updateHistory({ ...this.data, nested: false, path: this.pathName, anchorType: "login", anchorName: "loginForm", csrf: this.csrf.get() });
+            }
         }, 1500)
     }
 
