@@ -4,3 +4,25 @@
         url("/assets/TTLakesCondensed-Bold.woff") format("woff"),
         url("/assets/TTLakesCondensed-Bold.ttf") format("truetype");
 }
+
+
+@font-face {
+    font-family: "medium";
+    src: url("/assets/TTLakesCondensed-Medium.eot") format("embedded-opentype"),
+        url("/assets/TTLakesCondensed-Medium.woff") format("woff"),
+        url("/assets/TTLakesCondensed-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "regular";
+    src: url("/assets/TTLakesCondensed-Regular.eot") format("embedded-opentype"),
+        url("/assets/TTLakesCondensed-Regular.woff") format("woff"),
+        url("/assets/TTLakesCondensed-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "thin";
+    src: url("/assets/TTLakesCondensed-Thin.eot") format("embedded-opentype"),
+        url("/assets/TTLakesCondensed-Thin.woff") format("woff"),
+        url("/assets/TTLakesCondensed-Thin.ttf") format("truetype");
+}

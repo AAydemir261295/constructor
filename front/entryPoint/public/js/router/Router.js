@@ -138,6 +138,8 @@ export class Router {
                 await this.setRoute(path)
             }
         }
+        // this.loader.stop();
+
     }
 
 

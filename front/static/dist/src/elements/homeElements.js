@@ -6,7 +6,44 @@ exports.homeElements = {
         main: {
             tree: {
                 ele: "main", css: ["main", "hidden", "invisible"], styles: ["main"], childs: [
-                    { ele: "main", styles: ["container"], options: { id: "container" } },
+                    {
+                        ele: "main", styles: ["mainContainer"], childs: [
+                            { ele: "aside", styles: ["aside", "leftAside"], options: { id: "left-aside" } },
+                            { ele: "div", styles: ["container"], options: { id: "container" } },
+                            {
+                                ele: "aside", styles: ["aside", "rightAside"], options: { id: "right-aside" }, childs: [
+                                    {
+                                        ele: "header", styles: ["rightAsideHeader"], childs: [
+                                            { ele: "h3", styles: ["rightAsideTitle"], options: { innerText: "меню" } }
+                                        ]
+                                    },
+                                    {
+                                        ele: "form", styles: ["rightAsideForm"], options: { id: "elements-form" }, childs: [
+                                            {
+                                                ele: "div", styles: ["typeInputContainer"], childs: [
+                                                    { ele: "input", css: ["menu-input", "input", "nostyle-input"], styles: ["typeInputContainerInput"], options: { placeholder: "выберите элемент", name: "elements-input" } },
+                                                    {
+                                                        ele: "ul", css: ["invisible", "hidden", "nostyle-list"], styles: ["typeInputContainerDdown"], childs: [
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    { ele: "div" }
+                                ]
+                            }
+                        ]
+                    },
                     {
                         ele: "header", styles: ["homeHeader"], childs: [
                             {
@@ -37,6 +74,10 @@ exports.homeElements = {
             },
             ref: {
                 container: "#container",
+                rightAside: {
+                    elementsForm: "elements-form",
+                    elementsInput: "elements-input"
+                }
             }
         }
     },
@@ -51,16 +92,93 @@ exports.homeElements = {
             "min-height": "900px",
             /* opacity: 0; */
         },
-        container: {
+        mainContainer: {
+            "position": "relative",
             "margin-top": "20px",
             "margin-bottom": "20px",
             "height": "100%",
-            "width": "90%",
+            "width": "1300px",
+            "min-height": "800px"
+        },
+        aside: {
+            "position": "absolute",
+            "height": "100%",
+            "width": "300px",
             "min-height": "800px",
-            "min-width": "1300px",
-            "max-width": "1300px",
             "border-radius": "30px",
             "border": "2px solid var(--gray20)",
+            "z-index": "9"
+        },
+        leftAside: {
+            "left": "-325px"
+        },
+        rightAside: {
+            "right": "-330px",
+            "border": "2px solid var(--gray20)",
+            "border-radius": "30px",
+        },
+        rightAsideHeader: {
+            "height": "50px",
+            "width": "100%",
+            "text-align": "center",
+        },
+        rightAsideTitle: {
+            "font-family": "bold",
+            "line-height": "0px",
+            "text-transform": "uppercase",
+            "color": "var(--gray200)",
+        },
+        rightAsideForm: {
+            "width": "100%",
+        },
+        typeInputContainer: {
+            "position": "relative",
+            "display": "flex",
+            "flex-direction": "column",
+            "align-items": "center",
+            "width": "100%",
+            "height": "32px",
+        },
+        typeInputContainerInput: {
+            "height": "28px",
+            "border-radius": "10px",
+            "width": "200px",
+            "font-family": "regular",
+        },
+        typeInputContainerDdown: {
+            "position": "absolute",
+            "display": "flex",
+            "flex-direction": "column",
+            "align-items": "center",
+            "width": "180px",
+            "max-height": "100px",
+            "padding": "10px",
+            "border": "2px solid var(--blue100)",
+            "border-radius": "10px",
+            "top": "40px",
+            "overflow": "auto",
+            "transition": "0.2s",
+        },
+        typeInputContainerDdownItem: {
+            "cursor": "pointer",
+            "text-align": "center",
+            "margin-bottom": "5px",
+            "width": "100%",
+            "height": "20px",
+            "font-family": "medium",
+            "border": "2px solid transparent",
+            "border-radius": "8px",
+            "transition": "0.2s",
+        },
+        container: {
+            "position": "absolute",
+            "height": "100%",
+            "width": "1300px",
+            "min-height": "800px",
+            "border-radius": "30px",
+            "border": "2px solid var(--gray20)",
+            "z-index": "10",
+            "background-color": "var(--gray10)",
         },
         homeHeader: {
             "width": "1200px",
@@ -104,6 +222,6 @@ exports.homeElements = {
             "letter-spacing": -"1px",
             "color": "var(--gray200)",
             "font-family": "bold",
-        }
-    }
+        },
+    },
 };

@@ -1,15 +1,11 @@
 class Constructor {
 
-    constructor(elementsRef) {
-        this.container = document.querySelector(elementsRef.container);
+    constructor(container) {
+        this.constructorEle = document.querySelector(container);
     }
 
-    container;
-
-
+    constructorEle;
     
-
-
 
 }
 

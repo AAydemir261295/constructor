@@ -51,11 +51,12 @@ export default class Route {
     async resolve() {
         await this.getRouteData();
 
+
         setTimeout(async () => {
             this.page = new this.PageModule(this.data.elements, this.router, this.domInteractions, this.csrf);
             await this.page.renderPage(this.pathName);
 
-            
+
             if (this.pathName == "/home") {
                 this.router.updateHistory({ ...this.data, nested: false, path: this.pathName, csrf: this.csrf.get() });
             } else {

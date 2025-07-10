@@ -16,7 +16,7 @@ export class LoginForm extends MyForm {
         super(form, [elementsRef.emailInput]);
         this.csrf = csrf;
         this.router = router;
-        this.emailInput = new EmailInput(this.form.elements[elementsRef.emailInput],);
+        this.emailInput = new EmailInput(this.form.elements[elementsRef.emailInput]);
         this.registerBtn = form.querySelector(elementsRef.registerBtn);
         this.onSubmit();
         this.toRegisterForm();

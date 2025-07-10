@@ -42,7 +42,7 @@ class MyPage {
         this.container.classList.remove("hidden");
         setTimeout(() => {
             this.container.classList.remove("invisible");
-        }, 1);
+        }, 10);
 
     }
 

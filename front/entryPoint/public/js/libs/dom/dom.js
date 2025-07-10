@@ -12,7 +12,6 @@ export default class MyDom {
     // anchors = {};
     // activeAnchor = "";
 
-    // container;
 
     body;
     // anchorParents = {};

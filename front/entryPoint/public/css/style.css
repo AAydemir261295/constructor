@@ -41,3 +41,25 @@ body {
     transition: 0.2s;
 }
 
+
+
+/*  */
+
+.menu-input::placeholder {
+    font-family: regular;
+    font-size: 14px;
+    color: var(--gray100);
+    /* text-transform: uppercase; */
+}
+
+
+.ddown-item:last-child {
+    margin-bottom: 0px;
+}
+
+
+.ddown-item:hover {
+    border: 2px solid var(--gray20);
+}
+
+/*  */
