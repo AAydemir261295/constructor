@@ -5,22 +5,14 @@ export default class MyDom {
     }
 
     stylez;
-    // dom;
-
-
-    // anchorParents = {};
-    // anchors = {};
-    // activeAnchor = "";
-
-
     body;
-    // anchorParents = {};
-    // pageAnchors = {};
-    // activeAnchor = "";
 
     setStylez(styles) {
         this.stylez = styles;
     }
+
+
+
 
     async render(pageData) {
         var container = await this.createElement(pageData.elements.main.tree);
@@ -36,7 +28,7 @@ export default class MyDom {
         for (const key of keys) {
             if (key != "main") {
                 let parent = await this.createElement(pageData.elements[key].tree);
-                await this.buildTree(pageData.elements[key].tree.childs, parent);
+                await this.buildTree(pageData.elements[key].tree.childs, parent, anchorParents);
                 let tmp = {};
                 tmp[key] = parent;
                 pageAnchors[key] = parent;
@@ -51,7 +43,7 @@ export default class MyDom {
 
 
         let bodyIsExist = this.body.querySelector(".main");
-        
+
         if (bodyIsExist) {
             this.body.removeChild(bodyIsExist);
         }
@@ -88,6 +80,7 @@ export default class MyDom {
                     if (child.hasOwnProperty("childs")) {
                         var innerChild = parent.appendChild(await this.createElement(child));
                         var childs = child.childs;
+
                         if (child.hasOwnProperty("anchorParent")) {
                             anchorParents[child.anchorParent.type] = innerChild;
                         }

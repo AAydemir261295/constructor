@@ -2,8 +2,8 @@ import ElementsForm from "/js/pages/home/libs/ElementsForm.js";
 
 class RightAside {
 
-    constructor(form, elementsRef) {
-        this.form = new ElementsForm(form, elementsRef);
+    constructor(form, elementsRef, items) {
+        this.form = new ElementsForm(form, elementsRef, items);
     }
 
     form;

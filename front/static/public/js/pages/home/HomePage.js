@@ -23,7 +23,11 @@ export class HomePage extends MyPage {
     async renderPage(path, data) {
         await this.render();
         this.myConstructor = new Constructor(this.pageData.elements.main.ref.container);
-        this.rightAside = new RightAside(document.forms[this.pageData.elements.main.ref.rightAside.elementsForm], this.pageData.elements.main.ref.rightAside);
+        this.rightAside = new RightAside(
+            document.forms[this.pageData.elements.main.ref.rightAside.elementsForm],
+            this.pageData.elements.main.ref.rightAside,
+            this.pageData.elements.main.items.ddownItems,
+        );
     }
 }
 

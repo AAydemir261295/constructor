@@ -22,16 +22,11 @@ export const homeElements = {
                                                 ele: "div", styles: ["typeInputContainer"], childs: [
                                                     { ele: "input", css: ["menu-input", "input", "nostyle-input"], styles: ["typeInputContainerInput"], options: { placeholder: "выберите элемент", name: "elements-input" } },
                                                     {
-                                                        ele: "ul", css: ["invisible", "hidden", "nostyle-list"], styles: ["typeInputContainerDdown"], childs: [
-                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
-                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
-                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
-                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
-                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
-                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
-                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
-                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
-                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"] },
+                                                        ele: "ul", css: ["invisible", "hidden", "nostyle-list"], styles: ["typeInputContainerDdown"], options: { id: "elements-input-ddown" }, childs: [
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "контейнер" } },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "кнопка" } },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "навигация" } },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "поле ввода" } },
                                                         ]
                                                     }
                                                 ]
@@ -75,8 +70,18 @@ export const homeElements = {
                 container: "#container",
                 rightAside: {
                     elementsForm: "elements-form",
-                    elementsInput: "elements-input"
+                    elementsInput: "elements-input",
+                    elementsDdown: "#elements-input-ddown",
+                    elementsItem: ".ddown-item"
                 }
+            },
+            items: {
+                ddownItems: [
+                    "контейнер",
+                    "кнопка",
+                    "навигация",
+                    "поле ввода",
+                ]
             }
         }
     },
@@ -143,6 +148,7 @@ export const homeElements = {
             "border-radius": "10px",
             "width": "200px",
             "font-family": "regular",
+            "text-align": "center",
         },
         typeInputContainerDdown: {
             "position": "absolute",
@@ -155,7 +161,8 @@ export const homeElements = {
             "border": "2px solid var(--blue100)",
             "border-radius": "10px",
             "top": "40px",
-            "overflow": "auto",
+            "overflow-y": "auto",
+            "overflow-x": "hidden",
             "transition": "0.2s",
         },
         typeInputContainerDdownItem: {

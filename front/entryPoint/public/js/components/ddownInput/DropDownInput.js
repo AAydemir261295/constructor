@@ -1,46 +1,70 @@
 class DropDownInput {
 
-    constructor() {
+    constructor(input, elementsRef, items) {
+        this.inputRef = input;
+        this.ddownRef = document.querySelector(elementsRef.elementsDdown);
+        this.itemsRef = document.querySelectorAll(elementsRef.elementsItem);
+        this.items = items;
 
         this.setListeners();
     }
 
-    input = document.querySelector("#input");
-    ddown = document.querySelector("#ddown");
-    items = document.querySelectorAll(".type-input-container__ddown-item");
+    inputRef;
+    ddownRef;
+    itemsRef;
 
+    items;
 
     show() {
-        this.ddown.classList.remove("hidden");
+        this.ddownRef.classList.remove("hidden");
 
         setTimeout(() => {
-            this.ddown.classList.remove("invisible");
+            this.ddownRef.classList.remove("invisible");
         }, 10)
     }
 
     hide() {
-        this.ddown.classList.add("invisible");
+        this.ddownRef.classList.add("invisible");
         setTimeout(() => {
-            this.ddown.classList.add("hidden");
+            this.ddownRef.classList.add("hidden");
         }, 200)
     }
 
 
+    sanitizeInput(s) {
+        return s.replace(/&/g, '').replace(/</g, '').replace(/"/g, '');
+    }
+
 
     setListeners() {
-        this.input.addEventListener("click", (ev) => {
+        this.inputRef.addEventListener("click", (ev) => {
             this.show();
         })
 
+
+        this.inputRef.addEventListener("input", (ev) => {
+            this.inputRef.value = this.sanitizeInput(this.inputRef.value);
+
+            let inputValue = this.inputRef.value.toLowerCase();
+
+            this.items.forEach((v, idx) => {
+                if (v.indexOf(inputValue) == -1) {
+                    this.itemsRef[idx].classList.add("hidden");
+                } else {
+                    this.itemsRef[idx].classList.remove("hidden");
+                }
+            })
+        })
+
         window.addEventListener("click", (ev) => {
-            if (ev.target != input) {
+            if (ev.target != this.inputRef) {
                 this.hide();
             }
         })
 
-        this.items.forEach((listItem) => {
+        this.itemsRef.forEach((listItem, idx) => {
             listItem.addEventListener("click", (ev) => {
-                
+                this.inputRef.value = this.items[idx];
             })
         })
     }

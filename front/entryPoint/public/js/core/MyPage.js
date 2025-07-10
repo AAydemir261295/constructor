@@ -17,6 +17,7 @@ class MyPage {
 
     anchorParents = {};
     pageAnchors = {};
+    reattachItems = [];
 
 
     async render() {

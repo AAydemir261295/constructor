@@ -59,7 +59,7 @@ body {
 
 
 .ddown-item:hover {
-    border: 2px solid var(--gray20);
+    border: 2px solid var(--gray20) !important;
 }
 
 /*  */
