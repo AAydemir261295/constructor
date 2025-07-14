@@ -15,6 +15,7 @@ export class HomePage extends MyPage {
 
     addSelectedElement(itemIdx) {
         console.log(itemIdx);
+        
     }
 
     restore(data) {

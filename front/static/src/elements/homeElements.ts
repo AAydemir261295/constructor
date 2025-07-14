@@ -8,7 +8,11 @@ export const homeElements = {
                     {
                         ele: "main", styles: ["mainContainer"], childs: [
                             { ele: "aside", styles: ["aside", "leftAside"], options: { id: "left-aside" } },
-                            { ele: "div", styles: ["container"], options: { id: "container" } },
+                            {
+                                ele: "div", styles: ["container"], options: { id: "container" }, childs: [
+                                    { ele: "canvas", styles: ["canvaz"], options: { id: "canvaz" } }
+                                ]
+                            },
                             {
                                 ele: "aside", styles: ["aside", "rightAside"], options: { id: "right-aside" }, childs: [
                                     {
@@ -36,10 +40,10 @@ export const homeElements = {
                                     },
                                     {
                                         ele: "div", styles: ["elementsResultContainer"], options: { id: "elements-result" }, childs: [
-                                            { ele: "div", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["containerMin"], options: { "myValue": "контейнер" } },
-                                            { ele: "button", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "btn-submit", "nostyle-btn"], styles: ["buttonMin"], options: { type: "button", "item-value": "кнопка", innerText: "текст" } },
+                                            { ele: "div", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["containerMin"], },
+                                            { ele: "button", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "btn-submit", "nostyle-btn"], styles: ["buttonMin"], options: { type: "button", innerText: "текст" } },
                                             {
-                                                ele: "nav", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["navMin"], options: { "item-value": "навигация" }, childs: [
+                                                ele: "nav", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["navMin"], childs: [
                                                     {
                                                         ele: "ul", css: ["nostyle-list"], styles: ["navMinList"], childs: [
                                                             { ele: "li", styles: ["navMinListItemLogo"] },
@@ -67,9 +71,9 @@ export const homeElements = {
                                                     }
                                                 ]
                                             },
-                                            { ele: "input", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "input", "nostyle-input"], styles: ["inputMin"], options: { "item-value": "поле ввода", placeholder: "поле ввода", type: "text", readOnly: true } },
+                                            { ele: "input", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "input", "nostyle-input"], styles: ["inputMin"], options: { placeholder: "поле ввода", type: "text", readOnly: true } },
                                             {
-                                                ele: "aside", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["asideMin"], options: { "item-value": "боковая панель" }, childs: [
+                                                ele: "aside", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["asideMin"], childs: [
                                                     {
                                                         ele: "header", childs: [
                                                             { ele: "h2", styles: ["asideMinTitle"], options: { innerText: "заголовок" } }
@@ -158,7 +162,10 @@ export const homeElements = {
                 ]
             },
             ref: {
-                container: "#container",
+                container: {
+                    container: "#container",
+                    canvaz: "#canvaz"
+                },
                 rightAside: {
                     elementsForm: "elements-form",
                     elementsInput: "elements-input",
@@ -174,7 +181,9 @@ export const homeElements = {
                     "навигация",
                     "поле ввода",
                     "боковая панель",
-
+                ],
+                htmlElements: [
+                    { ele: "div", css: ["pointer"], styles: ["containerMin"] },
                 ]
             }
         }
@@ -289,6 +298,10 @@ export const homeElements = {
             "border": "2px solid var(--gray20)",
             "z-index": "10",
             "background-color": "var(--gray10)",
+        },
+        canvaz: {
+            "width": "100%",
+            "height": "100%",
         },
         homeHeader: {
             "width": "1200px",

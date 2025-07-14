@@ -9,7 +9,11 @@ exports.homeElements = {
                     {
                         ele: "main", styles: ["mainContainer"], childs: [
                             { ele: "aside", styles: ["aside", "leftAside"], options: { id: "left-aside" } },
-                            { ele: "div", styles: ["container"], options: { id: "container" } },
+                            {
+                                ele: "div", styles: ["container"], options: { id: "container" }, childs: [
+                                    { ele: "canvas", styles: ["canvaz"], options: { id: "canvaz" } }
+                                ]
+                            },
                             {
                                 ele: "aside", styles: ["aside", "rightAside"], options: { id: "right-aside" }, childs: [
                                     {
@@ -157,7 +161,10 @@ exports.homeElements = {
                 ]
             },
             ref: {
-                container: "#container",
+                container: {
+                    container: "#container",
+                    canvaz: "#canvaz"
+                },
                 rightAside: {
                     elementsForm: "elements-form",
                     elementsInput: "elements-input",
@@ -287,6 +294,10 @@ exports.homeElements = {
             "border": "2px solid var(--gray20)",
             "z-index": "10",
             "background-color": "var(--gray10)",
+        },
+        canvaz: {
+            "width": "100%",
+            "height": "100%",
         },
         homeHeader: {
             "width": "1200px",
@@ -449,3 +460,94 @@ exports.homeElements = {
         },
     },
 };
+//   <!-- <aside class="left-aside aside">
+//     <header class="left-aside__header">
+//       <h3 class="left-aside__title">
+//         детали
+//       </h3>
+//     </header>
+//     <main class="left-aside__main">
+//       <ul class="left-aside__list nostyle-list">
+//         <li class="left-aside__list-item">
+//           <header class="left-aside__list-item-header">
+//             <h4 class="left-aside__liste-item-title">кнопка</h4>
+//           </header>
+//           <div class="left-aside__inputs-container">
+//             <label class="left-aside__input-label" for="width">ширина</label>
+//             <input name="width" class="left_aside__input input nostyle-input" type="text">
+//             <label class="left-aside__input-label" for="height">высота</label>
+//             <input name="height" class="left_aside__input input nostyle-input" type="text">
+//             <label class="left-aside__input-label" for="text">текст</label>
+//             <input name="text" class="left_aside__input input nostyle-input" type="text">
+//           </div>
+//         </li>
+//       </ul>
+//     </main>
+//   </aside> -->
+// .left-aside {
+//     position: absolute;
+//     height: 100%;
+//     width: 300px;
+//     min-height: 800px;
+//     border-radius: 30px;
+//     border: 2px solid var(--gray20);
+//     /* z-index: 9; */
+// }
+// .left-aside__header {
+//     height: 50px;
+//     width: 100%;
+//     text-align: center;
+// }
+// .left-aside__title {
+//     font-family: bold;
+//     line-height: 0px;
+//     text-transform: uppercase;
+//     color: var(--gray200);
+// }
+// .left-aside__main {
+//     height: 90%;
+// }
+// .left-aside__list {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: flex-start;
+//     align-items: center;
+// }
+// .left-aside__list-item {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     margin-bottom: 15px;
+//     width: 260px;
+//     min-height: 50px;
+//     padding: 10px;
+//     border: 2px solid var(--gray20);
+//     word-break: break-all;
+//     border-radius: 15px;
+// }
+// .left-aside__list-item-header {
+//     width: 100%;
+//     text-align: center;
+//     height: 20px;
+// }
+// .left-aside__liste-item-title {
+//     font-family: medium;
+//     margin-top: 5px;
+//     line-height: 0px;
+// }
+// .left-aside__inputs-container {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     height: auto;
+//     padding: 5px 0px;
+// }
+// .left_aside__input {
+//     margin-bottom: 10px;
+//     height: 30px;
+//     border-radius: 10px;
+// }
+// .left-aside__input-label {
+//     font-size: 15px;
+//     font-family: regular;
+// }

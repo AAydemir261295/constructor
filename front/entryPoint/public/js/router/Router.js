@@ -127,19 +127,16 @@ export class Router {
 
 
     async resolveRoute(path) {
-        // let isLogined = await this.authGuard.checkAuth();
-        // if (isLogined) {
-        //     await this.setRoute("/home");
-        // } else {
-
-        //     if (path == "/home") {
-        //         await this.setRoute("/login")
-        //     } else {
-        //         await this.setRoute(path)
-        //     }
-        // }
-        this.loader.stop();
-
+        let isLogined = await this.authGuard.checkAuth();
+        if (isLogined) {
+            await this.setRoute("/home");
+        } else {
+            if (path == "/home") {
+                await this.setRoute("/login")
+            } else {
+                await this.setRoute(path)
+            }
+        }
     }
 
 

@@ -3,7 +3,6 @@ import { Loader } from "/js/components/loader/loader.js";
 import { Csrf } from "/js/libs/csrf/Csrf.js";
 // import DropDownInput from "/js/components/ddownInput/DropDownInput.js";
 
-
 class App {
 
     router;
@@ -14,7 +13,6 @@ class App {
         loader.start();
         this.csrf = new Csrf();
         this.router = new Router(pathName, loader, this.csrf);
-        // let tmp = new DropDownInput();
     }
 }
 

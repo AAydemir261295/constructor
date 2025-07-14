@@ -1,11 +1,14 @@
 class Constructor {
 
-    constructor(container) {
-        this.constructorEle = document.querySelector(container);
+    constructor(elementsRef) {
+        this.constructorEle = document.querySelector(elementsRef.container);
+        this.canvaz = this.constructorEle.querySelector(elementsRef.canvaz);
     }
 
     constructorEle;
-    
+    canvaz;
+
+
 
 }
 
