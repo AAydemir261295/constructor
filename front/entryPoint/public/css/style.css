@@ -15,6 +15,9 @@
 @import url("/css/blocks/nav-btn/nav-btn.css");
 
 
+@import url("/css/blocks/result-element/result-element.css");
+@import url("/css/blocks/ddown-item/ddown-item.css");
+@import url("/css/blocks/menu-input/menu-input.css");
 
 
 
@@ -41,32 +44,11 @@ body {
     transition: 0.2s;
 }
 
-.menu-input::placeholder {
-    font-family: regular;
-    font-size: 14px;
-    color: var(--gray100);
-    /* text-transform: uppercase; */
-}
 
-
-.ddown-item:last-child {
-    margin-bottom: 0px;
-}
-
-
-.ddown-item:hover {
-    border: 2px solid var(--gray20) !important;
-}
+/*  */
+/*  */
+/*  */
+/*  */
 
 
 
-.hoverable {}
-
-.hoverable:hover {
-    border: 2px solid var(--blue100) !important;
-}
-
-
-.hideable {
-    transition: 0.2s !important;
-}

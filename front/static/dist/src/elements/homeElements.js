@@ -37,10 +37,10 @@ exports.homeElements = {
                                     },
                                     {
                                         ele: "div", styles: ["elementsResultContainer"], options: { id: "elements-result" }, childs: [
-                                            { ele: "div", css: ["hidden", "invisible", "hideable"], styles: ["containerMin"] },
-                                            { ele: "button", css: ["hidden", "invisible", "hideable", "btn-submit", "nostyle-btn"], styles: ["buttonMin"], options: { type: "button", innerText: "текст" } },
+                                            { ele: "div", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["containerMin"], options: { "myValue": "контейнер" } },
+                                            { ele: "button", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "btn-submit", "nostyle-btn"], styles: ["buttonMin"], options: { type: "button", "item-value": "кнопка", innerText: "текст" } },
                                             {
-                                                ele: "nav", css: ["hidden", "invisible", "hideable"], styles: ["navMin"], childs: [
+                                                ele: "nav", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["navMin"], options: { "item-value": "навигация" }, childs: [
                                                     {
                                                         ele: "ul", css: ["nostyle-list"], styles: ["navMinList"], childs: [
                                                             { ele: "li", styles: ["navMinListItemLogo"] },
@@ -68,9 +68,9 @@ exports.homeElements = {
                                                     }
                                                 ]
                                             },
-                                            { ele: "input", css: ["hidden", "invisible", "hideable", "input", "nostyle-input"], styles: ["inputMin"], options: { placeholder: "поле ввода", type: "text", readOnly: true } },
+                                            { ele: "input", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "input", "nostyle-input"], styles: ["inputMin"], options: { "item-value": "поле ввода", placeholder: "поле ввода", type: "text", readOnly: true } },
                                             {
-                                                ele: "aside", css: ["hidden", "invisible", "hideable"], styles: ["asideMin"], childs: [
+                                                ele: "aside", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["asideMin"], options: { "item-value": "боковая панель" }, childs: [
                                                     {
                                                         ele: "header", childs: [
                                                             { ele: "h2", styles: ["asideMinTitle"], options: { innerText: "заголовок" } }
@@ -171,8 +171,8 @@ exports.homeElements = {
                     "контейнер",
                     "кнопка",
                     "навигация",
-                    "боковая панель",
                     "поле ввода",
+                    "боковая панель",
                 ]
             }
         }
@@ -318,12 +318,10 @@ exports.homeElements = {
             "min-height": "60px",
         },
         navLogo: {
-            /* cursor: pointer; */
             "position": "relative",
             "top": "-60px",
         },
         logo: {
-            /* cursor: pointer; */
             "line-height": "0px",
             "font-size": "40px",
             "text-transform": "uppercase",
@@ -365,7 +363,6 @@ exports.homeElements = {
             "background-color": "var(--blue200)",
         },
         navMinListItemBtn: {
-            "cursor": "pointer",
             "display": "flex",
             "flex-direction": "column",
             "justify-content": "center",
@@ -411,7 +408,6 @@ exports.homeElements = {
             "height": "100%",
         },
         asideMinListItem: {
-            "cursor": "pointer",
             "display": "flex",
             "flex-direction": "column",
             "align-items": "center",
@@ -440,7 +436,6 @@ exports.homeElements = {
             "height": "100%",
         },
         footerListItem: {
-            "cursor": "pointer",
             "width": "50px",
             "height": "50px",
             "border-radius": "15px",

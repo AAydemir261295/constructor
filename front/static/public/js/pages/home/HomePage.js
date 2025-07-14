@@ -6,15 +6,16 @@ import RightAside from "/js/pages/home/RightAside.js";
 export class HomePage extends MyPage {
     constructor(homeElements, router, domInteractions, csrf) {
         super(homeElements, router, domInteractions, csrf);
-
-
-        // this.leftAside = new LeftAside();
     }
 
     myConstructor;
     rightAside;
     leftAside;
     navigation;
+
+    addSelectedElement(itemIdx) {
+        console.log(itemIdx);
+    }
 
     restore(data) {
 
@@ -27,6 +28,7 @@ export class HomePage extends MyPage {
             document.forms[this.pageData.elements.main.ref.rightAside.elementsForm],
             this.pageData.elements.main.ref.rightAside,
             this.pageData.elements.main.items.ddownItems,
+            this.addSelectedElement.bind(this),
         );
     }
 }

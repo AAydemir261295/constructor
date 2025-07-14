@@ -1,0 +1,7 @@
+.ddown-item:last-child {
+    margin-bottom: 0px;
+}
+
+.ddown-item:hover {
+    border: 2px solid var(--gray20) !important;
+}

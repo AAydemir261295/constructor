@@ -1,17 +1,18 @@
 class DropDownInput {
 
-    constructor(input, elementsRef, items) {
+    constructor(input, elementsRef, items, showSelectedItem) {
         this.inputRef = input;
+        this.items = items;
+        this.showSelecteItemFn = showSelectedItem;
         this.ddownRef = document.querySelector(elementsRef.elementsDdown);
         this.itemsRef = document.querySelectorAll(elementsRef.elementsItem);
-        this.items = items;
-
         this.setListeners();
     }
 
     inputRef;
     ddownRef;
     itemsRef;
+    showSelecteItemFn;
 
     items;
 
@@ -63,6 +64,7 @@ class DropDownInput {
         this.itemsRef.forEach((listItem, idx) => {
             listItem.addEventListener("click", (ev) => {
                 this.inputRef.value = this.items[idx];
+                this.showSelecteItemFn(idx);
             })
         })
     }

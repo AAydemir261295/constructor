@@ -36,10 +36,10 @@ export const homeElements = {
                                     },
                                     {
                                         ele: "div", styles: ["elementsResultContainer"], options: { id: "elements-result" }, childs: [
-                                            { ele: "div", css: ["hidden", "invisible", "hideable"], styles: ["containerMin"] },
-                                            { ele: "button", css: ["hidden", "invisible", "hideable", "btn-submit", "nostyle-btn"], styles: ["buttonMin"], options: { type: "button", innerText: "текст" } },
+                                            { ele: "div", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["containerMin"], options: { "myValue": "контейнер" } },
+                                            { ele: "button", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "btn-submit", "nostyle-btn"], styles: ["buttonMin"], options: { type: "button", "item-value": "кнопка", innerText: "текст" } },
                                             {
-                                                ele: "nav", css: ["hidden", "invisible", "hideable"], styles: ["navMin"], childs: [
+                                                ele: "nav", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["navMin"], options: { "item-value": "навигация" }, childs: [
                                                     {
                                                         ele: "ul", css: ["nostyle-list"], styles: ["navMinList"], childs: [
                                                             { ele: "li", styles: ["navMinListItemLogo"] },
@@ -67,9 +67,9 @@ export const homeElements = {
                                                     }
                                                 ]
                                             },
-                                            { ele: "input", css: ["hidden", "invisible", "hideable", "input", "nostyle-input"], styles: ["inputMin"], options: { placeholder: "поле ввода", type: "text", readOnly: true } },
+                                            { ele: "input", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "input", "nostyle-input"], styles: ["inputMin"], options: { "item-value": "поле ввода", placeholder: "поле ввода", type: "text", readOnly: true } },
                                             {
-                                                ele: "aside", css: ["hidden", "invisible", "hideable"], styles: ["asideMin"], childs: [
+                                                ele: "aside", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["asideMin"], options: { "item-value": "боковая панель" }, childs: [
                                                     {
                                                         ele: "header", childs: [
                                                             { ele: "h2", styles: ["asideMinTitle"], options: { innerText: "заголовок" } }
@@ -172,8 +172,9 @@ export const homeElements = {
                     "контейнер",
                     "кнопка",
                     "навигация",
-                    "боковая панель",
                     "поле ввода",
+                    "боковая панель",
+
                 ]
             }
         }
@@ -319,12 +320,10 @@ export const homeElements = {
             "min-height": "60px",
         },
         navLogo: {
-            /* cursor: pointer; */
             "position": "relative",
             "top": "-60px",
         },
         logo: {
-            /* cursor: pointer; */
             "line-height": "0px",
             "font-size": "40px",
             "text-transform": "uppercase",
@@ -366,7 +365,6 @@ export const homeElements = {
             "background-color": "var(--blue200)",
         },
         navMinListItemBtn: {
-            "cursor": "pointer",
             "display": "flex",
             "flex-direction": "column",
             "justify-content": "center",
@@ -413,7 +411,6 @@ export const homeElements = {
             "height": "100%",
         },
         asideMinListItem: {
-            "cursor": "pointer",
             "display": "flex",
             "flex-direction": "column",
             "align-items": "center",
@@ -442,7 +439,6 @@ export const homeElements = {
             "height": "100%",
         },
         footerListItem: {
-            "cursor": "pointer",
             "width": "50px",
             "height": "50px",
             "border-radius": "15px",
@@ -456,3 +452,111 @@ export const homeElements = {
         },
     },
 }
+
+//   <!-- <aside class="left-aside aside">
+//     <header class="left-aside__header">
+//       <h3 class="left-aside__title">
+//         детали
+//       </h3>
+//     </header>
+
+//     <main class="left-aside__main">
+//       <ul class="left-aside__list nostyle-list">
+//         <li class="left-aside__list-item">
+//           <header class="left-aside__list-item-header">
+//             <h4 class="left-aside__liste-item-title">кнопка</h4>
+//           </header>
+
+//           <div class="left-aside__inputs-container">
+//             <label class="left-aside__input-label" for="width">ширина</label>
+//             <input name="width" class="left_aside__input input nostyle-input" type="text">
+//             <label class="left-aside__input-label" for="height">высота</label>
+//             <input name="height" class="left_aside__input input nostyle-input" type="text">
+//             <label class="left-aside__input-label" for="text">текст</label>
+//             <input name="text" class="left_aside__input input nostyle-input" type="text">
+//           </div>
+//         </li>
+//       </ul>
+//     </main>
+
+//   </aside> -->
+
+
+// .left-aside {
+//     position: absolute;
+//     height: 100%;
+//     width: 300px;
+//     min-height: 800px;
+//     border-radius: 30px;
+//     border: 2px solid var(--gray20);
+//     /* z-index: 9; */
+// }
+
+// .left-aside__header {
+//     height: 50px;
+//     width: 100%;
+//     text-align: center;
+// }
+
+
+// .left-aside__title {
+//     font-family: bold;
+//     line-height: 0px;
+//     text-transform: uppercase;
+//     color: var(--gray200);
+// }
+
+// .left-aside__main {
+//     height: 90%;
+// }
+
+// .left-aside__list {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: flex-start;
+//     align-items: center;
+// }
+
+// .left-aside__list-item {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     margin-bottom: 15px;
+//     width: 260px;
+//     min-height: 50px;
+//     padding: 10px;
+//     border: 2px solid var(--gray20);
+//     word-break: break-all;
+//     border-radius: 15px;
+// }
+
+// .left-aside__list-item-header {
+//     width: 100%;
+//     text-align: center;
+//     height: 20px;
+// }
+
+// .left-aside__liste-item-title {
+//     font-family: medium;
+//     margin-top: 5px;
+//     line-height: 0px;
+// }
+
+// .left-aside__inputs-container {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     height: auto;
+//     padding: 5px 0px;
+// }
+
+// .left_aside__input {
+//     margin-bottom: 10px;
+//     height: 30px;
+//     border-radius: 10px;
+// }
+
+// .left-aside__input-label {
+//     font-size: 15px;
+//     font-family: regular;
+// }
