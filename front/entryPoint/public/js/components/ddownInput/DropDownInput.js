@@ -43,8 +43,6 @@ class DropDownInput {
 
 
         this.inputRef.addEventListener("input", (ev) => {
-            this.inputRef.value = this.sanitizeInput(this.inputRef.value);
-
             let inputValue = this.inputRef.value.toLowerCase();
 
             this.items.forEach((v, idx) => {

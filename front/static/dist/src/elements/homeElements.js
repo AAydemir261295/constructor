@@ -28,13 +28,102 @@ exports.homeElements = {
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "кнопка" } },
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "навигация" } },
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "поле ввода" } },
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "боковая панель" } },
                                                         ]
                                                     }
                                                 ]
                                             }
                                         ]
                                     },
-                                    { ele: "div" }
+                                    {
+                                        ele: "div", styles: ["elementsResultContainer"], options: { id: "elements-result" }, childs: [
+                                            { ele: "div", css: ["hidden", "invisible", "hideable"], styles: ["containerMin"] },
+                                            { ele: "button", css: ["hidden", "invisible", "hideable", "btn-submit", "nostyle-btn"], styles: ["buttonMin"], options: { type: "button", innerText: "текст" } },
+                                            {
+                                                ele: "nav", css: ["hidden", "invisible", "hideable"], styles: ["navMin"], childs: [
+                                                    {
+                                                        ele: "ul", css: ["nostyle-list"], styles: ["navMinList"], childs: [
+                                                            { ele: "li", styles: ["navMinListItemLogo"] },
+                                                            {
+                                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
+                                                                    { ele: "span", styles: ["navMinListItemLine"] }
+                                                                ]
+                                                            },
+                                                            {
+                                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
+                                                                    { ele: "span", styles: ["navMinListItemLine"] }
+                                                                ]
+                                                            },
+                                                            {
+                                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
+                                                                    { ele: "span", styles: ["navMinListItemLine"] }
+                                                                ]
+                                                            },
+                                                            {
+                                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
+                                                                    { ele: "span", styles: ["navMinListItemLine"] }
+                                                                ]
+                                                            },
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            { ele: "input", css: ["hidden", "invisible", "hideable", "input", "nostyle-input"], styles: ["inputMin"], options: { placeholder: "поле ввода", type: "text", readOnly: true } },
+                                            {
+                                                ele: "aside", css: ["hidden", "invisible", "hideable"], styles: ["asideMin"], childs: [
+                                                    {
+                                                        ele: "header", childs: [
+                                                            { ele: "h2", styles: ["asideMinTitle"], options: { innerText: "заголовок" } }
+                                                        ]
+                                                    },
+                                                    {
+                                                        ele: "main", styles: ["asideMinContent"], childs: [
+                                                            {
+                                                                ele: "ul", css: ["nostyle-list"], styles: ["asideMinList"], childs: [
+                                                                    {
+                                                                        ele: "li", css: ["hoverable"], styles: ["asideMinListItem"], childs: [
+                                                                            { ele: "span", styles: ["asideMinListItemLine"] }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        ele: "li", css: ["hoverable"], styles: ["asideMinListItem"], childs: [
+                                                                            { ele: "span", styles: ["asideMinListItemLine"] }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        ele: "li", css: ["hoverable"], styles: ["asideMinListItem"], childs: [
+                                                                            { ele: "span", styles: ["asideMinListItemLine"] }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        ele: "li", css: ["hoverable"], styles: ["asideMinListItem"], childs: [
+                                                                            { ele: "span", styles: ["asideMinListItemLine"] }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        ele: "li", css: ["hoverable"], styles: ["asideMinListItem"], childs: [
+                                                                            { ele: "span", styles: ["asideMinListItemLine"] }
+                                                                        ]
+                                                                    },
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        ele: "footer", styles: ["footer"], childs: [
+                                                            {
+                                                                ele: "ul", css: ["nostyle-list"], styles: ["footerList"], childs: [
+                                                                    { ele: "li", css: ["hoverable"], styles: ["footerListItem"] },
+                                                                    { ele: "li", css: ["hoverable"], styles: ["footerListItem"] },
+                                                                    { ele: "li", css: ["hoverable"], styles: ["footerListItem"] },
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                        ]
+                                    }
                                 ]
                             }
                         ]
@@ -73,7 +162,8 @@ exports.homeElements = {
                     elementsForm: "elements-form",
                     elementsInput: "elements-input",
                     elementsDdown: "#elements-input-ddown",
-                    elementsItem: ".ddown-item"
+                    elementsItem: ".ddown-item",
+                    elementsResult: "#elements-result",
                 }
             },
             items: {
@@ -81,6 +171,7 @@ exports.homeElements = {
                     "контейнер",
                     "кнопка",
                     "навигация",
+                    "боковая панель",
                     "поле ввода",
                 ]
             }
@@ -159,6 +250,7 @@ exports.homeElements = {
             "width": "180px",
             "max-height": "100px",
             "padding": "10px",
+            "background-color": "var(--gray10)",
             "border": "2px solid var(--blue100)",
             "border-radius": "10px",
             "top": "40px",
@@ -176,6 +268,15 @@ exports.homeElements = {
             "border": "2px solid transparent",
             "border-radius": "8px",
             "transition": "0.2s",
+        },
+        elementsResultContainer: {
+            "display": "flex",
+            "flex-direction": "column",
+            "align-items": "center",
+            "height": "640px",
+            "padding": "20px",
+            "overflow-y": "auto",
+            "overflow-x": "hidden",
         },
         container: {
             "position": "absolute",
@@ -229,6 +330,127 @@ exports.homeElements = {
             "letter-spacing": -"1px",
             "color": "var(--gray200)",
             "font-family": "bold",
+        },
+        containerMin: {
+            "width": "250px",
+            "height": "80px",
+            "border-radius": "20px",
+            "border": "2px solid var(--gray20)",
+        },
+        buttonMin: {
+            "padding": "10px 30px",
+            "width": "200px",
+            "word-wrap": "break-word",
+            "border-radius": "15px",
+            "color": "var(--gray150)",
+            "border": "1px solid var(--gray20)",
+        },
+        navMin: {
+            "width": "250px",
+            "height": "40px",
+            "border-radius": "15px",
+            "border": "2px solid var(--gray20)",
+        },
+        navMinList: {
+            "display": "flex",
+            "flex-direction": "row",
+            "justify-content": "space-around",
+            "align-items": "center",
+            "height": "100%",
+        },
+        navMinListItemLogo: {
+            "width": "30px",
+            "height": "30px",
+            "border-radius": "10px",
+            "background-color": "var(--blue200)",
+        },
+        navMinListItemBtn: {
+            "cursor": "pointer",
+            "display": "flex",
+            "flex-direction": "column",
+            "justify-content": "center",
+            "align-items": "center",
+            "width": "30px",
+            "height": "15px",
+            "border-radius": "5px",
+            "border": "2px solid var(--gray20)",
+            "transition": "0.2s",
+            "text-align": "center",
+        },
+        navMinListItemLine: {
+            "background": "var(--gray20)",
+            "width": "26px",
+            "height": "2px",
+            "border-radius": "1px",
+        },
+        asideMin: {
+            "display": "flex",
+            "flex-direction": "column",
+            "justify-content": "space-around",
+            "align-items": "center",
+            "width": "230px",
+            "height": "380px",
+            "padding": "10px",
+            "border": "2px solid var(--gray20)",
+            "border-radius": "20px",
+        },
+        asideMinTitle: {
+            "line-height": "0px",
+            "color": "var(--gray150)",
+            "font-family": "bold",
+        },
+        asideMinContent: {
+            "height": "230px",
+            "width": "100%",
+        },
+        asideMinList: {
+            "display": "flex",
+            "flex-direction": "column",
+            "justify-content": "space-between",
+            "align-items": "center",
+            "height": "100%",
+        },
+        asideMinListItem: {
+            "cursor": "pointer",
+            "display": "flex",
+            "flex-direction": "column",
+            "align-items": "center",
+            "justify-content": "center",
+            "border-radius": "10px",
+            "border": "2px solid var(--gray20)",
+            "height": "30px",
+            "width": "100%",
+            "transition": "0.2s",
+        },
+        asideMinListItemLine: {
+            "background": "var(--gray20)",
+            "width": "90%",
+            "height": "3px",
+            "border-radius": "1px",
+        },
+        footer: {
+            "width": "230px",
+            "height": "50px",
+        },
+        footerList: {
+            "display": "flex",
+            "flex-direction": "row",
+            "justify-content": "space-around",
+            "width": "100%",
+            "height": "100%",
+        },
+        footerListItem: {
+            "cursor": "pointer",
+            "width": "50px",
+            "height": "50px",
+            "border-radius": "15px",
+            "border": "2px solid var(--gray20)",
+            "transition": " 0.2s",
+        },
+        inputMin: {
+            "border-radius": "10px",
+            "width": "200px",
+            "height": "30px",
         },
     },
 };

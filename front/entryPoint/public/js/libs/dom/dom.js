@@ -123,6 +123,9 @@ export default class MyDom {
     async addStyles(ele, classList) {
         classList.forEach((className) => {
             var cssBlock = this.stylez[className];
+            if(cssBlock == undefined){
+                console.log(className);
+            }
             var cssPropertiesKeys = Object.keys(cssBlock);
             for (const propertyKey of cssPropertiesKeys) {
                 ele.style[propertyKey] = cssBlock[propertyKey];

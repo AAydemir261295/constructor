@@ -41,10 +41,6 @@ body {
     transition: 0.2s;
 }
 
-
-
-/*  */
-
 .menu-input::placeholder {
     font-family: regular;
     font-size: 14px;
@@ -62,4 +58,15 @@ body {
     border: 2px solid var(--gray20) !important;
 }
 
-/*  */
+
+
+.hoverable {}
+
+.hoverable:hover {
+    border: 2px solid var(--blue100) !important;
+}
+
+
+.hideable {
+    transition: 0.2s !important;
+}
