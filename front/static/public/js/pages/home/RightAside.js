@@ -17,7 +17,7 @@ class RightAside {
     addElementFn;
 
 
-    showSelectedElements(idx) {
+    showSelectedElements(itemName, idx) {
         let resultElements = Array.from(this.resultElements);
         resultElements.forEach((ele, q) => {
             if (q == idx) {
@@ -28,7 +28,7 @@ class RightAside {
                     }, 10)
                 }, 200);
                 ele.addEventListener("click", () => {
-                    this.addElementFn(idx);
+                    this.addElementFn(itemName);
                 })
             } else {
                 this.resultElements[q].classList.add("invisible");

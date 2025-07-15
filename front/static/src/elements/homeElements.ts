@@ -182,9 +182,21 @@ export const homeElements = {
                     "поле ввода",
                     "боковая панель",
                 ],
-                htmlElements: [
-                    { ele: "div", css: ["pointer"], styles: ["containerMin"] },
-                ]
+                components: {
+                    "кнопка": {
+                        ele: "div", css: ["pointer"], styles: [], childs: [
+                            { ele: "button", css: ["pointer", "btn-submit", "nostyle-btn"], styles: ["buttonMin", "newComponent"], options: { type: "button", innerText: "текст" } },
+                            { ele: "div", styles: ["resizerCorner", "seCursor", "leftTop"] },
+                            { ele: "div", styles: ["resizerCorner", "neCursor", "rightTop"] },
+                            { ele: "div", styles: ["resizerCorner", "seCursor", "rightBottom"] },
+                            { ele: "div", styles: ["resizerCorner", "neCursor", "leftBottom"] },
+                            { ele: "div", styles: ["resizerLine", "eCursor", "left"] },
+                            { ele: "div", styles: ["resizerLine", "nCursor", "top"] },
+                            { ele: "div", styles: ["resizerLine", "eCursor", "right"] },
+                            { ele: "div", styles: ["resizerLine", "nCursor", "bottom"] },
+                        ]
+                    },
+                }
             }
         }
     },
@@ -463,6 +475,77 @@ export const homeElements = {
             "width": "200px",
             "height": "30px",
         },
+        componentWrapp: {
+            position: "absolute",
+        },
+        resizerCorner: {
+            "position": "absolute",
+            "width": "15px",
+            "height": "15px",
+            "background-color": "transparent",
+        },
+        resizerLine: {
+            "position": "absolute",
+            "background-color": "transparent",
+        },
+        seCursor: {
+            "cursor": "se-resize",
+        },
+        neCursor: {
+            "cursor": "ne-resize",
+        },
+        eCursor: {
+            "cursor": "e-resize",
+        },
+        sCursor: {
+            "cursor": "s-resize",
+        },
+        leftTop: {
+            "left": "0px",
+            "top": "0px",
+        },
+        rightTop: {
+            "right": "0px",
+            "top": "0px",
+        },
+        rightBottom: {
+            "right": "0px",
+            "bottom": "0px",
+        },
+        leftBottom: {
+            "left": "0px",
+            "bottom": "0px",
+        },
+        left: {
+            'left': "0px",
+            'top': "15px",
+            'width': "15px",
+            'height': "calc(100% - 30px)",
+        },
+        top: {
+            "left": "15px",
+            "top": "0px",
+            "height": "15px",
+            "width": "calc(100% - 30px)",
+        },
+        right: {
+            "right": "0px",
+            "top": "15px",
+            "width": "15px",
+            "height": "calc(100% - 30px)",
+        },
+        bottom: {
+            "left": "15px",
+            "bottom": "0px",
+            "width": "calc(100% - 30px)",
+            "height": "15px",
+        },
+        newComponent: {
+            "box-shadow": "3px 3px 0px 0px var(--red100)," +
+                "-3px -3px 0px 0px var(--red100)," +
+                "3px -3px 0px 0px var(--red100)," +
+                "-3px 3px 0px 0px var(--red100)",
+        }
     },
 }
 

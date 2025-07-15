@@ -45,6 +45,7 @@ body {
 }
 
 
+
 /*  */
 /*  */
 /*  */
@@ -71,7 +72,7 @@ body {
     top: 0px;
     width: 15px;
     height: 15px;
-    background-color: transparent;
+    background-color: black;
 }
 
 .right-top {
@@ -81,7 +82,7 @@ body {
     top: 0px;
     width: 15px;
     height: 15px;
-    background-color: transparent;
+    background-color: black;
 }
 
 .right-bottom {
@@ -91,7 +92,7 @@ body {
     bottom: 0px;
     width: 15px;
     height: 15px;
-    background-color: transparent;
+    background-color: black;
 }
 
 .left-bottom {
@@ -101,5 +102,42 @@ body {
     bottom: 0px;
     width: 15px;
     height: 15px;
-    background-color: transparent;
+    background-color: black;
+}
+
+
+.left {
+    position: absolute;
+    left: 0px;
+    top: 15px;
+    width: 15px;
+    height: calc(100% - 30px);
+    background-color: blue;
+}
+
+.top {
+    position: absolute;
+    left: 15px;
+    top: 0px;
+    height: 15px;
+    width: calc(100% - 30px);
+    background-color: blue;
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    top: 15px;
+    width: 15px;
+    height: calc(100% - 30px);
+    background-color: blue;
+}
+
+.bottom {
+    position: absolute;
+    left: 15px;
+    bottom: 0px;
+    width: calc(100% - 30px);
+    height: 15px;
+    background-color: blue;
 }

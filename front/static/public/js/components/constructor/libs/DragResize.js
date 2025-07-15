@@ -26,7 +26,7 @@ class DragResize {
         const element = this.ele;
         const resizers = this.corners;
 
-        const minimum_size = 20;
+        const minimum_size = 50;
         let originalWidth = 0;
         let originalHeight = 0;
         let originalMouseX = 0;
@@ -41,6 +41,9 @@ class DragResize {
 
         let that = this;
 
+        let minLeft = 0;
+        let minTop = 0;
+
         for (let i = 0; i < resizers.length; i++) {
             const currentResizer = resizers[i];
 
@@ -51,6 +54,11 @@ class DragResize {
 
                 originalMouseX = e.pageX;
                 originalMouseY = e.pageY;
+
+
+                minLeft = that.ele.offsetLeft + that.ele.offsetWidth - minimum_size;
+                minTop = that.ele.offsetTop + that.ele.offsetHeight - minimum_size;
+
 
                 mouseClickOnCornerBoundedWidthX = e.offsetX;
                 mouseClickOnCornerBoundedWidthY = e.offsetY;
@@ -76,7 +84,7 @@ class DragResize {
 
                     element.style.width = `${Math.max(Math.min(originalWidth - (e.pageX - originalMouseX), maxWidth), minimum_size)}px`;
                     element.style.height = `${Math.max(Math.min(originalHeight + (e.pageY - originalMouseY), maxHeight), minimum_size)}px`;
-                    element.style.left = `${Math.max(e.clientX - this.parent.offsetLeft - mouseClickOnCornerBoundedWidthX, 0)}px`;
+                    element.style.left = `${Math.min(Math.max(e.clientX - this.parent.offsetLeft - mouseClickOnCornerBoundedWidthX - 1, 0), minLeft)}px`;
                 }
                 else if (currentResizer.classList.contains('right-top')) {
                     const maxWidth = this.parent.offsetWidth - this.ele.offsetLeft;
@@ -84,19 +92,36 @@ class DragResize {
 
                     element.style.width = `${Math.max(Math.min(originalWidth + (e.pageX - originalMouseX), maxWidth), minimum_size)}px`;
                     element.style.height = `${Math.max(Math.min(originalHeight - (e.pageY - originalMouseY), maxHeight), minimum_size)}px`;
-                    element.style.top = `${Math.max(e.clientY - this.parent.offsetTop - mouseClickOnCornerBoundedWidthY, 0)}px`
+                    element.style.top = `${Math.min(Math.max(e.clientY - this.parent.offsetTop - mouseClickOnCornerBoundedWidthY - 1, 0), minTop)}px`
                 }
-                else {
+                else if (currentResizer.classList.contains("left-top")) {
                     const maxWidth = this.ele.offsetLeft + this.ele.offsetWidth;
                     const maxHeight = this.ele.offsetHeight + this.ele.offsetTop;
 
                     element.style.width = `${Math.max(Math.min(originalWidth - (e.pageX - originalMouseX), maxWidth), minimum_size)}px`
-                    element.style.left = `${Math.max(e.clientX - this.parent.offsetLeft - mouseClickOnCornerBoundedWidthX, 0)}px`;
-
+                    element.style.left = `${Math.min(Math.max(e.clientX - this.parent.offsetLeft - mouseClickOnCornerBoundedWidthX - 1, 0), minLeft)}px`;
+                    element.style.height = `${Math.max(Math.min(originalHeight - (e.pageY - originalMouseY), maxHeight), minimum_size)}px`
+                    element.style.top = `${Math.min(Math.max(e.clientY - this.parent.offsetTop - mouseClickOnCornerBoundedWidthY - 1, 0), minTop)}px`
+                } else if (currentResizer.classList.contains("left")) {
+                    const maxWidth = this.ele.offsetLeft + this.ele.offsetWidth;
+                    element.style.width = `${Math.max(Math.min(originalWidth - (e.pageX - originalMouseX), maxWidth), minimum_size)}px`
+                    element.style.left = `${Math.min(Math.max(e.clientX - this.parent.offsetLeft - mouseClickOnCornerBoundedWidthX - 1, 0), minLeft)}px`;
+                }
+                else if (currentResizer.classList.contains("top")) {
+                    const maxHeight = this.ele.offsetHeight + this.ele.offsetTop;
 
                     element.style.height = `${Math.max(Math.min(originalHeight - (e.pageY - originalMouseY), maxHeight), minimum_size)}px`
-                    element.style.top = `${Math.max(e.clientY - this.parent.offsetTop - mouseClickOnCornerBoundedWidthY, 0)}px`;
+                    element.style.top = `${Math.min(Math.max(e.clientY - this.parent.offsetTop - mouseClickOnCornerBoundedWidthY - 1, 0), minTop)}px`
+                }
+                else if (currentResizer.classList.contains("right")) {
+                    const maxWidth = this.parent.offsetWidth - this.ele.offsetLeft;
 
+                    element.style.width = `${Math.max(Math.min(originalWidth + (e.pageX - originalMouseX), maxWidth), minimum_size)}px`
+                }
+                else if (currentResizer.classList.contains("bottom")) {
+                    const maxHeight = this.parent.offsetHeight - this.ele.offsetTop;
+
+                    element.style.height = `${Math.max(Math.min(originalHeight + (e.pageY - originalMouseY), maxHeight), minimum_size)}px`;
                 }
             }
 
