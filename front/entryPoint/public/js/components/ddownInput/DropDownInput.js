@@ -32,9 +32,7 @@ class DropDownInput {
     }
 
 
-    sanitizeInput(s) {
-        return s.replace(/&/g, '').replace(/</g, '').replace(/"/g, '');
-    }
+ 
 
 
     setListeners() {

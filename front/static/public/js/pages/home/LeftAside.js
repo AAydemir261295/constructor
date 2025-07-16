@@ -22,7 +22,7 @@ class LeftAside {
         }
         let form = this.elements[itemName].querySelector(this.references[itemName].form);
 
-        this.currentItem = new AsideElement(form, this.references[itemName], this.elements[itemName], itemName, itemId, component.editComponentFn);
+        this.currentItem = new AsideElement(form, this.references[itemName], this.elements[itemName], itemName, itemId, component.boundedEditComponentFn);
 
         this.contentContainer.appendChild(this.currentItem.ele);
 

@@ -234,6 +234,13 @@ export const homeElements = {
                                     { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height", value: "39", type: "text" } },
                                     { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "text", innerText: "текст" } },
                                     { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "text", value: "текст", type: "text" } },
+
+                                    // { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "color", innerText: "цвет фона" } },
+                                    // { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "color", value: "цвет", type: "text" } },
+
+                                    // { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "border", innerText: "обводка" } },
+                                    // { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "text", value: "текст", type: "text" } },
+
                                 ]
                             },
 
@@ -479,7 +486,8 @@ export const homeElements = {
             "padding": "10px 10px",
             "width": "100%",
             "height": "100%",
-            "word-wrap": "break-word",
+            "overflow": "hidden",
+            "text-overflow": "ellipsis",
             "border": "1px solid var(--gray20)",
             "border-radius": "15px",
             "color": "var(--gray150)",

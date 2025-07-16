@@ -7,10 +7,6 @@ class Component extends DragResize {
         this.type = componentType;
         this.id = componentId;
         this.listeners();
-
-        // this.subscribe("resized", (data) => {
-            // this.editComponent(data.propType, data.propValue);
-        // })
     }
 
     position;
@@ -39,7 +35,8 @@ class Component extends DragResize {
                 this.ele.style.width = `${this.maxWidth}px`
                 return this.maxWidth;
             } else {
-                this.ele.style.width = `${value}px`
+                let width = ~~value;
+                this.ele.style.width = `${width}px`
                 return undefined;
             }
         }
@@ -53,15 +50,41 @@ class Component extends DragResize {
                 this.ele.style.height = `${this.maxHeight}px`;
                 return this.maxHeight;
             } else {
-                this.ele.style.height = `${value}px`
+                let height = ~~value;
+                this.ele.style.height = `${height}px`
                 return undefined;
             }
-
         }
     }
 
-    setInnerText(value) {
 
+
+    setInnerText(value) {
+        let text = this.sanitizeText(value);
+
+        this.ele.children[0].textContent = text;
+
+        if (this.ele.offsetWidth != this.currWidth) {
+            let width = this.ele.offsetWidth;
+            this.emit("resized", { propType: "width", propValue: width })
+            this.currWidth = width;
+            if (this.minimumWidth > this.currWidth) {
+                this.minimumWidth = width;
+            }
+        }
+
+        if (this.ele.offsetHeight != this.currHeight) {
+            let height = this.ele.offsetHeight;
+            this.emit("resized", { propType: "height", propValue: height })
+            this.currHeight = height;
+            if (this.minimumHeight > this.currHeight) {
+                this.minimumHeight = height;
+            }
+        }
+    }
+
+    sanitizeText(s) {
+        return s.replace(/&/g, '').replace(/</g, '').replace(/"/g, '');
     }
 
     compare() { }
