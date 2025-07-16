@@ -1,3 +1,5 @@
+
+
 export default class MyDom {
     constructor() {
         // this.dom = document;
@@ -12,6 +14,17 @@ export default class MyDom {
     }
 
 
+
+    async createNestedElements(eleArr) {
+        let keys = Object.keys(eleArr)
+        let result = {};
+        for (const key of keys) {
+            let parent = await this.createElement(eleArr[key]);
+            await this.buildTree(eleArr[key].childs, parent);
+            result[key] = parent;
+        }
+        return result;
+    }
 
 
     async render(pageData) {
@@ -123,7 +136,7 @@ export default class MyDom {
     async addStyles(ele, classList) {
         classList.forEach((className) => {
             var cssBlock = this.stylez[className];
-            if(cssBlock == undefined){
+            if (cssBlock == undefined) {
                 console.log(className);
             }
             var cssPropertiesKeys = Object.keys(cssBlock);

@@ -1,10 +1,6 @@
 // import { MyEvent } from "/js/core/MyEvent.js";
 
 class MyForm {
-
-    #form;
-    #formData;
-
     constructor(form, inputNames) {
         this.#form = form;
         var that = this;
@@ -16,9 +12,24 @@ class MyForm {
 
         this.form.addEventListener("formdata", (ev) => {
             let formData = ev.formData;
-            inputNames.forEach(inputName => { formData.set(inputName, formData.get(inputName)) });
+            inputNames.forEach((inputName) => {
+                formData.set(inputName, formData.get(inputName))
+                console.log(formData.get(inputName));
+            });
             that.#formData = formData;
         })
+    }
+
+    #form;
+    #formData;
+    #inputs;
+
+    get inputs() {
+        return this.#inputs;
+    }
+
+    set inputs(value) {
+        this.#inputs = value;
     }
 
     get formData() {

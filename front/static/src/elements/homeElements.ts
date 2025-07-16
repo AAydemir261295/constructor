@@ -4,10 +4,24 @@ export const homeElements = {
             tree:
             {
                 ele: "main", css: ["main", "hidden", "invisible"], styles: ["main"], childs: [
-
                     {
                         ele: "main", styles: ["mainContainer"], childs: [
-                            { ele: "aside", styles: ["aside", "leftAside"], options: { id: "left-aside" } },
+                            {
+                                ele: "aside", styles: ["aside", "leftAside"], options: { id: "left-aside" }, childs: [
+                                    {
+                                        ele: "header", styles: ["leftAsideHeader"], childs: [
+                                            { ele: "h3", styles: ["leftAsideTitle"], options: { innerText: "детали" } }
+                                        ]
+                                    },
+                                    {
+                                        ele: "main", styles: ["leftAsideMain"], childs: [
+                                            {
+                                                ele: "ul", css: ["nostyle-list"], styles: ["leftAsideList"], options: { id: "left-aside-content" }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
                             {
                                 ele: "div", styles: ["container"], options: { id: "container" }, childs: [
                                     { ele: "canvas", styles: ["canvaz"], options: { id: "canvaz" } }
@@ -41,7 +55,7 @@ export const homeElements = {
                                     {
                                         ele: "div", styles: ["elementsResultContainer"], options: { id: "elements-result" }, childs: [
                                             { ele: "div", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["containerMin"], },
-                                            { ele: "button", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "btn-submit", "nostyle-btn"], styles: ["buttonMin"], options: { type: "button", innerText: "текст" } },
+                                            { ele: "button", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "btn-submit", "nostyle-btn"], styles: ["buttonMin", "resultsButtonMin"], options: { type: "button", innerText: "текст" } },
                                             {
                                                 ele: "nav", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["navMin"], childs: [
                                                     {
@@ -172,6 +186,13 @@ export const homeElements = {
                     elementsDdown: "#elements-input-ddown",
                     elementsItem: ".ddown-item",
                     elementsResult: "#elements-result",
+                },
+                leftAside: {
+                    contentContainer: "#left-aside-content",
+                    "кнопка": {
+                        form: "#button-form",
+                        inputs: ["width", "height", "text"]
+                    }
                 }
             },
             items: {
@@ -184,18 +205,40 @@ export const homeElements = {
                 ],
                 components: {
                     "кнопка": {
-                        ele: "div", css: ["pointer"], styles: [], childs: [
-                            { ele: "button", css: ["pointer", "btn-submit", "nostyle-btn"], styles: ["buttonMin", "newComponent"], options: { type: "button", innerText: "текст" } },
-                            { ele: "div", styles: ["resizerCorner", "seCursor", "leftTop"] },
-                            { ele: "div", styles: ["resizerCorner", "neCursor", "rightTop"] },
-                            { ele: "div", styles: ["resizerCorner", "seCursor", "rightBottom"] },
-                            { ele: "div", styles: ["resizerCorner", "neCursor", "leftBottom"] },
-                            { ele: "div", styles: ["resizerLine", "eCursor", "left"] },
-                            { ele: "div", styles: ["resizerLine", "nCursor", "top"] },
-                            { ele: "div", styles: ["resizerLine", "eCursor", "right"] },
-                            { ele: "div", styles: ["resizerLine", "nCursor", "bottom"] },
+                        ele: "div", css: ["pointer"], styles: ["newComponent"], childs: [
+                            { ele: "button", css: ["pointer", "btn-submit", "nostyle-btn"], styles: ["buttonMinBoard"], options: { type: "button", innerText: "текст" } },
+                            { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
+                            { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
+                            { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
+                            { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
+                            { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
+                            { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
+                            { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
+                            { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
                         ]
                     },
+                },
+                asideItems: {
+                    "кнопка": {
+                        ele: "li", css: ["hidden", "invisible"], styles: ["leftAsideListItem"], childs: [
+                            {
+                                ele: "header", styles: ["leftAsideListItemHeader"], childs: [
+                                    { ele: "h4", styles: ["leftAsideListItemTitle"], options: { innerText: "кнопка" } }
+                                ]
+                            },
+                            {
+                                ele: "form", styles: ["leftAsideInputsContainer"], options: { id: "button-form" }, childs: [
+                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "width", innerText: "ширина" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "width", value: "59", type: "text" } },
+                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "height", innerText: "высота" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height", value: "39", type: "text" } },
+                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "text", innerText: "текст" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "text", value: "текст", type: "text" } },
+                                ]
+                            },
+
+                        ]
+                    }
                 }
             }
         }
@@ -207,23 +250,21 @@ export const homeElements = {
             "justify-content": "space-between",
             "align-items": "center",
             "width": "100%",
-            "height": "100vh",
-            "min-height": "900px",
-            /* opacity: 0; */
+            "min-height": "100vh",
+            "padding": "20px",
         },
         mainContainer: {
             "position": "relative",
-            "margin-top": "20px",
-            "margin-bottom": "20px",
-            "height": "100%",
             "width": "1300px",
-            "min-height": "800px"
+            "height": "calc(100vh - 120px)",
+            "min-height": "820px",
+            "margin-bottom": "20px",
         },
         aside: {
             "position": "absolute",
-            "height": "100%",
+            "height": "inherit",
+            "min-height": "820px",
             "width": "300px",
-            "min-height": "800px",
             "border-radius": "30px",
             "border": "2px solid var(--gray20)",
             "z-index": "9"
@@ -231,10 +272,67 @@ export const homeElements = {
         leftAside: {
             "left": "-325px"
         },
+        leftAsideHeader: {
+            "height": "50px",
+            "width": "100%",
+            "text-align": "center",
+        },
+        leftAsideTitle: {
+            "font-family": "bold",
+            "line-height": "0px",
+            "text-transform": "uppercase",
+            "color": "var(--gray200)",
+        },
+        leftAsideMain: {
+            "height": "90%",
+        },
+        leftAsideList: {
+            "display": "flex",
+            "flex-direction": "column",
+            "justify-content": "flex-start",
+            "align-items": "center",
+        },
+        leftAsideListItem: {
+            "display": "flex",
+            "flex-direction": "column",
+            "align-items": "center",
+            "margin-bottom": "15px",
+            "width": "100%",
+            "min-height": "50px",
+            "padding": "10px 0px",
+            "border-top": "2px solid var(--gray20)",
+            "border-bottom": "2px solid var(--gray20)",
+
+            "word-break": "break-all",
+            "transition": "opacity 0.2s",
+        },
+        leftAsideListItemHeader: {
+            "width": "100%",
+            "text-align": "center",
+            "height": "20px",
+        },
+        leftAsideListItemTitle: {
+            "font-family": "medium",
+            "margin-top": "5px",
+            "line-height": "0px",
+        },
+        leftAsideInputsContainer: {
+            "display": "flex",
+            "flex-direction": "column",
+            "align-items": "center",
+            "margin-top": "5px"
+        },
+        leftAsideInput: {
+            "height": "30px",
+            "border-radius": "10px",
+            "text-align": "center",
+        },
+        leftAsideInputLabel: {
+            "font-size": "15px",
+            "font-family": "regular",
+        },
         rightAside: {
             "right": "-330px",
-            "border": "2px solid var(--gray20)",
-            "border-radius": "30px",
         },
         rightAsideHeader: {
             "height": "50px",
@@ -302,29 +400,32 @@ export const homeElements = {
             "overflow-x": "hidden",
         },
         container: {
-            "position": "absolute",
-            "height": "100%",
+            "position": "fixed",
+            "min-height": "820px",
+            "height": "inherit",
             "width": "1300px",
-            "min-height": "800px",
             "border-radius": "30px",
             "border": "2px solid var(--gray20)",
             "z-index": "10",
             "background-color": "var(--gray10)",
         },
         canvaz: {
+            "position": "absolute",
+            "top": "0px",
             "width": "100%",
             "height": "100%",
         },
         homeHeader: {
+            "position": "relative",
             "width": "1200px",
             "min-height": "60px",
             "height": "60px",
             "border-radius": "20px",
             "border": "2px solid var(--gray20)",
-            "margin-bottom": "20px",
+            "margin-bottom": "40px",
         },
         nav: {
-            "height": "60px",
+            "height": "inherit",
         },
         navList: {
             "display": "flex",
@@ -362,6 +463,10 @@ export const homeElements = {
             "border-radius": "20px",
             "border": "2px solid var(--gray20)",
         },
+        resultsButtonMin: {
+            "padding": "10px 30px",
+            "width": "200px",
+        },
         buttonMin: {
             "padding": "10px 30px",
             "width": "200px",
@@ -369,6 +474,16 @@ export const homeElements = {
             "border-radius": "15px",
             "color": "var(--gray150)",
             "border": "1px solid var(--gray20)",
+        },
+        buttonMinBoard: {
+            "padding": "10px 10px",
+            "width": "100%",
+            "height": "100%",
+            "word-wrap": "break-word",
+            "border": "1px solid var(--gray20)",
+            "border-radius": "15px",
+            "color": "var(--gray150)",
+            "font-size": "14px",
         },
         navMin: {
             "width": "250px",
@@ -501,50 +616,55 @@ export const homeElements = {
             "cursor": "s-resize",
         },
         leftTop: {
-            "left": "0px",
-            "top": "0px",
+            "left": "-10px",
+            "top": "-10px",
         },
         rightTop: {
-            "right": "0px",
-            "top": "0px",
+            "right": "-10px",
+            "top": "-10px",
         },
         rightBottom: {
-            "right": "0px",
-            "bottom": "0px",
+            "right": "-10px",
+            "bottom": "-10px",
         },
         leftBottom: {
-            "left": "0px",
-            "bottom": "0px",
+            "left": "-10px",
+            "bottom": "-10px",
         },
         left: {
-            'left': "0px",
-            'top': "15px",
+            'left': "-10px",
+            'top': "5px",
             'width': "15px",
-            'height': "calc(100% - 30px)",
+            'height': "calc(100% - 10px)",
         },
         top: {
-            "left": "15px",
-            "top": "0px",
+            "left": "5px",
+            "top": "-10px",
             "height": "15px",
-            "width": "calc(100% - 30px)",
+            "width": "calc(100% - 10px)",
         },
         right: {
-            "right": "0px",
-            "top": "15px",
+            "right": "-10px",
+            "top": "5px",
             "width": "15px",
-            "height": "calc(100% - 30px)",
+            "height": "calc(100% - 10px)",
         },
         bottom: {
-            "left": "15px",
-            "bottom": "0px",
-            "width": "calc(100% - 30px)",
+            "left": "5px",
+            "bottom": "-10px",
+            "width": "calc(100% - 10px)",
             "height": "15px",
         },
         newComponent: {
+            "position": "absolute",
+            "left": "50%",
+            "top": "50%",
+            "border-radius": "15px",
             "box-shadow": "3px 3px 0px 0px var(--red100)," +
                 "-3px -3px 0px 0px var(--red100)," +
                 "3px -3px 0px 0px var(--red100)," +
                 "-3px 3px 0px 0px var(--red100)",
+            "transition": "box-shadow 0.2s",
         }
     },
 }
