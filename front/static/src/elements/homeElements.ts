@@ -189,10 +189,14 @@ export const homeElements = {
                 },
                 leftAside: {
                     contentContainer: "#left-aside-content",
+                    form: "#aside-form",
                     "кнопка": {
-                        form: "#button-form",
                         inputs: ["width", "height", "text"]
+                    },
+                    "контейнер": {
+                        inputs: ["width", "height"],
                     }
+
                 }
             },
             items: {
@@ -205,8 +209,8 @@ export const homeElements = {
                 ],
                 components: {
                     "кнопка": {
-                        ele: "div", css: ["pointer"], styles: ["newComponent"], childs: [
-                            { ele: "button", css: ["pointer", "btn-submit", "nostyle-btn"], styles: ["buttonMinBoard"], options: { type: "button", innerText: "текст" } },
+                        ele: "div", css: ["pointer"], styles: ["newComponent", "borderRadius15px"], childs: [
+                            { ele: "button", css: ["btn-submit", "nostyle-btn"], styles: ["buttonMinBoard"], options: { type: "button", innerText: "текст" } },
                             { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
                             { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
                             { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
@@ -217,6 +221,20 @@ export const homeElements = {
                             { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
                         ]
                     },
+                    "контейнер": {
+                        ele: "div", css: ["pointer"], styles: ["newComponent", "widthHeightAtStart", "borderRadius20px"], childs: [
+                            { ele: "div", styles: ["containerMinBoard",] },
+                            { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
+                            { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
+                            { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
+                            { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
+                            { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
+                            { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
+                            { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
+                            { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
+                        ]
+                    }
+
                 },
                 asideItems: {
                     "кнопка": {
@@ -227,14 +245,38 @@ export const homeElements = {
                                 ]
                             },
                             {
-                                ele: "form", styles: ["leftAsideInputsContainer"], options: { id: "button-form" }, childs: [
+                                ele: "form", styles: ["leftAsideInputsContainer"], options: { id: "aside-form" }, childs: [
                                     { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "width", innerText: "ширина" } },
-                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "width", value: "59", type: "text" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "width",type: "text" } },
                                     { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "height", innerText: "высота" } },
-                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height", value: "39", type: "text" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height", type: "text" } },
                                     { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "text", innerText: "текст" } },
-                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "text", value: "текст", type: "text" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "text", type: "text" } },
 
+                                    // { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "color", innerText: "цвет фона" } },
+                                    // { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "color", value: "цвет", type: "text" } },
+
+                                    // { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "border", innerText: "обводка" } },
+                                    // { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "text", value: "текст", type: "text" } },
+
+                                ]
+                            },
+
+                        ]
+                    },
+                    "контейнер": {
+                        ele: "li", css: ["hidden", "invisible"], styles: ["leftAsideListItem"], childs: [
+                            {
+                                ele: "header", styles: ["leftAsideListItemHeader"], childs: [
+                                    { ele: "h4", styles: ["leftAsideListItemTitle"], options: { innerText: "контейнер" } }
+                                ]
+                            },
+                            {
+                                ele: "form", styles: ["leftAsideInputsContainer"], options: { id: "aside-form" }, childs: [
+                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "width", innerText: "ширина" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "width", type: "text" } },
+                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "height", innerText: "высота" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height",  type: "text" } },
                                     // { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "color", innerText: "цвет фона" } },
                                     // { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "color", value: "цвет", type: "text" } },
 
@@ -493,6 +535,12 @@ export const homeElements = {
             "color": "var(--gray150)",
             "font-size": "14px",
         },
+        containerMinBoard: {
+            "width": "calc(100% - 4px)",
+            "height": "calc(100% - 4px)",
+            "border-radius": "20px",
+            "border": "2px solid var(--gray20)",
+        },
         navMin: {
             "width": "250px",
             "height": "40px",
@@ -667,12 +715,22 @@ export const homeElements = {
             "position": "absolute",
             "left": "50%",
             "top": "50%",
-            "border-radius": "15px",
             "box-shadow": "3px 3px 0px 0px var(--red100)," +
                 "-3px -3px 0px 0px var(--red100)," +
                 "3px -3px 0px 0px var(--red100)," +
                 "-3px 3px 0px 0px var(--red100)",
             "transition": "box-shadow 0.2s",
+        },
+        widthHeightAtStart: {
+            "width": "250px",
+            "height": "80px",
+            // border: "2px solid transparent"
+        },
+        borderRadius20px: {
+            "border-radius": "20px",
+        },
+        borderRadius15px: {
+            "border-radius": "15px",
         }
     },
 }

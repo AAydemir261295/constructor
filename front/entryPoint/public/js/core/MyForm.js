@@ -1,4 +1,3 @@
-// import { MyEvent } from "/js/core/MyEvent.js";
 
 class MyForm {
     constructor(form, inputNames) {

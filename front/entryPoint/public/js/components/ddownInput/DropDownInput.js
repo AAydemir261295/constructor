@@ -32,7 +32,13 @@ class DropDownInput {
     }
 
 
- 
+
+    showItems(...args) {
+        let idx = args[0];
+
+        this.inputRef.value = this.items[idx];
+        this.showSelectedItemFn(this.items[idx], idx);
+    }
 
 
     setListeners() {
@@ -59,11 +65,9 @@ class DropDownInput {
             }
         })
 
+
         this.itemsRef.forEach((listItem, idx) => {
-            listItem.addEventListener("click", (ev) => {
-                this.inputRef.value = this.items[idx];
-                this.showSelectedItemFn(this.items[idx], idx);
-            })
+            listItem.addEventListener("click", this.showItems.bind(this, idx))
         })
     }
 

@@ -7,6 +7,7 @@ class Constructor {
         this.canvaz = this.board.querySelector(elementsRef.canvaz);
         this.componentsData = components;
         this.domInteractions = domInteractions;
+
     }
 
     board;
@@ -15,20 +16,11 @@ class Constructor {
     ids = [];
     componentsData;
 
- 
-    async getId() {
-        let max = 1000000;
-        let min = 0;
-        let numb = Math.floor(Math.random() * (max - min + 1) + min);
-        if (this.ids.indexOf(numb) == -1) {
-            return numb;
-        } else {
-            await this.getId();
-        }
-    }
+    lastId = 0;
+
 
     async addComponent(componentName) {
-        let compId = await this.getId();
+        let compId = this.lastId++;
 
         let tmp = this.componentsData[componentName];
         let parent = await this.domInteractions.createElement(tmp);

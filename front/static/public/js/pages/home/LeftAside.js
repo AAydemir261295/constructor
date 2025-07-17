@@ -11,6 +11,10 @@ class LeftAside {
     references;
     elements;
     currentItem;
+    currentItemType;
+    itemId;
+
+
 
     async prepareItems(elements) {
         this.elements = await this.domInteractions.createNestedElements(elements);
@@ -20,9 +24,21 @@ class LeftAside {
         if (this.currentItem) {
             this.currentItem.hide();
         }
-        let form = this.elements[itemName].querySelector(this.references[itemName].form);
 
-        this.currentItem = new AsideElement(form, this.references[itemName], this.elements[itemName], itemName, itemId, component.boundedEditComponentFn);
+        this.currentItemType = itemName;
+        this.itemId = itemId;
+
+        console.log(itemName);
+
+        let form = this.elements[itemName].querySelector(this.references.form);
+
+        this.currentItem = new AsideElement(form,
+            this.references[itemName],
+            this.elements[itemName],
+            component.getItemProperties(),
+            component.boundedEditComponentFn);
+
+
 
         this.contentContainer.appendChild(this.currentItem.ele);
 
@@ -31,7 +47,19 @@ class LeftAside {
         component.subscribe("resized", (data) => {
             this.currentItem.editInputsValue(data.propType, data.propValue);
         })
+
     }
+
+    editItemProperties(itemId, props) {
+        if (this.itemId != itemId) {
+            this.itemId = itemId;
+            props.forEach((prop) => {
+                this.currentItem.editInputsValue(prop.propType, prop.propValue);
+            })
+        }
+    }
+
+
 }
 
 export default LeftAside

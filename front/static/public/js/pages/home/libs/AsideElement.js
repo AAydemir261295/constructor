@@ -2,19 +2,19 @@ import MyForm from "http://localhost:3000/js/core/MyForm.js";
 
 class AsideElement extends MyForm {
 
-    constructor(form, elementsRef, ele, elementType, elementId, editProperty) {
+    constructor(form, elementsRef, ele, componentProperties, editProperty) {
         super(form, elementsRef.inputs);
         this.ele = ele;
-        this.elementType = elementType;
-        this.elementId = elementId;
         this.editProperty = editProperty;
-        
+
+        componentProperties.forEach((props) => {
+            this.editInputsValue(props.propType, props.propValue);
+        })
+
         this.onFormChange();
     }
 
     ele;
-    elementType;
-    elementId;
     editProperty;
 
 
@@ -27,7 +27,6 @@ class AsideElement extends MyForm {
             let inputName = e.target.name;
             let value = e.target.value;
             let isBigger = this.editProperty(inputName, value)
-            console.log(isBigger);
             if (isBigger) {
                 e.target.value = isBigger;
             }
@@ -36,20 +35,20 @@ class AsideElement extends MyForm {
 
 
     show() {
-        this.ele.classList.remove("hidden");
-
         setTimeout(() => {
-            this.ele.classList.remove("invisible");
-        }, 10)
+            this.ele.classList.remove("hidden");
+
+            setTimeout(() => {
+                this.ele.classList.remove("invisible");
+            }, 10)
+        }, 200)
     }
 
     hide() {
-        setTimeout(() => {
-            this.ele.classList.add("invisible");
+        this.ele.classList.add("invisible");
 
-            setTimeout(() => {
-                this.ele.classList.add("hidden");
-            }, 200)
+        setTimeout(() => {
+            this.ele.classList.add("hidden");
         }, 200)
     }
 

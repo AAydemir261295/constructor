@@ -12,10 +12,17 @@ class DragResize extends EventEmitter {
         this.minimumWidth = +this.resizeEle.offsetWidth;
         this.minimumHeight = +this.resizeEle.offsetHeight;
 
+        this.currWidth = this.ele.offsetWidth;
+        this.currHeight = this.ele.offsetHeight;
+
         this.maxWidth = this.parent.offsetWidth - this.ele.offsetLeft - 10;
         this.maxHeight = this.parent.offsetHeight - this.ele.offsetTop - 10;
 
-        this.resizers = Array.from(this.ele.children).splice(1, this.ele.children.length);
+        if (this.ele.children.length > 8) {
+            this.resizers = Array.from(this.ele.children).splice(1, this.ele.children.length);
+        } else {
+            this.resizers = Array.from(this.ele.children);
+        }
 
 
         this.dragElement();
@@ -67,6 +74,13 @@ class DragResize extends EventEmitter {
     boundedRightBottomResize = this.resizeRightBottom.bind(this);
     boundedBottomResize = this.resizeBottom.bind(this);
     boundedLeftBottomResize = this.resizeLeftBottom.bind(this);
+
+
+    mouseUpController = new AbortController();
+    mouseUpSignal = this.mouseUpController.signal;
+
+    mouseMoveController = new AbortController();
+    mouseMoveSignal = this.mouseMoveController.signal;
 
 
     resizeLeft(e) {
@@ -139,7 +153,9 @@ class DragResize extends EventEmitter {
     }
 
 
-    stopResize(handler, editTypes) {
+
+
+    stopResize(editTypes) {
         editTypes.forEach((type) => {
             if (type == "width") {
                 this.emit("resized", { propType: type, propValue: this.currWidth })
@@ -147,10 +163,27 @@ class DragResize extends EventEmitter {
                 this.emit("resized", { propType: type, propValue: this.currHeight });
             }
         })
+        this.removeListeners();
+    }
 
 
-        document.removeEventListener('mousemove', handler);
+    removeListeners() {
+        this.mouseMoveController.abort();
+        this.mouseMoveController = new AbortController();
+        this.mouseMoveSignal = this.mouseMoveController.signal;
 
+        this.mouseUpController.abort();
+        this.mouseUpController = new AbortController();
+        this.mouseUpSignal = this.mouseUpController.signal;
+    }
+
+
+    getMouseMoveSignal() {
+        return this.mouseMoveSignal;
+    }
+
+    getMouseUpSignal() {
+        return this.mouseUpSignal;
     }
 
     resizeElement() {
@@ -179,8 +212,8 @@ class DragResize extends EventEmitter {
 
             this.ele.style.right = `${parentWidth - eleLeft - this.ele.offsetWidth - 4}px`;
 
-            document.addEventListener('mousemove', this.boundedLeftResize)
-            document.addEventListener('mouseup', () => this.stopResize(this.boundedLeftResize, ["width"]))
+            document.addEventListener('mousemove', this.resizeLeft.bind(this), { signal: this.getMouseMoveSignal() })
+            document.addEventListener('mouseup', (ev) => this.stopResize(["width"]), { signal: this.getMouseUpSignal() })
         })
 
         // leftTop
@@ -213,8 +246,8 @@ class DragResize extends EventEmitter {
             this.ele.style.bottom = `${parentHeight - eleTop - this.ele.offsetHeight - 4}px`;
             this.ele.style.right = `${parentWidth - eleLeft - this.ele.offsetWidth - 4}px`;
 
-            document.addEventListener('mousemove', this.boundedLeftTopResize)
-            document.addEventListener('mouseup', () => this.stopResize(this.boundedLeftTopResize, ["width", "height"]))
+            document.addEventListener('mousemove', this.resizeLeftTop.bind(this), { signal: this.getMouseMoveSignal() })
+            document.addEventListener('mouseup', (ev) => this.stopResize(["width", "height"]), { signal: this.getMouseUpSignal() })
         })
 
         // top
@@ -240,8 +273,8 @@ class DragResize extends EventEmitter {
 
             this.ele.style.bottom = `${parentHeight - eleTop - this.ele.offsetHeight - 4}px`;
 
-            document.addEventListener('mousemove', this.boundedTopResize)
-            document.addEventListener('mouseup', () => this.stopResize(this.boundedTopResize, ["height"]))
+            document.addEventListener('mousemove', this.resizeTop.bind(this), { signal: this.getMouseMoveSignal() })
+            document.addEventListener('mouseup', (ev) => this.stopResize(["height"]), { signal: this.getMouseUpSignal() })
         })
 
         // rightTop
@@ -273,8 +306,8 @@ class DragResize extends EventEmitter {
             this.ele.style.left = `${eleLeft}px`
 
 
-            document.addEventListener('mousemove', this.boundedRightTopResize)
-            document.addEventListener('mouseup', () => this.stopResize(this.boundedRightTopResize, ["width", "height"]))
+            document.addEventListener('mousemove', this.resizeRightTop.bind(this), { signal: this.getMouseMoveSignal() })
+            document.addEventListener('mouseup', (ev) => this.stopResize(["width", "height"]), { signal: this.getMouseUpSignal() })
         })
 
         // right
@@ -300,8 +333,8 @@ class DragResize extends EventEmitter {
             this.ele.style.left = `${eleLeft}px`
 
 
-            document.addEventListener('mousemove', this.boundedRightResize)
-            document.addEventListener('mouseup', () => this.stopResize(this.boundedRightResize, ["width"]))
+            document.addEventListener('mousemove', this.resizeRight.bind(this), { signal: this.getMouseMoveSignal() })
+            document.addEventListener('mouseup', (ev) => this.stopResize(["width"]), { signal: this.getMouseUpSignal() })
         })
 
         // rightBottom
@@ -329,8 +362,8 @@ class DragResize extends EventEmitter {
             this.ele.style.top = `${top}px`;
             this.ele.style.left = `${left}px`;
 
-            document.addEventListener('mousemove', this.boundedRightBottomResize)
-            document.addEventListener('mouseup', () => this.stopResize(this.boundedRightBottomResize, ["width", "height"]))
+            document.addEventListener('mousemove', this.resizeRightBottom.bind(this), { signal: this.getMouseMoveSignal() })
+            document.addEventListener('mouseup', (ev) => this.stopResize(["width", "height"]), { signal: this.getMouseUpSignal() })
         })
 
         // bottom
@@ -355,8 +388,8 @@ class DragResize extends EventEmitter {
 
             this.ele.style.top = `${eleTop}px`;
 
-            document.addEventListener('mousemove', this.boundedBottomResize)
-            document.addEventListener('mouseup', () => this.stopResize(this.boundedBottomResize, ["height"]))
+            document.addEventListener('mousemove', this.resizeBottom.bind(this), { signal: this.getMouseMoveSignal() })
+            document.addEventListener('mouseup', (ev) => this.stopResize(["height"]), { signal: this.getMouseUpSignal() })
         })
 
         // leftBottom
@@ -385,8 +418,8 @@ class DragResize extends EventEmitter {
             this.ele.style.top = `${eleTop}px`;
             this.ele.style.right = `${parentWidth - eleLeft - this.ele.offsetWidth - 4}px`;
 
-            document.addEventListener('mousemove', this.boundedLeftBottomResize)
-            document.addEventListener('mouseup', () => this.stopResize(this.boundedLeftBottomResize, ["width", "height"]))
+            document.addEventListener('mousemove', this.resizeLeftBottom.bind(this), { signal: this.getMouseMoveSignal() })
+            document.addEventListener('mouseup', (ev) => this.stopResize(["width", "height"]), { signal: this.getMouseUpSignal() })
         })
     }
 

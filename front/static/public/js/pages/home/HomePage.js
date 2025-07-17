@@ -8,6 +8,7 @@ import LeftAside from "/js/pages/home/LeftAside.js";
 export class HomePage extends MyPage {
     constructor(homeElements, router, domInteractions, csrf) {
         super(homeElements, router, domInteractions, csrf);
+
     }
 
     myConstructor;
@@ -18,7 +19,19 @@ export class HomePage extends MyPage {
     async addSelectedElement(itemName) {
         let component = await this.myConstructor.addComponent(itemName);
         this.leftAside.setItemProperties(itemName, component.id, component);
+
+        this.myConstructor.components.forEach(comp => {
+            comp.subscribe("selected", (data) => {
+                if (comp.type == this.leftAside.currentItemType) {
+                    this.leftAside.editItemProperties(comp.id, data.props)
+                } else {
+                    this.leftAside.setItemProperties(comp.type, comp.id, comp);
+                }
+            })
+        });
     }
+
+
 
     restore(data) {
 
@@ -34,7 +47,7 @@ export class HomePage extends MyPage {
             this.addSelectedElement.bind(this),
         );
 
-        this.leftAside = new LeftAside(this.pageData.elements.main.ref.leftAside, this.domInteractions,);
+        this.leftAside = new LeftAside(this.pageData.elements.main.ref.leftAside, this.domInteractions);
         await this.leftAside.prepareItems(this.pageData.elements.main.items.asideItems);
     }
 }

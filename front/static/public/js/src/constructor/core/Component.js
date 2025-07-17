@@ -3,20 +3,22 @@ import DragResize from "/js/src/constructor/libs/DragResize.js";
 class Component extends DragResize {
 
     constructor(ele, parent, componentType, componentId) {
-        super(ele, parent,);
-        this.type = componentType;
-        this.id = componentId;
+        super(ele, parent);
+        this.#type = componentType;
+        this.#id = componentId;
+
         this.listeners();
     }
 
     position;
+    childs = [];
     #type;
     #id;
+
 
     boundedEditComponentFn = this.editComponent.bind(this);
 
     editComponent(propName, propValue) {
-        console.log(propName, propValue);
         switch (propName) {
             case "width":
                 return this.setWidth(+propValue);
@@ -90,9 +92,28 @@ class Component extends DragResize {
     compare() { }
 
 
+
+    getItemProperties() {
+        switch (this.#type) {
+            case "кнопка":
+                return [{ propType: "width", propValue: this.ele.offsetWidth },
+                { propType: "height", propValue: this.ele.offsetHeight },
+                { propType: "text", propValue: this.ele.children[0].textContent }]
+            case "контейнер":
+                return [{ propType: "width", propValue: this.ele.offsetWidth },
+                { propType: "height", propValue: this.ele.offsetHeight }]
+
+        }
+    }
+
+
     listeners() {
         this.ele.addEventListener("mousedown", () => {
             this.ele.style.removeProperty("box-shadow");
+        })
+
+        this.ele.addEventListener("click", () => {
+            this.emit("selected", { props: this.getItemProperties() });
         })
     }
 
