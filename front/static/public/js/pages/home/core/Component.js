@@ -1,4 +1,4 @@
-import DragResize from "/js/src/constructor/libs/DragResize.js";
+import DragResize from "/js/pages/home/constructor/libs/DragResize.js";
 
 class Component extends DragResize {
 
@@ -25,14 +25,28 @@ class Component extends DragResize {
     setWidth(value) {
         let isNumber = Number.isInteger(value);
         if (isNumber && value >= this.minimumWidth) {
-            if (value > this.maxWidth) {
-                this.ele.style.width = `${this.maxWidth}px`
-                return this.maxWidth;
+            let maxWidth = this.parent.offsetWidth - 20;
+            if (value > maxWidth) {
+                this.ele.style.left = `${0}px`;
+                this.ele.style.width = `${maxWidth}px`;
+                return maxWidth;
             } else {
                 let width = ~~value;
-                this.ele.style.width = `${width}px`
+                let prevLeft = this.ele.offsetLeft;
+                let currentLeft = Math.max(prevLeft - (width / 2), 0);
+                this.ele.style.left = `${currentLeft}px`;
+                this.ele.style.width = `${width}px`;
                 return undefined;
+
             }
+            // if (value > this.maxWidth) {
+            //     this.ele.style.width = `${this.maxWidth}px`
+            //     return this.maxWidth;
+            // } else {
+            //     let width = ~~value;
+            //     this.ele.style.width = `${width}px`
+            //     return undefined;
+            // }
         }
     }
 
@@ -40,14 +54,28 @@ class Component extends DragResize {
         let isNumber = Number.isInteger(value);
 
         if (isNumber && value >= this.minimumHeight) {
-            if (value > this.maxHeight) {
-                this.ele.style.height = `${this.maxHeight}px`;
-                return this.maxHeight;
+            let maxHeight = this.parent.offsetHeight - 20;
+            if (value > maxHeight) {
+                this.ele.style.top = `${0}px`;
+                this.ele.style.height = `${maxHeight}px`;
+                return maxHeight
             } else {
                 let height = ~~value;
+                let prevTop = this.ele.offsetTop;
+                let currentTop = Math.max(prevTop - (height / 2), 0);
+                this.ele.style.top = `${currentTop}px`;
                 this.ele.style.height = `${height}px`
                 return undefined;
+
             }
+            // if (value > this.maxHeight) {
+            //     this.ele.style.height = `${this.maxHeight}px`;
+            //     return this.maxHeight;
+            // } else {
+            //     let height = ~~value;
+            //     this.ele.style.height = `${height}px`
+            //     return undefined;
+            // }
         }
     }
 
@@ -102,9 +130,9 @@ class Component extends DragResize {
             this.ele.style.removeProperty("box-shadow");
         })
 
-        this.ele.addEventListener("click", () => {
-            this.emit("selected");
-        })
+        // this.ele.addEventListener("click", () => {
+        //     this.emit("selected");
+        // })
     }
 
 }

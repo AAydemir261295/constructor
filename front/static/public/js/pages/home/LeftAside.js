@@ -2,10 +2,13 @@ import ComponentPropsForm from "/js/pages/home/libs/ComponentPropsForm.js";
 
 class LeftAside {
 
-    constructor(elementsRef, domInteractions) {
+    constructor(elementsRef, domInteractions, components) {
         this.domInteractions = domInteractions;
         this.contentContainer = document.querySelector(elementsRef.contentContainer);
         this.references = elementsRef;
+        this.components = components;
+
+        this.componentsInteractions();
     }
 
     references;
@@ -14,6 +17,8 @@ class LeftAside {
     itemId;
 
     boundedDeleteHandler = this.deleteHandler.bind(this);
+
+
 
 
     async prepareItems(elements) {
@@ -79,6 +84,20 @@ class LeftAside {
         this.currentItem.removeBtn.addEventListener("click", this.boundedDeleteHandler);
     }
 
+    componentsInteractions() {
+        this.components.subscribe("selected", (component) => {
+            this.setComponentForm(component);
+        })
+
+        this.components.subscribe("resized", (component) => {
+            console.log("ASD");
+            this.setComponentForm(component);
+        })
+
+        this.components.subscribe("add", (component) => {
+            this.setComponentForm(component);
+        })
+    }
 }
 
 export default LeftAside

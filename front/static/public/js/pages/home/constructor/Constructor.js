@@ -1,33 +1,25 @@
-import Container from "/js/src/constructor/libs/components/Container.js";
-import Button from "/js/src/constructor/libs/components/Button.js";
+import Container from "/js/pages/home/constructor/libs/components/Container.js";
+import Button from "/js/pages/home/constructor/libs/components/Button.js";
+import Navigation from "/js/pages/home/constructor/libs/components/Navigation.js";
 
-import Canvaz from "/js/src/constructor/libs/Canvaz.js";
+import Canvaz from "/js/pages/home/constructor/libs/Canvaz.js";
 
 class Constructor {
 
-    constructor(elementsRef, components, domInteractions) {
+    constructor(elementsRef, componentsData, domInteractions, components) {
         this.board = document.querySelector(elementsRef.container);
         this.canvaz = new Canvaz(this.board.querySelector(elementsRef.canvaz));
-        this.componentsData = components;
+        this.componentsData = componentsData;
         this.domInteractions = domInteractions;
-
+        this.components = components;
     }
 
     board;
     canvaz;
-    components = [];
+    components;
     ids = [];
     componentsData;
-
     lastId = 0;
-
-
-    removeComponent(compId) {
-        let comp = this.components.find(c => c.id == compId);
-        let idx = this.components.indexOf(comp);
-        this.components.splice(idx, 1);
-        console.log(this.components);
-    }
 
 
     createComponent(type, parent, board, componentName, compId, componentRefs) {
@@ -36,9 +28,10 @@ class Constructor {
                 return new Button(parent, board, componentName, compId);
             case "контейнер":
                 return new Container(parent, board, componentName, compId);
+            case "навигация":
+                return new Navigation(parent, board, componentName, compId, componentRefs);
         }
     }
-
 
     async addOnBoard(componentName, componentRefs) {
         let compId = this.lastId++;
@@ -49,18 +42,9 @@ class Constructor {
         this.board.appendChild(parent);
 
         let component = this.createComponent(componentName, parent, this.board, componentName, compId, componentRefs);
+        this.components.add(component);
 
-        component.subscribe("delete", () => {
-            this.removeComponent(component.id);
-        })
-
-
-        this.components.push(component);
-
-        return component;
     }
-
-
 }
 
 

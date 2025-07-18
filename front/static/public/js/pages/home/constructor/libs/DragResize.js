@@ -162,7 +162,9 @@ class DragResize extends EventEmitter {
 
 
     stopResize(editTypes) {
+        console.log(editTypes);
         editTypes.forEach((type) => {
+            console.log(this.currHeight);
             if (type == "width") {
                 this.emit("resized", { propType: type, propValue: this.currWidth })
             } else if (type == "height") {
