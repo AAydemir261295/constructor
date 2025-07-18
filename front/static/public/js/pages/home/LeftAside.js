@@ -73,8 +73,8 @@ class LeftAside {
         this.currentItem.hide();
 
         setTimeout(() => {
+            this.components.remove(this.currentItem.component.id);
             this.currentItem.ele.remove();
-            this.currentItem.component.remove();
             this.currentItem = null;
         }, 200)
     }
@@ -90,7 +90,6 @@ class LeftAside {
         })
 
         this.components.subscribe("resized", (component) => {
-            console.log("ASD");
             this.setComponentForm(component);
         })
 

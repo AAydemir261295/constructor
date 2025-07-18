@@ -15,10 +15,10 @@ class Component extends DragResize {
     id;
 
 
-    remove() {
-        this.emit("delete");
-        this.ele.remove();
-    }
+    // remove() {
+        // this.emit("delete");
+        // this.ele.remove();
+    // }
 
 
 
@@ -27,13 +27,13 @@ class Component extends DragResize {
         if (isNumber && value >= this.minimumWidth) {
             let maxWidth = this.parent.offsetWidth - 20;
             if (value > maxWidth) {
-                this.ele.style.left = `${0}px`;
+                this.ele.style.left = `${10}px`;
                 this.ele.style.width = `${maxWidth}px`;
                 return maxWidth;
             } else {
                 let width = ~~value;
                 let prevLeft = this.ele.offsetLeft;
-                let currentLeft = Math.max(prevLeft - (width / 2), 0);
+                let currentLeft = Math.max(prevLeft - (width / 2), 10);
                 this.ele.style.left = `${currentLeft}px`;
                 this.ele.style.width = `${width}px`;
                 return undefined;
@@ -56,13 +56,13 @@ class Component extends DragResize {
         if (isNumber && value >= this.minimumHeight) {
             let maxHeight = this.parent.offsetHeight - 20;
             if (value > maxHeight) {
-                this.ele.style.top = `${0}px`;
+                this.ele.style.top = `${10}px`;
                 this.ele.style.height = `${maxHeight}px`;
                 return maxHeight
             } else {
                 let height = ~~value;
                 let prevTop = this.ele.offsetTop;
-                let currentTop = Math.max(prevTop - (height / 2), 0);
+                let currentTop = Math.max(prevTop - (height / 2), 10);
                 this.ele.style.top = `${currentTop}px`;
                 this.ele.style.height = `${height}px`
                 return undefined;
