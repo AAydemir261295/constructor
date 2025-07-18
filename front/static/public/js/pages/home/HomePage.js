@@ -15,20 +15,21 @@ export class HomePage extends MyPage {
     rightAside;
     leftAside;
     navigation;
+    components = [];
 
     async addSelectedElement(itemName) {
-        let component = await this.myConstructor.addComponent(itemName);
-        this.leftAside.setItemProperties(itemName, component.id, component);
+        let component = await this.myConstructor.addOnBoard(itemName, this.pageData.elements.main.ref.leftAside[itemName]);
 
-        this.myConstructor.components.forEach(comp => {
-            comp.subscribe("selected", (data) => {
-                if (comp.type == this.leftAside.currentItemType) {
-                    this.leftAside.editItemProperties(comp.id, data.props)
-                } else {
-                    this.leftAside.setItemProperties(comp.type, comp.id, comp);
-                }
-            })
-        });
+        this.leftAside.setComponentForm(component);
+
+
+        component.subscribe("selected", () => {
+            this.leftAside.setComponentForm(component);
+        })
+
+        component.subscribe("resized", () => {
+            this.leftAside.setComponentForm(component);
+        })
     }
 
 

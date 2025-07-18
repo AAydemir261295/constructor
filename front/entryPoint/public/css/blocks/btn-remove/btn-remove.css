@@ -1,0 +1,11 @@
+.btn-remove {
+    border: 1px solid transparent;
+    background-color: var(--gray20);
+    color: var(--red100);
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-remove:hover {
+    border: 1px solid var(--red100) !important;
+}

@@ -190,11 +190,16 @@ export const homeElements = {
                 leftAside: {
                     contentContainer: "#left-aside-content",
                     form: "#aside-form",
+                    removeBtn: "#remove-btn",
                     "кнопка": {
                         inputs: ["width", "height", "text"]
                     },
                     "контейнер": {
                         inputs: ["width", "height"],
+                    },
+                    "навигация": {
+                        title: "#nav-min-title",
+                        inputs: []
                     }
 
                 }
@@ -222,7 +227,7 @@ export const homeElements = {
                         ]
                     },
                     "контейнер": {
-                        ele: "div", css: ["pointer"], styles: ["newComponent", "widthHeightAtStart", "borderRadius20px"], childs: [
+                        ele: "div", css: ["pointer"], styles: ["newComponent", "widthHeightAtStartContainer", "borderRadius20px"], childs: [
                             { ele: "div", styles: ["containerMinBoard",] },
                             { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
                             { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
@@ -233,6 +238,58 @@ export const homeElements = {
                             { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
                             { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
                         ]
+                    },
+                    "навигация": {
+                        ele: "div", css: ["pointer"], styles: ["newComponent", "widthHeightAtStartNav", "borderRadius15px"], childs: [
+                            {
+                                ele: "nav", styles: ["navMinBoard"], childs: [
+                                    {
+                                        ele: "ul", css: ["nostyle-list"], styles: ["navMinList"], childs: [
+                                            { ele: "li", styles: ["navMinListItemLogo"] },
+                                            {
+                                                ele: "li", styles: ["navMinListItem"], childs: [
+                                                    {
+                                                        ele: "header", styles: ["navMinListItemHeader"], childs: [
+                                                            { ele: "h4", styles: ["navMinListItemTitle"], options: { id: "nav-min-title", innerText: "название" } }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+
+                                            {
+                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
+                                                    { ele: "span", styles: ["navMinListItemLine"] }
+                                                ]
+                                            },
+                                            {
+                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
+                                                    { ele: "span", styles: ["navMinListItemLine"] }
+                                                ]
+                                            },
+                                            {
+                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
+                                                    { ele: "span", styles: ["navMinListItemLine"] }
+                                                ]
+                                            },
+                                            {
+                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
+                                                    { ele: "span", styles: ["navMinListItemLine"] }
+                                                ]
+                                            },
+                                        ]
+                                    }
+                                ]
+                            },
+                            { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
+                            { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
+                            { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
+                            { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
+                            { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
+                            { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
+                            { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
+                            { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
+                        ]
+
                     }
 
                 },
@@ -247,21 +304,18 @@ export const homeElements = {
                             {
                                 ele: "form", styles: ["leftAsideInputsContainer"], options: { id: "aside-form" }, childs: [
                                     { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "width", innerText: "ширина" } },
-                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "width",type: "text" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "width", type: "text" } },
                                     { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "height", innerText: "высота" } },
                                     { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height", type: "text" } },
                                     { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "text", innerText: "текст" } },
                                     { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "text", type: "text" } },
-
-                                    // { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "color", innerText: "цвет фона" } },
-                                    // { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "color", value: "цвет", type: "text" } },
-
-                                    // { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "border", innerText: "обводка" } },
-                                    // { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "text", value: "текст", type: "text" } },
-
                                 ]
                             },
-
+                            {
+                                ele: "footer", styles: ["leftAsideListItemFooter"], childs: [
+                                    { ele: "button", css: ["btn-remove", "nostyle-btn"], styles: ["removeBtn"], options: { id: "remove-btn", type: "button", innerText: "удалить" } }
+                                ]
+                            }
                         ]
                     },
                     "контейнер": {
@@ -276,16 +330,50 @@ export const homeElements = {
                                     { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "width", innerText: "ширина" } },
                                     { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "width", type: "text" } },
                                     { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "height", innerText: "высота" } },
-                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height",  type: "text" } },
-                                    // { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "color", innerText: "цвет фона" } },
-                                    // { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "color", value: "цвет", type: "text" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height", type: "text" } },
+                                ]
+                            },
+                            {
+                                ele: "footer", styles: ["leftAsideListItemFooter"], childs: [
+                                    { ele: "button", css: ["btn-remove", "nostyle-btn"], styles: ["removeBtn"], options: { id: "remove-btn", type: "button", innerText: "удалить" } }
+                                ]
+                            }
 
-                                    // { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "border", innerText: "обводка" } },
-                                    // { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "text", value: "текст", type: "text" } },
+                        ]
+                    },
+                    "навигация": {
+                        ele: "li", css: ["hidden", "invisible"], styles: ["leftAsideListItem"], childs: [
+                            {
+                                ele: "header", styles: ["leftAsideListItemHeader"], childs: [
+                                    { ele: "h4", styles: ["leftAsideListItemTitle"], options: { innerText: "навигация" } }
+                                ]
+                            },
+                            {
+                                ele: "form", styles: ["leftAsideInputsContainer"], options: { id: "aside-form" }, childs: [
+                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "width", innerText: "ширина" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "width", type: "text" } },
+                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "height", innerText: "высота" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height", type: "text" } },
+
+                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "logo", innerText: "логотип" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "logo", type: "file" } },
+
+
+                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "title", innerText: "название" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "title", type: "text" } },
+
+
 
                                 ]
                             },
 
+                            {
+                                ele: "footer", styles: ["leftAsideListItemFooter"], childs: [
+                                    { ele: "button", css: ["btn-submit", "nostyle-btn"], styles: [], options: { id: "add-btn", type: "button", innerText: "добавить кнопку" } },
+
+                                    { ele: "button", css: ["btn-remove", "nostyle-btn"], styles: ["removeBtn"], options: { id: "remove-btn", type: "button", innerText: "удалить" } }
+                                ]
+                            }
                         ]
                     }
                 }
@@ -379,6 +467,17 @@ export const homeElements = {
         leftAsideInputLabel: {
             "font-size": "15px",
             "font-family": "regular",
+        },
+        leftAsideListItemFooter: {
+            "display": "flex",
+            "flex-direction": "column",
+            "align-items": "center",
+            "margin-top": "10px",
+        },
+        removeBtn: {
+            "width": "170px",
+            "height": "30px",
+            "border-radius": "10px",
         },
         rightAside: {
             "right": "-330px",
@@ -541,6 +640,12 @@ export const homeElements = {
             "border-radius": "20px",
             "border": "2px solid var(--gray20)",
         },
+        navMinBoard: {
+            "width": "calc(100% - 4px)",
+            "height": "calc(100% - 4px)",
+            "border-radius": "15px",
+            "border": "2px solid var(--gray20)",
+        },
         navMin: {
             "width": "250px",
             "height": "40px",
@@ -559,6 +664,15 @@ export const homeElements = {
             "height": "30px",
             "border-radius": "10px",
             "background-color": "var(--blue200)",
+        },
+        navMinListItem: {
+
+        },
+        navMinListItemHeader: {
+
+        },
+        navMinListItemTitle: {
+            "font-family": "bold",
         },
         navMinListItemBtn: {
             "display": "flex",
@@ -624,6 +738,7 @@ export const homeElements = {
             "border-radius": "1px",
         },
         footer: {
+
             "width": "230px",
             "height": "50px",
         },
@@ -721,10 +836,13 @@ export const homeElements = {
                 "-3px 3px 0px 0px var(--red100)",
             "transition": "box-shadow 0.2s",
         },
-        widthHeightAtStart: {
+        widthHeightAtStartContainer: {
             "width": "250px",
             "height": "80px",
-            // border: "2px solid transparent"
+        },
+        widthHeightAtStartNav: {
+            "width": "320px",
+            "height": "40px",
         },
         borderRadius20px: {
             "border-radius": "20px",

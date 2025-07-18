@@ -4,31 +4,23 @@ class Component extends DragResize {
 
     constructor(ele, parent, componentType, componentId) {
         super(ele, parent);
-        this.#type = componentType;
-        this.#id = componentId;
-
+        this.type = componentType;
+        this.id = componentId;
         this.listeners();
     }
 
     position;
     childs = [];
-    #type;
-    #id;
+    type;
+    id;
 
 
-    boundedEditComponentFn = this.editComponent.bind(this);
-
-    editComponent(propName, propValue) {
-        switch (propName) {
-            case "width":
-                return this.setWidth(+propValue);
-            case "height":
-                return this.setHeight(+propValue);
-            case "text":
-                this.setInnerText(propValue);
-                break;
-        }
+    remove() {
+        this.emit("delete");
+        this.ele.remove();
     }
+
+
 
     setWidth(value) {
         let isNumber = Number.isInteger(value);
@@ -93,18 +85,16 @@ class Component extends DragResize {
 
 
 
-    getItemProperties() {
-        switch (this.#type) {
-            case "кнопка":
-                return [{ propType: "width", propValue: this.ele.offsetWidth },
-                { propType: "height", propValue: this.ele.offsetHeight },
-                { propType: "text", propValue: this.ele.children[0].textContent }]
-            case "контейнер":
-                return [{ propType: "width", propValue: this.ele.offsetWidth },
-                { propType: "height", propValue: this.ele.offsetHeight }]
 
-        }
-    }
+
+    //         case "навигация":
+    //             return [{ propType: "width", propValue: this.ele.offsetWidth },
+    //             { propType: "height", propValue: this.ele.offsetHeight },
+    //             // {propType: "logo", propValue: ""},
+    //             { propType: "title", propValue: this.ele.children[0].children[0].children[1].children[0].children[0].textContent },
+
+    //             ]
+
 
 
     listeners() {
@@ -113,25 +103,8 @@ class Component extends DragResize {
         })
 
         this.ele.addEventListener("click", () => {
-            this.emit("selected", { props: this.getItemProperties() });
+            this.emit("selected");
         })
-    }
-
-
-    set type(value) {
-        this.#type = value;
-    }
-
-    get type() {
-        return this.#type;
-    }
-
-    set id(value) {
-        this.#id = value;
-    }
-
-    get id() {
-        return this.#id
     }
 
 }

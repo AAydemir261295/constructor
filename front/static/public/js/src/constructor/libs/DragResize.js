@@ -15,15 +15,16 @@ class DragResize extends EventEmitter {
         this.currWidth = this.ele.offsetWidth;
         this.currHeight = this.ele.offsetHeight;
 
-        this.maxWidth = this.parent.offsetWidth - this.ele.offsetLeft - 10;
-        this.maxHeight = this.parent.offsetHeight - this.ele.offsetTop - 10;
+        this.refreshMaxSizes();
+
+        // this.maxWidth = this.parent.offsetWidth - this.ele.offsetLeft - 10;
+        // this.maxHeight = this.parent.offsetHeight - this.ele.offsetTop - 10;
 
         if (this.ele.children.length > 8) {
             this.resizers = Array.from(this.ele.children).splice(1, this.ele.children.length);
         } else {
             this.resizers = Array.from(this.ele.children);
         }
-
 
         this.dragElement();
         this.resizeElement();
@@ -82,6 +83,11 @@ class DragResize extends EventEmitter {
     mouseMoveController = new AbortController();
     mouseMoveSignal = this.mouseMoveController.signal;
 
+
+    refreshMaxSizes() {
+        this.maxWidth = this.parent.offsetWidth - this.ele.offsetLeft - 10;
+        this.maxHeight = this.parent.offsetHeight - this.ele.offsetTop - 10;
+    }
 
     resizeLeft(e) {
         this.maxWidth = this.ele.offsetLeft + this.ele.offsetWidth - 10;
@@ -167,6 +173,9 @@ class DragResize extends EventEmitter {
     }
 
 
+
+
+
     removeListeners() {
         this.mouseMoveController.abort();
         this.mouseMoveController = new AbortController();
@@ -187,7 +196,6 @@ class DragResize extends EventEmitter {
     }
 
     resizeElement() {
-
         // left
         this.resizers[0].addEventListener('mousedown', (e) => {
             e.preventDefault();
@@ -440,8 +448,14 @@ class DragResize extends EventEmitter {
         this.pos3 = e.clientX;
         this.pos4 = e.clientY;
 
-        this.ele.style.top = Math.max(Math.min((this.ele.offsetTop - this.pos2), this.parent.offsetHeight - this.ele.offsetHeight - 10), 10) + "px";
-        this.ele.style.left = Math.max(Math.min((this.ele.offsetLeft - this.pos1), this.parent.offsetWidth - this.ele.offsetWidth - 10), 10) + "px";
+        const top = Math.max(Math.min((this.ele.offsetTop - this.pos2), this.parent.offsetHeight - this.ele.offsetHeight - 10), 10)
+        const left = Math.max(Math.min((this.ele.offsetLeft - this.pos1), this.parent.offsetWidth - this.ele.offsetWidth - 10), 10)
+
+        this.ele.style.top = `${top}px`;
+        this.ele.style.left = `${left}px`;
+
+
+        this.emit("move", { top: top, left: left, width: this.ele.offsetWidth, height: this.ele.offsetHeight });
     }
 
     dragMouseDown(e) {
@@ -460,6 +474,8 @@ class DragResize extends EventEmitter {
 
 
     closeDragElement() {
+        this.refreshMaxSizes();
+
         document.removeEventListener("mouseup", this.boundedCloseDragElement);
         document.removeEventListener("mousemove", this.boundedElementDrag);
     }

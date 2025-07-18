@@ -1,4 +1,4 @@
-import AsideElement from "/js/pages/home/libs/AsideElement.js";
+import ComponentPropsForm from "/js/pages/home/libs/ComponentPropsForm.js";
 
 class LeftAside {
 
@@ -11,54 +11,73 @@ class LeftAside {
     references;
     elements;
     currentItem;
-    currentItemType;
     itemId;
 
+    boundedDeleteHandler = this.deleteHandler.bind(this);
 
 
     async prepareItems(elements) {
         this.elements = await this.domInteractions.createNestedElements(elements);
     }
 
-    setItemProperties(itemName, itemId, component) {
-        if (this.currentItem) {
-            this.currentItem.hide();
-        }
-
-        this.currentItemType = itemName;
-        this.itemId = itemId;
-
-        console.log(itemName);
-
-        let form = this.elements[itemName].querySelector(this.references.form);
-
-        this.currentItem = new AsideElement(form,
-            this.references[itemName],
-            this.elements[itemName],
-            component.getItemProperties(),
-            component.boundedEditComponentFn);
-
-
+    createNewForm(component) {
+        let form = this.elements[component.type].querySelector(this.references.form);
+        this.currentItem = new ComponentPropsForm(form,
+            this.references.removeBtn,
+            this.references[component.type],
+            this.elements[component.type],
+            component);
 
         this.contentContainer.appendChild(this.currentItem.ele);
-
         this.currentItem.show();
-
-        component.subscribe("resized", (data) => {
-            this.currentItem.editInputsValue(data.propType, data.propValue);
-        })
-
+        this.deleteComponentListener();
     }
 
-    editItemProperties(itemId, props) {
-        if (this.itemId != itemId) {
-            this.itemId = itemId;
-            props.forEach((prop) => {
-                this.currentItem.editInputsValue(prop.propType, prop.propValue);
-            })
+    editCurrentForm(component) {
+        if (this.currentItem.component.id != component.id) {
+            this.currentItem.removeBtn.removeEventListener("click", this.boundedDeleteHandler);
+            this.currentItem.removeListeners();
+            this.currentItem.component = component;
+            this.currentItem.setInputsValue(component.getProperties());
+            this.currentItem.onFormChangeListener();
+            this.deleteComponentListener();
+        } else {
+            this.currentItem.setInputsValue(component.getProperties());
         }
     }
 
+
+    setComponentForm(component) {
+        if (this.currentItem) {
+            if (this.currentItem.component.type != component.type) {
+                this.currentItem.hide();
+                this.currentItem.removeListeners();
+
+                this.createNewForm(component);
+            } else {
+                this.editCurrentForm(component);
+            }
+        } else {
+            this.createNewForm(component);
+        }
+    }
+
+    deleteHandler() {
+        this.currentItem.removeBtn.removeEventListener("click", this.boundedDeleteHandler);
+        this.currentItem.removeListeners();
+        this.currentItem.hide();
+
+        setTimeout(() => {
+            this.currentItem.ele.remove();
+            this.currentItem.component.remove();
+            this.currentItem = null;
+        }, 200)
+    }
+
+
+    deleteComponentListener() {
+        this.currentItem.removeBtn.addEventListener("click", this.boundedDeleteHandler);
+    }
 
 }
 
