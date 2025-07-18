@@ -438,7 +438,8 @@ class DragResize extends EventEmitter {
         this.ele.style.removeProperty("bottom");
         this.ele.style.removeProperty("right");
 
-        this.ele.onmousedown = this.boundedDragMouseDown;
+        // this.ele.onmousedown = this.boundedDragMouseDown;
+        this.ele.addEventListener("mousedown", this.boundedDragMouseDown);
     }
 
     elementDrag(e) {
@@ -453,6 +454,8 @@ class DragResize extends EventEmitter {
         const top = Math.max(Math.min((this.ele.offsetTop - this.pos2), this.parent.offsetHeight - this.ele.offsetHeight - 10), 10)
         const left = Math.max(Math.min((this.ele.offsetLeft - this.pos1), this.parent.offsetWidth - this.ele.offsetWidth - 10), 10)
 
+        console.log(top);
+        console.log(left);
         this.ele.style.top = `${top}px`;
         this.ele.style.left = `${left}px`;
 

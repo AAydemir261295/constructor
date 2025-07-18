@@ -43,11 +43,12 @@ exports.homeElements = {
                                                     { ele: "input", css: ["menu-input", "input", "nostyle-input"], styles: ["typeInputContainerInput"], options: { placeholder: "выберите элемент", name: "elements-input" } },
                                                     {
                                                         ele: "ul", css: ["invisible", "hidden", "nostyle-list"], styles: ["typeInputContainerDdown"], options: { id: "elements-input-ddown" }, childs: [
+                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "изображение" } },
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "контейнер" } },
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "кнопка" } },
-                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "навигация" } },
+                                                            // { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "навигация" } },
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "поле ввода" } },
-                                                            { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "боковая панель" } },
+                                                            // { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "боковая панель" } },
                                                         ]
                                                     }
                                                 ]
@@ -56,6 +57,11 @@ exports.homeElements = {
                                     },
                                     {
                                         ele: "div", styles: ["elementsResultContainer"], options: { id: "elements-result" }, childs: [
+                                            {
+                                                ele: "div", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["imageWrapp"], childs: [
+                                                    { ele: "img", styles: ["imageMin"] }
+                                                ]
+                                            },
                                             { ele: "div", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["containerMin"], },
                                             { ele: "button", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "btn-submit", "nostyle-btn"], styles: ["buttonMin", "resultsButtonMin"], options: { type: "button", innerText: "текст" } },
                                             {
@@ -191,26 +197,49 @@ exports.homeElements = {
                     contentContainer: "#left-aside-content",
                     form: "#aside-form",
                     removeBtn: "#remove-btn",
+                    "изображение": {
+                        inputs: ["width", "height"],
+                    },
                     "кнопка": {
                         inputs: ["width", "height", "text"]
                     },
                     "контейнер": {
                         inputs: ["width", "height"],
                     },
-                    "навигация": {
-                        inputs: []
-                    }
+                    // "навигация": {
+                    //     title: "#nav-min-title",
+                    //     buttons: ".hoverable",
+                    //     inputs: []
+                    // }
                 }
             },
             items: {
                 ddownItems: [
+                    "изображение",
                     "контейнер",
                     "кнопка",
-                    "навигация",
+                    // "навигация",
                     "поле ввода",
-                    "боковая панель",
+                    // "боковая панель",
                 ],
                 components: {
+                    "изображение": {
+                        ele: "div", css: ["pointer"], styles: ["newComponent", "borderRadius15px"], childs: [
+                            {
+                                ele: "div", styles: ["imageWrapp"], childs: [
+                                    { ele: "img", styles: ["imageMin"] }
+                                ]
+                            },
+                            { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
+                            { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
+                            { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
+                            { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
+                            { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
+                            { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
+                            { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
+                            { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
+                        ]
+                    },
                     "кнопка": {
                         ele: "div", css: ["pointer"], styles: ["newComponent", "borderRadius15px"], childs: [
                             { ele: "button", css: ["btn-submit", "nostyle-btn"], styles: ["buttonMinBoard"], options: { type: "button", innerText: "текст" } },
@@ -237,56 +266,92 @@ exports.homeElements = {
                             { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
                         ]
                     },
-                    "навигация": {
-                        ele: "div", css: ["pointer"], styles: ["newComponent", "widthHeightAtStartNav", "borderRadius15px"], childs: [
-                            {
-                                ele: "nav", styles: ["navMinBoard"], childs: [
-                                    {
-                                        ele: "ul", css: ["nostyle-list"], styles: ["navMinList"], childs: [
-                                            { ele: "li", styles: ["navMinListItemLogo"] },
-                                            {
-                                                ele: "li", styles: ["navMinListItem"], childs: [
-                                                    {
-                                                        ele: "header", styles: ["navMinListItemHeader"], childs: [
-                                                            { ele: "h4", styles: ["navMinListItemTitle"], options: { innerText: "название" } }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
-                                                    { ele: "span", styles: ["navMinListItemLine"] }
-                                                ]
-                                            },
-                                            {
-                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
-                                                    { ele: "span", styles: ["navMinListItemLine"] }
-                                                ]
-                                            },
-                                            {
-                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
-                                                    { ele: "span", styles: ["navMinListItemLine"] }
-                                                ]
-                                            },
-                                            {
-                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
-                                                    { ele: "span", styles: ["navMinListItemLine"] }
-                                                ]
-                                            },
-                                        ]
-                                    }
-                                ]
-                            },
-                            { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
-                            { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
-                            { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
-                            { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
-                            { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
-                            { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
-                            { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
-                            { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
-                        ]
-                    }
+                    // "навигация": {
+                    //     ele: "div", css: ["pointer"], styles: ["newComponent", "widthHeightAtStartNav", "borderRadius15px"], childs: [
+                    //         {
+                    //             ele: "nav", styles: ["navMinBoard"], childs: [
+                    //                 {
+                    //                     ele: "ul", css: ["nostyle-list"], styles: ["navMinList"], childs: [
+                    //                         {
+                    //                             ele: "li", styles: ["navMinListItemBrand"], childs: [
+                    //                                 { ele: "div", styles: ["navMinListItemLogo"] },
+                    //                                 {
+                    //                                     ele: "header", styles: ["navMinListItemHeader"], childs: [
+                    //                                         { ele: "h4", styles: ["navMinListItemTitle"], options: { id: "nav-min-title", innerText: "название" } }
+                    //                                     ]
+                    //                                 }
+                    //                             ]
+                    //                         },
+                    //                         {
+                    //                             ele: "div", styles: ["navMinListButtons"], childs: [
+                    //                                 {
+                    //                                     ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn", "navMinListItemBtnBoard"], childs: [
+                    //                                         { ele: "span", styles: ["navMinListItemLine"] },
+                    //                                         { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
+                    //                                         { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
+                    //                                         { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
+                    //                                         { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
+                    //                                         { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
+                    //                                         { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
+                    //                                         { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
+                    //                                         { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
+                    //                                     ]
+                    //                                 },
+                    //                                 {
+                    //                                     ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn", "navMinListItemBtnBoard"], childs: [
+                    //                                         { ele: "span", styles: ["navMinListItemLine"] },
+                    //                                         { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
+                    //                                         { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
+                    //                                         { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
+                    //                                         { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
+                    //                                         { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
+                    //                                         { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
+                    //                                         { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
+                    //                                         { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
+                    //                                     ]
+                    //                                 },
+                    //                                 {
+                    //                                     ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn", "navMinListItemBtnBoard"], childs: [
+                    //                                         { ele: "span", styles: ["navMinListItemLine"] },
+                    //                                         { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
+                    //                                         { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
+                    //                                         { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
+                    //                                         { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
+                    //                                         { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
+                    //                                         { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
+                    //                                         { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
+                    //                                         { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
+                    //                                     ]
+                    //                                 },
+                    //                                 {
+                    //                                     ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn", "navMinListItemBtnBoard"], childs: [
+                    //                                         { ele: "span", styles: ["navMinListItemLine"] },
+                    //                                         { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
+                    //                                         { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
+                    //                                         { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
+                    //                                         { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
+                    //                                         { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
+                    //                                         { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
+                    //                                         { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
+                    //                                         { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
+                    //                                     ]
+                    //                                 },
+                    //                             ]
+                    //                         }
+                    //                     ]
+                    //                 }
+                    //             ]
+                    //         },
+                    //         { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
+                    //         { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
+                    //         { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
+                    //         { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
+                    //         { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
+                    //         { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
+                    //         { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
+                    //         { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
+                    //     ]
+                    // }
                 },
                 asideItems: {
                     "кнопка": {
@@ -335,11 +400,11 @@ exports.homeElements = {
                             }
                         ]
                     },
-                    "навигация": {
+                    "изображение": {
                         ele: "li", css: ["hidden", "invisible"], styles: ["leftAsideListItem"], childs: [
                             {
                                 ele: "header", styles: ["leftAsideListItemHeader"], childs: [
-                                    { ele: "h4", styles: ["leftAsideListItemTitle"], options: { innerText: "навигация" } }
+                                    { ele: "h4", styles: ["leftAsideListItemTitle"], options: { innerText: "кнопка" } }
                                 ]
                             },
                             {
@@ -348,20 +413,44 @@ exports.homeElements = {
                                     { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "width", type: "text" } },
                                     { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "height", innerText: "высота" } },
                                     { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height", type: "text" } },
-                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "logo", innerText: "логотип" } },
-                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "logo", type: "file" } },
-                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "title", innerText: "название" } },
-                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "title", type: "text" } },
+                                    { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "img", innerText: "загрузить изображение" } },
+                                    { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "img", type: "file" } },
                                 ]
                             },
                             {
                                 ele: "footer", styles: ["leftAsideListItemFooter"], childs: [
-                                    { ele: "button", css: ["btn-submit", "nostyle-btn"], styles: [], options: { id: "add-btn", type: "button", innerText: "добавить кнопку" } },
                                     { ele: "button", css: ["btn-remove", "nostyle-btn"], styles: ["removeBtn"], options: { id: "remove-btn", type: "button", innerText: "удалить" } }
                                 ]
                             }
                         ]
                     }
+                    // "навигация": {
+                    //     ele: "li", css: ["hidden", "invisible"], styles: ["leftAsideListItem"], childs: [
+                    //         {
+                    //             ele: "header", styles: ["leftAsideListItemHeader"], childs: [
+                    //                 { ele: "h4", styles: ["leftAsideListItemTitle"], options: { innerText: "навигация" } }
+                    //             ]
+                    //         },
+                    //         {
+                    //             ele: "form", styles: ["leftAsideInputsContainer"], options: { id: "aside-form" }, childs: [
+                    //                 { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "width", innerText: "ширина" } },
+                    //                 { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "width", type: "text" } },
+                    //                 { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "height", innerText: "высота" } },
+                    //                 { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height", type: "text" } },
+                    //                 { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "logo", innerText: "логотип" } },
+                    //                 { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "logo", type: "file" } },
+                    //                 { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "title", innerText: "название" } },
+                    //                 { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "title", type: "text" } },
+                    //             ]
+                    //         },
+                    //         {
+                    //             ele: "footer", styles: ["leftAsideListItemFooter"], childs: [
+                    //                 { ele: "button", css: ["btn-submit", "nostyle-btn"], styles: [], options: { id: "add-btn", type: "button", innerText: "добавить кнопку" } },
+                    //                 { ele: "button", css: ["btn-remove", "nostyle-btn"], styles: ["removeBtn"], options: { id: "remove-btn", type: "button", innerText: "удалить" } }
+                    //             ]
+                    //         }
+                    //     ]
+                    // }
                 }
             }
         }
@@ -632,17 +721,25 @@ exports.homeElements = {
             "border": "2px solid var(--gray20)",
         },
         navMin: {
-            "width": "250px",
+            "width": "230px",
             "height": "40px",
             "border-radius": "15px",
             "border": "2px solid var(--gray20)",
+            "padding": "0px 5px",
         },
         navMinList: {
             "display": "flex",
             "flex-direction": "row",
-            "justify-content": "space-around",
+            "justify-content": "space-between",
             "align-items": "center",
             "height": "100%",
+        },
+        navMinListItemBrand: {
+            "width": "auto",
+            "display": "flex",
+            "flex-direction": "row",
+            "align-items": "center",
+            "margin-left": "5px",
         },
         navMinListItemLogo: {
             "width": "30px",
@@ -650,10 +747,18 @@ exports.homeElements = {
             "border-radius": "10px",
             "background-color": "var(--blue200)",
         },
-        navMinListItem: {},
-        navMinListItemHeader: {},
+        navMinListItemHeader: {
+            "margin-left": "10px",
+        },
         navMinListItemTitle: {
             "font-family": "bold",
+        },
+        navMinListButtons: {
+            "display": "flex",
+            "flex-direction": "row",
+            "justify-content": "space-between",
+            "align-items": "center",
+            "margin-right": "5px",
         },
         navMinListItemBtn: {
             "display": "flex",
@@ -666,6 +771,10 @@ exports.homeElements = {
             "border": "2px solid var(--gray20)",
             "transition": "0.2s",
             "text-align": "center",
+        },
+        navMinListItemBtnBoard: {
+            "position": "relative",
+            "margin-right": "10px"
         },
         navMinListItemLine: {
             "background": "var(--gray20)",
@@ -828,7 +937,22 @@ exports.homeElements = {
         },
         borderRadius15px: {
             "border-radius": "15px",
-        }
+        },
+        imageWrapp: {
+            "position": "relative",
+            "width": "100px",
+            "height": "100px",
+            "border-radius": "15px",
+            "overflow": "hidden",
+        },
+        imageMin: {
+            "position": "absolute",
+            "width": "calc(100% + 2px)",
+            "height": "calc(100% + 2px)",
+            "left": "-1px",
+            "top": "-1px",
+            "background-color": "var(--gray20)",
+        },
     },
 };
 //   <!-- <aside class="left-aside aside">

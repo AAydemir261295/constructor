@@ -28,8 +28,8 @@ class Constructor {
                 return new Button(parent, board, componentName, compId);
             case "контейнер":
                 return new Container(parent, board, componentName, compId);
-            case "навигация":
-                return new Navigation(parent, board, componentName, compId, componentRefs);
+            // case "навигация":
+            //     return new Navigation(parent, board, componentName, compId, componentRefs);
         }
     }
 
