@@ -7,7 +7,7 @@ export const homeElements = {
                     {
                         ele: "main", styles: ["mainContainer"], childs: [
                             {
-                                ele: "div", listeners: [{ mouseover: { opacity: 1 } }, { mouseout: { opacity: 0.3 } }], styles: ["expander", "leftAsideExpander"], options: { id: "left-aside-expander" }, childs: [
+                                ele: "div", listeners: [{ mouseover: { opacity: 1 } }, { mouseout: { opacity: 0.3 } }], styles: ["expander", "leftAsideExpander"], options: { id: "left-aside-show" }, childs: [
                                     {
                                         ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
                                             { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
@@ -17,10 +17,21 @@ export const homeElements = {
                                 ]
                             },
                             {
-                                ele: "aside", css: ["hidden"], styles: ["aside", "leftAside"], options: { id: "left-aside" }, childs: [
+                                ele: "aside", css: ["hidden", "invisible"], styles: ["aside", "leftAside"], options: { id: "left-aside" }, childs: [
+                                    {
+                                        ele: "div", listeners: [{ mouseover: { opacity: 1 } }, { mouseout: { opacity: 0.3 } }], styles: ["expander", "leftAsideExpanderInner"], options: { id: "left-aside-hide" }, childs: [
+                                            {
+                                                ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
+                                                    { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
+                                                    { ele: "path", options: { d: "M1 6V4C1 2.34315 2.34315 1 4 1H6C7.65685 1 9 2.34315 9 4V6C9 7.65685 7.65685 9 6 9H4C2.34315 9 1 7.65685 1 6Z" }, xmlns: "http://www.w3.org/2000/svg" }
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     {
                                         ele: "header", styles: ["leftAsideHeader"], childs: [
                                             { ele: "h3", styles: ["leftAsideTitle"], options: { innerText: "детали" } }
+
                                         ]
                                     },
                                     {
@@ -38,7 +49,7 @@ export const homeElements = {
                                 ]
                             },
                             {
-                                ele: "div", listeners: [{ mouseover: { opacity: 1 } }, { mouseout: { opacity: 0.3 } }], styles: ["expander", "rightAsideExpander"], options: { id: "right-aside-expander" }, childs: [
+                                ele: "div", listeners: [{ mouseover: { opacity: 1 } }, { mouseout: { opacity: 0.3 } }], styles: ["expander", "rightAsideExpander"], options: { id: "right-aside-show" }, childs: [
                                     {
                                         ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
                                             { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
@@ -48,10 +59,21 @@ export const homeElements = {
                                 ]
                             },
                             {
-                                ele: "aside", css: ['hidden'], styles: ["aside", "rightAside"], options: { id: "right-aside" }, childs: [
+                                ele: "aside", css: ["hidden", "invisible"], styles: ["aside", "rightAside"], options: { id: "right-aside" }, childs: [
+                                    {
+                                        ele: "div", listeners: [{ mouseover: { opacity: 1 } }, { mouseout: { opacity: 0.3 } }], styles: ["expander", "rightAsideExpanderInner"], options: { id: "right-aside-hide" }, childs: [
+                                            {
+                                                ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
+                                                    { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
+                                                    { ele: "path", options: { d: "M1 6V4C1 2.34315 2.34315 1 4 1H6C7.65685 1 9 2.34315 9 4V6C9 7.65685 7.65685 9 6 9H4C2.34315 9 1 7.65685 1 6Z" }, xmlns: "http://www.w3.org/2000/svg" }
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     {
                                         ele: "header", styles: ["rightAsideHeader"], childs: [
                                             { ele: "h3", styles: ["rightAsideTitle"], options: { innerText: "меню" } }
+
                                         ]
                                     },
                                     {
@@ -62,12 +84,9 @@ export const homeElements = {
                                                     {
                                                         ele: "ul", css: ["invisible", "hidden", "nostyle-list"], styles: ["typeInputContainerDdown"], options: { id: "elements-input-ddown" }, childs: [
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "изображение" } },
-
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "контейнер" } },
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "кнопка" } },
-                                                            // { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "навигация" } },
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "поле ввода" } },
-                                                            // { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "боковая панель" } },
                                                         ]
                                                     }
                                                 ]
@@ -83,133 +102,49 @@ export const homeElements = {
                                             },
                                             { ele: "div", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["containerMin"], },
                                             { ele: "button", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "btn-submit", "nostyle-btn"], styles: ["buttonMin", "resultsButtonMin"], options: { type: "button", innerText: "текст" } },
-                                            {
-                                                ele: "nav", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["navMin"], childs: [
-                                                    {
-                                                        ele: "ul", css: ["nostyle-list"], styles: ["navMinList"], childs: [
-                                                            { ele: "li", styles: ["navMinListItemLogo"] },
-                                                            {
-                                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
-                                                                    { ele: "span", styles: ["navMinListItemLine"] }
-                                                                ]
-                                                            },
-                                                            {
-                                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
-                                                                    { ele: "span", styles: ["navMinListItemLine"] }
-                                                                ]
-                                                            },
-                                                            {
-                                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
-                                                                    { ele: "span", styles: ["navMinListItemLine"] }
-                                                                ]
-                                                            },
-                                                            {
-                                                                ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn"], childs: [
-                                                                    { ele: "span", styles: ["navMinListItemLine"] }
-                                                                ]
-                                                            },
-                                                        ]
-                                                    }
-                                                ]
-                                            },
                                             { ele: "input", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "input", "nostyle-input"], styles: ["inputMin"], options: { placeholder: "поле ввода", type: "text", readOnly: true } },
-                                            {
-                                                ele: "aside", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["asideMin"], childs: [
-                                                    {
-                                                        ele: "header", childs: [
-                                                            { ele: "h2", styles: ["asideMinTitle"], options: { innerText: "заголовок" } }
-                                                        ]
-                                                    },
-                                                    {
-                                                        ele: "main", styles: ["asideMinContent"], childs: [
-                                                            {
-                                                                ele: "ul", css: ["nostyle-list"], styles: ["asideMinList"], childs: [
-                                                                    {
-                                                                        ele: "li", css: ["hoverable"], styles: ["asideMinListItem"], childs: [
-                                                                            { ele: "span", styles: ["asideMinListItemLine"] }
-                                                                        ]
-                                                                    },
-                                                                    {
-                                                                        ele: "li", css: ["hoverable"], styles: ["asideMinListItem"], childs: [
-                                                                            { ele: "span", styles: ["asideMinListItemLine"] }
-                                                                        ]
-                                                                    },
-                                                                    {
-                                                                        ele: "li", css: ["hoverable"], styles: ["asideMinListItem"], childs: [
-                                                                            { ele: "span", styles: ["asideMinListItemLine"] }
-                                                                        ]
-                                                                    },
-                                                                    {
-                                                                        ele: "li", css: ["hoverable"], styles: ["asideMinListItem"], childs: [
-                                                                            { ele: "span", styles: ["asideMinListItemLine"] }
-                                                                        ]
-                                                                    },
-                                                                    {
-                                                                        ele: "li", css: ["hoverable"], styles: ["asideMinListItem"], childs: [
-                                                                            { ele: "span", styles: ["asideMinListItemLine"] }
-                                                                        ]
-                                                                    },
-
-                                                                ]
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        ele: "footer", styles: ["footer"], childs: [
-                                                            {
-                                                                ele: "ul", css: ["nostyle-list"], styles: ["footerList"], childs: [
-                                                                    { ele: "li", css: ["hoverable"], styles: ["footerListItem"] },
-                                                                    { ele: "li", css: ["hoverable"], styles: ["footerListItem"] },
-                                                                    { ele: "li", css: ["hoverable"], styles: ["footerListItem"] },
-
-                                                                ]
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
                                         ]
                                     }
                                 ]
                             }
                         ]
                     },
-                    {
-                        ele: "div", listeners: [{ mouseover: { opacity: 1 } }, { mouseout: { opacity: 0.3 } }], styles: ["expander", "navExpander"], options: { id: "nav-expander" }, childs: [
-                            {
-                                ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
-                                    { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
-                                    { ele: "path", options: { d: "M1 6V4C1 2.34315 2.34315 1 4 1H6C7.65685 1 9 2.34315 9 4V6C9 7.65685 7.65685 9 6 9H4C2.34315 9 1 7.65685 1 6Z" }, xmlns: "http://www.w3.org/2000/svg" }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        ele: "header", css: ["hidden", "invisible"], styles: ["homeHeader"], options: { id: "navigation" }, childs: [
-                            {
-                                ele: "nav", styles: ["nav"], childs: [
-                                    {
-                                        ele: "ul", css: ["nostyle-list"], styles: ["navList"], childs: [
-                                            {
-                                                ele: "div", styles: ["navListItemsWrapp"], childs: [
-                                                    {
-                                                        ele: "li", styles: ["navListItem"], childs: [
-                                                            { ele: "button", css: ["nav-btn", "nostyle-btn"], options: { innerText: "проекты" } }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                ele: "li", styles: ["navListItem"], childs: [
-                                                    { ele: "h6", styles: ["navLogo", "logo"], options: { innerText: "лого" } }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    },
+                    // {
+                    //     ele: "div", listeners: [{ mouseover: { opacity: 1 } }, { mouseout: { opacity: 0.3 } }], styles: ["expander", "navExpander"], options: { id: "nav-expander" }, childs: [
+                    //         {
+                    //             ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
+                    //                 { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
+                    //                 { ele: "path", options: { d: "M1 6V4C1 2.34315 2.34315 1 4 1H6C7.65685 1 9 2.34315 9 4V6C9 7.65685 7.65685 9 6 9H4C2.34315 9 1 7.65685 1 6Z" }, xmlns: "http://www.w3.org/2000/svg" }
+                    //             ]
+                    //         }
+                    //     ]
+                    // },
+                    // {
+                    //     ele: "header", css: ["hidden", "invisible"], styles: ["homeHeader"], options: { id: "navigation" }, childs: [
+                    //         {
+                    //             ele: "nav", styles: ["nav"], childs: [
+                    //                 {
+                    //                     ele: "ul", css: ["nostyle-list"], styles: ["navList"], childs: [
+                    //                         {
+                    //                             ele: "div", styles: ["navListItemsWrapp"], childs: [
+                    //                                 {
+                    //                                     ele: "li", styles: ["navListItem"], childs: [
+                    //                                         { ele: "button", css: ["nav-btn", "nostyle-btn"], options: { innerText: "проекты" } }
+                    //                                     ]
+                    //                                 }
+                    //                             ]
+                    //                         },
+                    //                         {
+                    //                             ele: "li", styles: ["navListItem"], childs: [
+                    //                                 { ele: "h6", styles: ["navLogo", "logo"], options: { innerText: "лого" } }
+                    //                             ]
+                    //                         }
+                    //                     ]
+                    //                 }
+                    //             ]
+                    //         }
+                    //     ]
+                    // },
                 ]
             },
             ref: {
@@ -218,16 +153,22 @@ export const homeElements = {
                     canvaz: "#canvaz"
                 },
                 rightAside: {
+                    rightAside: "#right-aside",
                     elementsForm: "elements-form",
                     elementsInput: "elements-input",
                     elementsDdown: "#elements-input-ddown",
                     elementsItem: ".ddown-item",
                     elementsResult: "#elements-result",
+                    showBtn: "#right-aside-show",
+                    hideBtn: "#right-aside-hide",
                 },
                 leftAside: {
+                    leftAside: "#left-aside",
                     contentContainer: "#left-aside-content",
                     form: "#aside-form",
                     removeBtn: "#remove-btn",
+                    showBtn: "#left-aside-show",
+                    hideBtn: "#left-aside-hide",
                     "изображение": {
                         inputs: ["width", "height"],
                     },
@@ -255,9 +196,7 @@ export const homeElements = {
                     "изображение",
                     "контейнер",
                     "кнопка",
-                    // "навигация",
                     "поле ввода",
-                    // "боковая панель",
                 ],
                 components: {
                     "изображение": {
@@ -303,98 +242,6 @@ export const homeElements = {
                             { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
                         ]
                     },
-
-                    // "навигация": {
-                    //     ele: "div", css: ["pointer"], styles: ["newComponent", "widthHeightAtStartNav", "borderRadius15px"], childs: [
-                    //         {
-                    //             ele: "nav", styles: ["navMinBoard"], childs: [
-                    //                 {
-                    //                     ele: "ul", css: ["nostyle-list"], styles: ["navMinList"], childs: [
-                    //                         {
-                    //                             ele: "li", styles: ["navMinListItemBrand"], childs: [
-                    //                                 { ele: "div", styles: ["navMinListItemLogo"] },
-                    //                                 {
-                    //                                     ele: "header", styles: ["navMinListItemHeader"], childs: [
-                    //                                         { ele: "h4", styles: ["navMinListItemTitle"], options: { id: "nav-min-title", innerText: "название" } }
-                    //                                     ]
-                    //                                 }
-                    //                             ]
-                    //                         },
-
-                    //                         {
-                    //                             ele: "div", styles: ["navMinListButtons"], childs: [
-                    //                                 {
-                    //                                     ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn", "navMinListItemBtnBoard"], childs: [
-                    //                                         { ele: "span", styles: ["navMinListItemLine"] },
-                    //                                         { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
-                    //                                         { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
-                    //                                         { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
-                    //                                         { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
-                    //                                         { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
-                    //                                         { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
-                    //                                         { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
-                    //                                         { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
-                    //                                     ]
-                    //                                 },
-                    //                                 {
-                    //                                     ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn", "navMinListItemBtnBoard"], childs: [
-                    //                                         { ele: "span", styles: ["navMinListItemLine"] },
-                    //                                         { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
-                    //                                         { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
-                    //                                         { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
-                    //                                         { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
-                    //                                         { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
-                    //                                         { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
-                    //                                         { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
-                    //                                         { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
-                    //                                     ]
-                    //                                 },
-                    //                                 {
-                    //                                     ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn", "navMinListItemBtnBoard"], childs: [
-                    //                                         { ele: "span", styles: ["navMinListItemLine"] },
-                    //                                         { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
-                    //                                         { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
-                    //                                         { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
-                    //                                         { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
-                    //                                         { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
-                    //                                         { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
-                    //                                         { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
-                    //                                         { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
-                    //                                     ]
-                    //                                 },
-                    //                                 {
-                    //                                     ele: "li", css: ["hoverable"], styles: ["navMinListItemBtn", "navMinListItemBtnBoard"], childs: [
-                    //                                         { ele: "span", styles: ["navMinListItemLine"] },
-                    //                                         { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
-                    //                                         { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
-                    //                                         { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
-                    //                                         { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
-                    //                                         { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
-                    //                                         { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
-                    //                                         { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
-                    //                                         { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
-                    //                                     ]
-                    //                                 },
-                    //                             ]
-                    //                         }
-
-
-                    //                     ]
-                    //                 }
-                    //             ]
-                    //         },
-                    //         { ele: "div", css: ["left"], styles: ["resizerLine", "eCursor", "left"] },
-                    //         { ele: "div", css: ["left-top"], styles: ["resizerCorner", "seCursor", "leftTop"] },
-                    //         { ele: "div", css: ["top"], styles: ["resizerLine", "sCursor", "top"] },
-                    //         { ele: "div", css: ["right-top"], styles: ["resizerCorner", "neCursor", "rightTop"] },
-                    //         { ele: "div", css: ["right"], styles: ["resizerLine", "eCursor", "right"] },
-                    //         { ele: "div", css: ["right-bottom"], styles: ["resizerCorner", "seCursor", "rightBottom"] },
-                    //         { ele: "div", css: ["bottom"], styles: ["resizerLine", "sCursor", "bottom"] },
-                    //         { ele: "div", css: ["left-bottom"], styles: ["resizerCorner", "neCursor", "leftBottom"] },
-                    //     ]
-
-                    // }
-
                 },
                 asideItems: {
                     "кнопка": {
@@ -468,41 +315,6 @@ export const homeElements = {
                             }
                         ]
                     }
-                    // "навигация": {
-                    //     ele: "li", css: ["hidden", "invisible"], styles: ["leftAsideListItem"], childs: [
-                    //         {
-                    //             ele: "header", styles: ["leftAsideListItemHeader"], childs: [
-                    //                 { ele: "h4", styles: ["leftAsideListItemTitle"], options: { innerText: "навигация" } }
-                    //             ]
-                    //         },
-                    //         {
-                    //             ele: "form", styles: ["leftAsideInputsContainer"], options: { id: "aside-form" }, childs: [
-                    //                 { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "width", innerText: "ширина" } },
-                    //                 { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "width", type: "text" } },
-                    //                 { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "height", innerText: "высота" } },
-                    //                 { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "height", type: "text" } },
-
-                    //                 { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "logo", innerText: "логотип" } },
-                    //                 { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "logo", type: "file" } },
-
-
-                    //                 { ele: "label", styles: ["leftAsideInputLabel"], options: { for: "title", innerText: "название" } },
-                    //                 { ele: "input", css: ["input", "nostyle-input"], styles: ["leftAsideInput"], options: { name: "title", type: "text" } },
-
-
-
-                    //             ]
-                    //         },
-
-                    //         {
-                    //             ele: "footer", styles: ["leftAsideListItemFooter"], childs: [
-                    //                 { ele: "button", css: ["btn-submit", "nostyle-btn"], styles: [], options: { id: "add-btn", type: "button", innerText: "добавить кнопку" } },
-
-                    //                 { ele: "button", css: ["btn-remove", "nostyle-btn"], styles: ["removeBtn"], options: { id: "remove-btn", type: "button", innerText: "удалить" } }
-                    //             ]
-                    //         }
-                    //     ]
-                    // }
                 }
             }
         }
@@ -532,6 +344,7 @@ export const homeElements = {
                 "width": "300px",
                 "border-radius": "30px",
                 "border": "2px solid var(--gray20)",
+                "background-color": "var(--gray10)",
                 "z-index": "9"
             },
             leftAside: {
@@ -1043,7 +856,6 @@ export const homeElements = {
             },
             expander: {
                 "cursor": "pointer",
-                "position": "fixed",
                 "display": "flex",
                 "flex-direction": "column",
                 "justify-content": "center",
@@ -1061,12 +873,24 @@ export const homeElements = {
                 "bottom": "20px",
             },
             leftAsideExpander: {
+                "position": "fixed",
                 "top": "20px",
                 "left": "20px",
             },
             rightAsideExpander: {
+                "position": "fixed",
                 "right": "20px",
                 "top": "20px"
+            },
+            leftAsideExpanderInner: {
+                "position": "relative",
+                "top": "20px",
+                "left": "20px",
+            },
+            rightAsideExpanderInner: {
+                "position": "relative",
+                "top": "20px",
+                "right": "-240px",
             },
             homeHeader: {
                 "position": "fixed",
@@ -1084,15 +908,16 @@ export const homeElements = {
             },
             aside: {
                 "position": "absolute",
-                "height": "inherit",
-                "min-height": "820px",
+                "height": "calc(100% - 40px)",
                 "width": "300px",
                 "border-radius": "30px",
                 "border": "2px solid var(--gray20)",
-                "z-index": "9"
+                "background-color": "var(--gray10)",
+                "z-index": "11",
             },
             leftAside: {
-                "left": "-325px"
+                left: "20px",
+                top: "20px",
             },
             leftAsideHeader: {
                 "height": "50px",
@@ -1165,7 +990,8 @@ export const homeElements = {
                 "border-radius": "10px",
             },
             rightAside: {
-                "right": "-330px",
+                "right": "20px",
+                "top": "20px"
             },
             rightAsideHeader: {
                 "height": "50px",

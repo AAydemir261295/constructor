@@ -1,8 +1,12 @@
+import Aside from "/js/pages/home/core/Aside.js";
 import ElementsForm from "/js/pages/home/libs/ElementsForm.js";
 
-class RightAside {
+class RightAside extends Aside {
 
     constructor(form, elementsRef, items, addElement) {
+        console.log(elementsRef);
+        super(elementsRef.rightAside, elementsRef.showBtn, elementsRef.hideBtn);
+
         this.form = new ElementsForm(form, elementsRef, items, this.showSelectedElements.bind(this));
         this.addElementFn = addElement;
 

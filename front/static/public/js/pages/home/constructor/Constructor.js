@@ -36,6 +36,9 @@ class Constructor {
         let compId = this.lastId++;
 
         let tmp = this.componentsData[componentName];
+        
+        console.log(tmp);
+        
         let parent = await this.domInteractions.createElement(tmp);
         await this.domInteractions.buildTree(tmp.childs, parent);
         this.board.appendChild(parent);

@@ -162,9 +162,7 @@ class DragResize extends EventEmitter {
 
 
     stopResize(editTypes) {
-        console.log(editTypes);
         editTypes.forEach((type) => {
-            console.log(this.currHeight);
             if (type == "width") {
                 this.emit("resized", { propType: type, propValue: this.currWidth })
             } else if (type == "height") {
@@ -454,8 +452,6 @@ class DragResize extends EventEmitter {
         const top = Math.max(Math.min((this.ele.offsetTop - this.pos2), this.parent.offsetHeight - this.ele.offsetHeight - 10), 10)
         const left = Math.max(Math.min((this.ele.offsetLeft - this.pos1), this.parent.offsetWidth - this.ele.offsetWidth - 10), 10)
 
-        console.log(top);
-        console.log(left);
         this.ele.style.top = `${top}px`;
         this.ele.style.left = `${left}px`;
 

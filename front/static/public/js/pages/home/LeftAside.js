@@ -1,8 +1,11 @@
 import ComponentPropsForm from "/js/pages/home/libs/ComponentPropsForm.js";
+import Aside from "/js/pages/home/core/Aside.js";
 
-class LeftAside {
+
+class LeftAside extends Aside {
 
     constructor(elementsRef, domInteractions, components) {
+        super(elementsRef.leftAside, elementsRef.showBtn, elementsRef.hideBtn);
         this.domInteractions = domInteractions;
         this.contentContainer = document.querySelector(elementsRef.contentContainer);
         this.references = elementsRef;
@@ -94,6 +97,7 @@ class LeftAside {
         })
 
         this.components.subscribe("add", (component) => {
+            this.showAside();
             this.setComponentForm(component);
         })
     }
