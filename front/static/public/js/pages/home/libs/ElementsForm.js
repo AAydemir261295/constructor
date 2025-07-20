@@ -6,7 +6,6 @@ class ElementsForm extends MyForm {
     constructor(form, elementsRef, items, showSelectedItem) {
         super(form, [elementsRef.elementsInput]);
         this.input = new DropDownInput(this.form.elements[elementsRef.elementsInput], elementsRef, items, showSelectedItem);
-        console.log(items);
     }
 
     input;

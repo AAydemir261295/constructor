@@ -1,6 +1,5 @@
 import Container from "/js/pages/home/constructor/libs/components/Container.js";
 import Button from "/js/pages/home/constructor/libs/components/Button.js";
-import Navigation from "/js/pages/home/constructor/libs/components/Navigation.js";
 
 import Canvaz from "/js/pages/home/constructor/libs/Canvaz.js";
 

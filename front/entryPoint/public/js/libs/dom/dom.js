@@ -1,16 +1,23 @@
-
+import Window from "/js/libs/window/Window.js";
 
 export default class MyDom {
     constructor() {
         // this.dom = document;
         this.body = document.body;
+        this.window = new Window();
     }
 
     stylez;
+    media;
+    currentWindowMediaType;
     body;
+    window;
 
-    setStylez(styles) {
+    setStylez(styles, media) {
         this.stylez = styles;
+        this.media = media;
+        this.currentWindowMediaType = this.window.getMediaType();
+        console.log(this.currentWindowMediaType);
     }
 
 
@@ -134,8 +141,10 @@ export default class MyDom {
 
 
     async addStyles(ele, classList) {
+        let styles = this.stylez[this.currentWindowMediaType];
+
         classList.forEach((className) => {
-            var cssBlock = this.stylez[className];
+            var cssBlock = styles[className];
             if (cssBlock == undefined) {
                 console.log(className);
             }
@@ -146,21 +155,46 @@ export default class MyDom {
         })
     }
 
+    async addListeners(ele, listeners) {
+        listeners.forEach(listener => {
+            let events = Object.keys(listener);
+            events.forEach(event => {
+                ele.addEventListener(event, (ev) => {
+                    let styles = Object.keys(listener[event]);
+                    styles.forEach(cssProp => ele.style[cssProp] = listener[event][cssProp])
+                })
+            })
+        })
+    }
+
+
+    svgs = ["svg", "path"];
 
     async createElement(eleData) {
-        var ele = document.createElement(eleData.ele);
-        if (eleData.hasOwnProperty("styles")) {
-            await this.addStyles(ele, eleData.styles);
-        }
-        if (eleData.hasOwnProperty("css")) {
-            ele.classList.add(...eleData.css)
-        }
-        if (eleData.hasOwnProperty("options")) {
+        if (this.svgs.indexOf(eleData.ele) == -1) {
+            var ele = document.createElement(eleData.ele);
+            if (eleData.hasOwnProperty("styles")) {
+                await this.addStyles(ele, eleData.styles);
+            }
+            if (eleData.hasOwnProperty("css")) {
+                ele.classList.add(...eleData.css)
+            }
+            if (eleData.hasOwnProperty("options")) {
+                let options = eleData.options;
+                var keys = Object.keys(options);
+                keys.forEach(k => ele[k] = options[k]);
+            }
+            if (eleData.hasOwnProperty("listeners")) {
+                this.addListeners(ele, eleData.listeners)
+            }
+            return ele;
+        } else {
+            var ele = document.createElementNS(eleData.xmlns, eleData.ele);
             let options = eleData.options;
             var keys = Object.keys(options);
-            keys.forEach(k => ele[k] = options[k]);
+            keys.forEach(k => ele.setAttributeNS(null, k, options[k]));
+            return ele;
         }
-        return ele;
     }
 
 

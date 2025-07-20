@@ -7,7 +7,17 @@ export const homeElements = {
                     {
                         ele: "main", styles: ["mainContainer"], childs: [
                             {
-                                ele: "aside", styles: ["aside", "leftAside"], options: { id: "left-aside" }, childs: [
+                                ele: "div", listeners: [{ mouseover: { opacity: 1 } }, { mouseout: { opacity: 0.3 } }], styles: ["expander", "leftAsideExpander"], options: { id: "left-aside-expander" }, childs: [
+                                    {
+                                        ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
+                                            { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
+                                            { ele: "path", options: { d: "M1 6V4C1 2.34315 2.34315 1 4 1H6C7.65685 1 9 2.34315 9 4V6C9 7.65685 7.65685 9 6 9H4C2.34315 9 1 7.65685 1 6Z" }, xmlns: "http://www.w3.org/2000/svg" }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                ele: "aside", css: ["hidden"], styles: ["aside", "leftAside"], options: { id: "left-aside" }, childs: [
                                     {
                                         ele: "header", styles: ["leftAsideHeader"], childs: [
                                             { ele: "h3", styles: ["leftAsideTitle"], options: { innerText: "детали" } }
@@ -28,7 +38,17 @@ export const homeElements = {
                                 ]
                             },
                             {
-                                ele: "aside", styles: ["aside", "rightAside"], options: { id: "right-aside" }, childs: [
+                                ele: "div", listeners: [{ mouseover: { opacity: 1 } }, { mouseout: { opacity: 0.3 } }], styles: ["expander", "rightAsideExpander"], options: { id: "right-aside-expander" }, childs: [
+                                    {
+                                        ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
+                                            { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
+                                            { ele: "path", options: { d: "M1 6V4C1 2.34315 2.34315 1 4 1H6C7.65685 1 9 2.34315 9 4V6C9 7.65685 7.65685 9 6 9H4C2.34315 9 1 7.65685 1 6Z" }, xmlns: "http://www.w3.org/2000/svg" }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                ele: "aside", css: ['hidden'], styles: ["aside", "rightAside"], options: { id: "right-aside" }, childs: [
                                     {
                                         ele: "header", styles: ["rightAsideHeader"], childs: [
                                             { ele: "h3", styles: ["rightAsideTitle"], options: { innerText: "меню" } }
@@ -155,7 +175,17 @@ export const homeElements = {
                         ]
                     },
                     {
-                        ele: "header", styles: ["homeHeader"], childs: [
+                        ele: "div", listeners: [{ mouseover: { opacity: 1 } }, { mouseout: { opacity: 0.3 } }], styles: ["expander", "navExpander"], options: { id: "nav-expander" }, childs: [
+                            {
+                                ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
+                                    { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
+                                    { ele: "path", options: { d: "M1 6V4C1 2.34315 2.34315 1 4 1H6C7.65685 1 9 2.34315 9 4V6C9 7.65685 7.65685 9 6 9H4C2.34315 9 1 7.65685 1 6Z" }, xmlns: "http://www.w3.org/2000/svg" }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        ele: "header", css: ["hidden", "invisible"], styles: ["homeHeader"], options: { id: "navigation" }, childs: [
                             {
                                 ele: "nav", styles: ["nav"], childs: [
                                     {
@@ -214,6 +244,10 @@ export const homeElements = {
                     //     inputs: []
                     // }
 
+                },
+                navigation: {
+                    showHideBtn: "#nav-expander",
+                    navigation: "#navigation",
                 }
             },
             items: {
@@ -474,612 +508,1050 @@ export const homeElements = {
         }
     },
     stylez: {
-        main: {
-            "display": "flex",
-            "flex-direction": "column",
-            "justify-content": "space-between",
-            "align-items": "center",
-            "width": "100%",
-            "min-height": "100vh",
-            "padding": "20px",
-        },
-        mainContainer: {
-            "position": "relative",
-            "width": "1300px",
-            "height": "calc(100vh - 120px)",
-            "min-height": "820px",
-            "margin-bottom": "20px",
-        },
-        aside: {
-            "position": "absolute",
-            "height": "inherit",
-            "min-height": "820px",
-            "width": "300px",
-            "border-radius": "30px",
-            "border": "2px solid var(--gray20)",
-            "z-index": "9"
-        },
-        leftAside: {
-            "left": "-325px"
-        },
-        leftAsideHeader: {
-            "height": "50px",
-            "width": "100%",
-            "text-align": "center",
-        },
-        leftAsideTitle: {
-            "font-family": "bold",
-            "line-height": "0px",
-            "text-transform": "uppercase",
-            "color": "var(--gray200)",
-        },
-        leftAsideMain: {
-            "height": "90%",
-        },
-        leftAsideList: {
-            "display": "flex",
-            "flex-direction": "column",
-            "justify-content": "flex-start",
-            "align-items": "center",
-        },
-        leftAsideListItem: {
-            "display": "flex",
-            "flex-direction": "column",
-            "align-items": "center",
-            "margin-bottom": "15px",
-            "width": "100%",
-            "min-height": "50px",
-            "padding": "10px 0px",
-            "border-top": "2px solid var(--gray20)",
-            "border-bottom": "2px solid var(--gray20)",
+        2100: {
+            main: {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "space-between",
+                "align-items": "center",
+                "width": "100%",
+                "min-height": "100vh",
+                "padding": "20px",
+            },
+            mainContainer: {
+                "position": "relative",
+                "width": "1300px",
+                "height": "calc(100vh - 120px)",
+                "min-height": "820px",
+                "margin-bottom": "20px",
+            },
+            aside: {
+                "position": "absolute",
+                "height": "inherit",
+                "min-height": "820px",
+                "width": "300px",
+                "border-radius": "30px",
+                "border": "2px solid var(--gray20)",
+                "z-index": "9"
+            },
+            leftAside: {
+                "left": "-325px"
+            },
+            leftAsideHeader: {
+                "height": "50px",
+                "width": "100%",
+                "text-align": "center",
+            },
+            leftAsideTitle: {
+                "font-family": "bold",
+                "line-height": "0px",
+                "text-transform": "uppercase",
+                "color": "var(--gray200)",
+            },
+            leftAsideMain: {
+                "height": "90%",
+            },
+            leftAsideList: {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "flex-start",
+                "align-items": "center",
+            },
+            leftAsideListItem: {
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "margin-bottom": "15px",
+                "width": "100%",
+                "min-height": "50px",
+                "padding": "10px 0px",
+                "border-top": "2px solid var(--gray20)",
+                "border-bottom": "2px solid var(--gray20)",
 
-            "word-break": "break-all",
-            "transition": "opacity 0.2s",
-        },
-        leftAsideListItemHeader: {
-            "width": "100%",
-            "text-align": "center",
-            "height": "20px",
-        },
-        leftAsideListItemTitle: {
-            "font-family": "medium",
-            "margin-top": "5px",
-            "line-height": "0px",
-        },
-        leftAsideInputsContainer: {
-            "display": "flex",
-            "flex-direction": "column",
-            "align-items": "center",
-            "margin-top": "5px"
-        },
-        leftAsideInput: {
-            "height": "30px",
-            "border-radius": "10px",
-            "text-align": "center",
-        },
-        leftAsideInputLabel: {
-            "font-size": "15px",
-            "font-family": "regular",
-        },
-        leftAsideListItemFooter: {
-            "display": "flex",
-            "flex-direction": "column",
-            "align-items": "center",
-            "margin-top": "10px",
-        },
-        removeBtn: {
-            "width": "170px",
-            "height": "30px",
-            "border-radius": "10px",
-        },
-        rightAside: {
-            "right": "-330px",
-        },
-        rightAsideHeader: {
-            "height": "50px",
-            "width": "100%",
-            "text-align": "center",
-        },
-        rightAsideTitle: {
-            "font-family": "bold",
-            "line-height": "0px",
-            "text-transform": "uppercase",
-            "color": "var(--gray200)",
-        },
-        rightAsideForm: {
-            "width": "100%",
-        },
-        typeInputContainer: {
-            "position": "relative",
-            "display": "flex",
-            "flex-direction": "column",
-            "align-items": "center",
-            "width": "100%",
-            "height": "32px",
-        },
-        typeInputContainerInput: {
-            "height": "28px",
-            "border-radius": "10px",
-            "width": "200px",
-            "font-family": "regular",
-            "text-align": "center",
-        },
-        typeInputContainerDdown: {
-            "position": "absolute",
-            "display": "flex",
-            "flex-direction": "column",
-            "align-items": "center",
-            "width": "180px",
-            "max-height": "100px",
-            "padding": "10px",
-            "background-color": "var(--gray10)",
-            "border": "2px solid var(--blue100)",
-            "border-radius": "10px",
-            "top": "40px",
-            "overflow-y": "auto",
-            "overflow-x": "hidden",
-            "transition": "0.2s",
-        },
-        typeInputContainerDdownItem: {
-            "cursor": "pointer",
-            "text-align": "center",
-            "margin-bottom": "5px",
-            "width": "100%",
-            "height": "20px",
-            "font-family": "medium",
-            "border": "2px solid transparent",
-            "border-radius": "8px",
-            "transition": "0.2s",
-        },
-        elementsResultContainer: {
-            "display": "flex",
-            "flex-direction": "column",
-            "align-items": "center",
-            "height": "640px",
-            "padding": "20px",
-            "overflow-y": "auto",
-            "overflow-x": "hidden",
-        },
-        container: {
-            "position": "fixed",
-            "min-height": "820px",
-            "height": "inherit",
-            "width": "1300px",
-            "border-radius": "30px",
-            "border": "2px solid var(--gray20)",
-            "z-index": "10",
-            "background-color": "var(--gray10)",
-        },
-        canvaz: {
-            "position": "absolute",
-            "top": "0px",
-            "width": "100%",
-            "height": "100%",
-        },
-        homeHeader: {
-            "position": "relative",
-            "width": "1200px",
-            "min-height": "60px",
-            "height": "60px",
-            "border-radius": "20px",
-            "border": "2px solid var(--gray20)",
-            "margin-bottom": "40px",
-        },
-        nav: {
-            "height": "inherit",
-        },
-        navList: {
-            "display": "flex",
-            "flex-direction": "row",
-            "justify-content": "space-between",
-            "padding-left": "20px",
-            "padding-right": "20px",
-        },
-        navListItemsWrapp: {
-            "display": "flex",
-            "flex-direction": "row",
-            "justify-content": "space-between",
-            "width": "auto",
-            /* width: 120px; */
-        },
-        navListItem: {
-            "max-height": "60px",
-            "min-height": "60px",
-        },
-        navLogo: {
-            "position": "relative",
-            "top": "-60px",
-        },
-        logo: {
-            "line-height": "0px",
-            "font-size": "40px",
-            "text-transform": "uppercase",
-            "letter-spacing": -"1px",
-            "color": "var(--gray200)",
-            "font-family": "bold",
-        },
-        containerMin: {
-            "width": "250px",
-            "height": "80px",
-            "border-radius": "20px",
-            "border": "2px solid var(--gray20)",
-        },
-        resultsButtonMin: {
-            "padding": "10px 30px",
-            "width": "200px",
-        },
-        buttonMin: {
-            "padding": "10px 30px",
-            "width": "200px",
-            "word-wrap": "break-word",
-            "border-radius": "15px",
-            "color": "var(--gray150)",
-            "border": "1px solid var(--gray20)",
-        },
-        buttonMinBoard: {
-            "padding": "10px 10px",
-            "width": "100%",
-            "height": "100%",
-            "overflow": "hidden",
-            "text-overflow": "ellipsis",
-            "border": "1px solid var(--gray20)",
-            "border-radius": "15px",
-            "color": "var(--gray150)",
-            "font-size": "14px",
-        },
-        containerMinBoard: {
-            "width": "calc(100% - 4px)",
-            "height": "calc(100% - 4px)",
-            "border-radius": "20px",
-            "border": "2px solid var(--gray20)",
-        },
-        navMinBoard: {
-            "width": "calc(100% - 4px)",
-            "height": "calc(100% - 4px)",
-            "border-radius": "15px",
-            "border": "2px solid var(--gray20)",
-        },
-        navMin: {
-            "width": "230px",
-            "height": "40px",
-            "border-radius": "15px",
-            "border": "2px solid var(--gray20)",
-            "padding": "0px 5px",
-        },
-        navMinList: {
-            "display": "flex",
-            "flex-direction": "row",
-            "justify-content": "space-between",
-            "align-items": "center",
-            "height": "100%",
-        },
-        navMinListItemBrand: {
-            "width": "auto",
-            "display": "flex",
-            "flex-direction": "row",
-            "align-items": "center",
-            "margin-left": "5px",
-        },
-        navMinListItemLogo: {
-            "width": "30px",
-            "height": "30px",
-            "border-radius": "10px",
-            "background-color": "var(--blue200)",
-        },
-        navMinListItemHeader: {
-            "margin-left": "10px",
-        },
-        navMinListItemTitle: {
-            "font-family": "bold",
-        },
-        navMinListButtons: {
-            "display": "flex",
-            "flex-direction": "row",
-            "justify-content": "space-between",
-            "align-items": "center",
-            "margin-right": "5px",
-        },
-        navMinListItemBtn: {
-            "display": "flex",
-            "flex-direction": "column",
-            "justify-content": "center",
-            "align-items": "center",
-            "width": "30px",
-            "height": "15px",
-            "border-radius": "5px",
-            "border": "2px solid var(--gray20)",
-            "transition": "0.2s",
-            "text-align": "center",
-        },
-        navMinListItemBtnBoard: {
-            "position": "relative",
-            "margin-right": "10px"
-        },
-        navMinListItemLine: {
-            "background": "var(--gray20)",
-            "width": "26px",
-            "height": "2px",
-            "border-radius": "1px",
-        },
-        asideMin: {
-            "display": "flex",
-            "flex-direction": "column",
-            "justify-content": "space-around",
-            "align-items": "center",
-            "width": "230px",
-            "height": "380px",
-            "padding": "10px",
-            "border": "2px solid var(--gray20)",
-            "border-radius": "20px",
-        },
-        asideMinTitle: {
-            "line-height": "0px",
-            "color": "var(--gray150)",
-            "font-family": "bold",
-        },
-        asideMinContent: {
-            "height": "230px",
-            "width": "100%",
-        },
-        asideMinList: {
-            "display": "flex",
-            "flex-direction": "column",
-            "justify-content": "space-between",
-            "align-items": "center",
-            "height": "100%",
-        },
-        asideMinListItem: {
-            "display": "flex",
-            "flex-direction": "column",
-            "align-items": "center",
-            "justify-content": "center",
-            "border-radius": "10px",
-            "border": "2px solid var(--gray20)",
-            "height": "30px",
-            "width": "100%",
-            "transition": "0.2s",
-        },
-        asideMinListItemLine: {
-            "background": "var(--gray20)",
-            "width": "90%",
-            "height": "3px",
-            "border-radius": "1px",
-        },
-        footer: {
+                "word-break": "break-all",
+                "transition": "opacity 0.2s",
+            },
+            leftAsideListItemHeader: {
+                "width": "100%",
+                "text-align": "center",
+                "height": "20px",
+            },
+            leftAsideListItemTitle: {
+                "font-family": "medium",
+                "margin-top": "5px",
+                "line-height": "0px",
+            },
+            leftAsideInputsContainer: {
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "margin-top": "5px"
+            },
+            leftAsideInput: {
+                "height": "30px",
+                "border-radius": "10px",
+                "text-align": "center",
+            },
+            leftAsideInputLabel: {
+                "font-size": "15px",
+                "font-family": "regular",
+            },
+            leftAsideListItemFooter: {
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "margin-top": "10px",
+            },
+            removeBtn: {
+                "width": "170px",
+                "height": "30px",
+                "border-radius": "10px",
+            },
+            rightAside: {
+                "right": "-330px",
+            },
+            rightAsideHeader: {
+                "height": "50px",
+                "width": "100%",
+                "text-align": "center",
+            },
+            rightAsideTitle: {
+                "font-family": "bold",
+                "line-height": "0px",
+                "text-transform": "uppercase",
+                "color": "var(--gray200)",
+            },
+            rightAsideForm: {
+                "width": "100%",
+            },
+            typeInputContainer: {
+                "position": "relative",
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "width": "100%",
+                "height": "32px",
+            },
+            typeInputContainerInput: {
+                "height": "28px",
+                "border-radius": "10px",
+                "width": "200px",
+                "font-family": "regular",
+                "text-align": "center",
+            },
+            typeInputContainerDdown: {
+                "position": "absolute",
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "width": "180px",
+                "max-height": "100px",
+                "padding": "10px",
+                "background-color": "var(--gray10)",
+                "border": "2px solid var(--blue100)",
+                "border-radius": "10px",
+                "top": "40px",
+                "overflow-y": "auto",
+                "overflow-x": "hidden",
+                "transition": "0.2s",
+            },
+            typeInputContainerDdownItem: {
+                "cursor": "pointer",
+                "text-align": "center",
+                "margin-bottom": "5px",
+                "width": "100%",
+                "height": "20px",
+                "font-family": "medium",
+                "border": "2px solid transparent",
+                "border-radius": "8px",
+                "transition": "0.2s",
+            },
+            elementsResultContainer: {
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "height": "640px",
+                "padding": "20px",
+                "overflow-y": "auto",
+                "overflow-x": "hidden",
+            },
+            container: {
+                "position": "fixed",
+                "min-height": "820px",
+                "height": "inherit",
+                "width": "1300px",
+                "border-radius": "30px",
+                "border": "2px solid var(--gray20)",
+                "z-index": "10",
+                "background-color": "var(--gray10)",
+            },
+            canvaz: {
+                "position": "absolute",
+                "top": "0px",
+                "width": "100%",
+                "height": "100%",
+            },
+            homeHeader: {
+                "position": "relative",
+                "width": "1200px",
+                "min-height": "60px",
+                "height": "60px",
+                "border-radius": "20px",
+                "border": "2px solid var(--gray20)",
+                "margin-bottom": "40px",
+            },
+            nav: {
+                "height": "inherit",
+            },
+            navList: {
+                "display": "flex",
+                "flex-direction": "row",
+                "justify-content": "space-between",
+                "padding-left": "20px",
+                "padding-right": "20px",
+            },
+            navListItemsWrapp: {
+                "display": "flex",
+                "flex-direction": "row",
+                "justify-content": "space-between",
+                "width": "auto",
+                /* width: 120px; */
+            },
+            navListItem: {
+                "max-height": "60px",
+                "min-height": "60px",
+            },
+            navLogo: {
+                "position": "relative",
+                "top": "-60px",
+            },
+            logo: {
+                "line-height": "0px",
+                "font-size": "40px",
+                "text-transform": "uppercase",
+                "letter-spacing": -"1px",
+                "color": "var(--gray200)",
+                "font-family": "bold",
+            },
+            containerMin: {
+                "width": "250px",
+                "height": "80px",
+                "border-radius": "20px",
+                "border": "2px solid var(--gray20)",
+            },
+            resultsButtonMin: {
+                "padding": "10px 30px",
+                "width": "200px",
+            },
+            buttonMin: {
+                "padding": "10px 30px",
+                "width": "200px",
+                "word-wrap": "break-word",
+                "border-radius": "15px",
+                "color": "var(--gray150)",
+                "border": "1px solid var(--gray20)",
+            },
+            buttonMinBoard: {
+                "padding": "10px 10px",
+                "width": "100%",
+                "height": "100%",
+                "overflow": "hidden",
+                "text-overflow": "ellipsis",
+                "border": "1px solid var(--gray20)",
+                "border-radius": "15px",
+                "color": "var(--gray150)",
+                "font-size": "14px",
+            },
+            containerMinBoard: {
+                "width": "calc(100% - 4px)",
+                "height": "calc(100% - 4px)",
+                "border-radius": "20px",
+                "border": "2px solid var(--gray20)",
+            },
+            navMinBoard: {
+                "width": "calc(100% - 4px)",
+                "height": "calc(100% - 4px)",
+                "border-radius": "15px",
+                "border": "2px solid var(--gray20)",
+            },
+            navMin: {
+                "width": "230px",
+                "height": "40px",
+                "border-radius": "15px",
+                "border": "2px solid var(--gray20)",
+                "padding": "0px 5px",
+            },
+            navMinList: {
+                "display": "flex",
+                "flex-direction": "row",
+                "justify-content": "space-between",
+                "align-items": "center",
+                "height": "100%",
+            },
+            navMinListItemBrand: {
+                "width": "auto",
+                "display": "flex",
+                "flex-direction": "row",
+                "align-items": "center",
+                "margin-left": "5px",
+            },
+            navMinListItemLogo: {
+                "width": "30px",
+                "height": "30px",
+                "border-radius": "10px",
+                "background-color": "var(--blue200)",
+            },
+            navMinListItemHeader: {
+                "margin-left": "10px",
+            },
+            navMinListItemTitle: {
+                "font-family": "bold",
+            },
+            navMinListButtons: {
+                "display": "flex",
+                "flex-direction": "row",
+                "justify-content": "space-between",
+                "align-items": "center",
+                "margin-right": "5px",
+            },
+            navMinListItemBtn: {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "center",
+                "align-items": "center",
+                "width": "30px",
+                "height": "15px",
+                "border-radius": "5px",
+                "border": "2px solid var(--gray20)",
+                "transition": "0.2s",
+                "text-align": "center",
+            },
+            navMinListItemBtnBoard: {
+                "position": "relative",
+                "margin-right": "10px"
+            },
+            navMinListItemLine: {
+                "background": "var(--gray20)",
+                "width": "26px",
+                "height": "2px",
+                "border-radius": "1px",
+            },
+            asideMin: {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "space-around",
+                "align-items": "center",
+                "width": "230px",
+                "height": "380px",
+                "padding": "10px",
+                "border": "2px solid var(--gray20)",
+                "border-radius": "20px",
+            },
+            asideMinTitle: {
+                "line-height": "0px",
+                "color": "var(--gray150)",
+                "font-family": "bold",
+            },
+            asideMinContent: {
+                "height": "230px",
+                "width": "100%",
+            },
+            asideMinList: {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "space-between",
+                "align-items": "center",
+                "height": "100%",
+            },
+            asideMinListItem: {
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "justify-content": "center",
+                "border-radius": "10px",
+                "border": "2px solid var(--gray20)",
+                "height": "30px",
+                "width": "100%",
+                "transition": "0.2s",
+            },
+            asideMinListItemLine: {
+                "background": "var(--gray20)",
+                "width": "90%",
+                "height": "3px",
+                "border-radius": "1px",
+            },
+            footer: {
 
-            "width": "230px",
-            "height": "50px",
+                "width": "230px",
+                "height": "50px",
+            },
+            footerList: {
+                "display": "flex",
+                "flex-direction": "row",
+                "justify-content": "space-around",
+                "width": "100%",
+                "height": "100%",
+            },
+            footerListItem: {
+                "width": "50px",
+                "height": "50px",
+                "border-radius": "15px",
+                "border": "2px solid var(--gray20)",
+                "transition": " 0.2s",
+            },
+            inputMin: {
+                "border-radius": "10px",
+                "width": "200px",
+                "height": "30px",
+            },
+            componentWrapp: {
+                position: "absolute",
+            },
+            resizerCorner: {
+                "position": "absolute",
+                "width": "15px",
+                "height": "15px",
+                "background-color": "transparent",
+            },
+            resizerLine: {
+                "position": "absolute",
+                "background-color": "transparent",
+            },
+            seCursor: {
+                "cursor": "se-resize",
+            },
+            neCursor: {
+                "cursor": "ne-resize",
+            },
+            eCursor: {
+                "cursor": "e-resize",
+            },
+            sCursor: {
+                "cursor": "s-resize",
+            },
+            leftTop: {
+                "left": "-10px",
+                "top": "-10px",
+            },
+            rightTop: {
+                "right": "-10px",
+                "top": "-10px",
+            },
+            rightBottom: {
+                "right": "-10px",
+                "bottom": "-10px",
+            },
+            leftBottom: {
+                "left": "-10px",
+                "bottom": "-10px",
+            },
+            left: {
+                'left': "-10px",
+                'top': "5px",
+                'width': "15px",
+                'height': "calc(100% - 10px)",
+            },
+            top: {
+                "left": "5px",
+                "top": "-10px",
+                "height": "15px",
+                "width": "calc(100% - 10px)",
+            },
+            right: {
+                "right": "-10px",
+                "top": "5px",
+                "width": "15px",
+                "height": "calc(100% - 10px)",
+            },
+            bottom: {
+                "left": "5px",
+                "bottom": "-10px",
+                "width": "calc(100% - 10px)",
+                "height": "15px",
+            },
+            newComponent: {
+                "position": "absolute",
+                "left": "50%",
+                "top": "50%",
+                "box-shadow": "3px 3px 0px 0px var(--red100)," +
+                    "-3px -3px 0px 0px var(--red100)," +
+                    "3px -3px 0px 0px var(--red100)," +
+                    "-3px 3px 0px 0px var(--red100)",
+                "transition": "box-shadow 0.2s",
+            },
+            widthHeightAtStartContainer: {
+                "width": "250px",
+                "height": "80px",
+            },
+            widthHeightAtStartNav: {
+                "width": "320px",
+                "height": "40px",
+            },
+            borderRadius20px: {
+                "border-radius": "20px",
+            },
+            borderRadius15px: {
+                "border-radius": "15px",
+            },
+            imageWrapp: {
+                "position": "relative",
+                "width": "100px",
+                "height": "100px",
+                "border-radius": "15px",
+                "overflow": "hidden",
+            },
+            imageMin: {
+                "position": "absolute",
+                "width": "calc(100% + 2px)",
+                "height": "calc(100% + 2px)",
+                "left": "-1px",
+                "top": "-1px",
+                "background-color": "var(--gray20)",
+            },
         },
-        footerList: {
-            "display": "flex",
-            "flex-direction": "row",
-            "justify-content": "space-around",
-            "width": "100%",
-            "height": "100%",
+        // ***********************************
+        // ***********************************
+        // ***********************************
+        // ***********************************
+        // ***********************************
+        // ***********************************
+        // ***********************************
+        // ***********************************
+        // ***********************************
+        other: {
+            main: {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "space-between",
+                "align-items": "center",
+                "width": "100%",
+                "height": "100vh"
+            },
+            mainContainer: {
+                "position": "relative",
+                "width": "100%",
+                "height": "100%",
+                "min-height": "850px",
+            },
+            container: {
+                "position": "fixed",
+                "width": "100%",
+                "height": "inherit",
+                "min-height": "850px",
+                "z-index": "10",
+                "background-color": "var(--gray10)",
+            },
+            expander: {
+                "cursor": "pointer",
+                "position": "fixed",
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "center",
+                "align-items": "center",
+                "width": "40px",
+                "height": "30px",
+                "border-radius": "8px",
+                "background-color": "var(--blue100)",
+                "opacity": "0.3",
+                "transition": "opacity 0.2s",
+                "z-index": "11",
+            },
+            navExpander: {
+                "left": "calc(50% - 20px)",
+                "bottom": "20px",
+            },
+            leftAsideExpander: {
+                "top": "20px",
+                "left": "20px",
+            },
+            rightAsideExpander: {
+                "right": "20px",
+                "top": "20px"
+            },
+            homeHeader: {
+                "position": "fixed",
+                "width": "calc(100% - 40px)",
+                "min-height": "60px",
+                "height": "60px",
+                "border-radius": "20px",
+                "border": "2px solid var(--gray20)",
+                "bottom": "20px",
+                "transition": "opacity 0.2s",
+                "z-index": "11",
+            },
+            nav: {
+                "height": "inherit",
+            },
+            aside: {
+                "position": "absolute",
+                "height": "inherit",
+                "min-height": "820px",
+                "width": "300px",
+                "border-radius": "30px",
+                "border": "2px solid var(--gray20)",
+                "z-index": "9"
+            },
+            leftAside: {
+                "left": "-325px"
+            },
+            leftAsideHeader: {
+                "height": "50px",
+                "width": "100%",
+                "text-align": "center",
+            },
+            leftAsideTitle: {
+                "font-family": "bold",
+                "line-height": "0px",
+                "text-transform": "uppercase",
+                "color": "var(--gray200)",
+            },
+            leftAsideMain: {
+                "height": "90%",
+            },
+            leftAsideList: {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "flex-start",
+                "align-items": "center",
+            },
+            leftAsideListItem: {
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "margin-bottom": "15px",
+                "width": "100%",
+                "min-height": "50px",
+                "padding": "10px 0px",
+                "border-top": "2px solid var(--gray20)",
+                "border-bottom": "2px solid var(--gray20)",
+
+                "word-break": "break-all",
+                "transition": "opacity 0.2s",
+            },
+            leftAsideListItemHeader: {
+                "width": "100%",
+                "text-align": "center",
+                "height": "20px",
+            },
+            leftAsideListItemTitle: {
+                "font-family": "medium",
+                "margin-top": "5px",
+                "line-height": "0px",
+            },
+            leftAsideInputsContainer: {
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "margin-top": "5px"
+            },
+            leftAsideInput: {
+                "height": "30px",
+                "border-radius": "10px",
+                "text-align": "center",
+            },
+            leftAsideInputLabel: {
+                "font-size": "15px",
+                "font-family": "regular",
+            },
+            leftAsideListItemFooter: {
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "margin-top": "10px",
+            },
+            removeBtn: {
+                "width": "170px",
+                "height": "30px",
+                "border-radius": "10px",
+            },
+            rightAside: {
+                "right": "-330px",
+            },
+            rightAsideHeader: {
+                "height": "50px",
+                "width": "100%",
+                "text-align": "center",
+            },
+            rightAsideTitle: {
+                "font-family": "bold",
+                "line-height": "0px",
+                "text-transform": "uppercase",
+                "color": "var(--gray200)",
+            },
+            rightAsideForm: {
+                "width": "100%",
+            },
+            typeInputContainer: {
+                "position": "relative",
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "width": "100%",
+                "height": "32px",
+            },
+            typeInputContainerInput: {
+                "height": "28px",
+                "border-radius": "10px",
+                "width": "200px",
+                "font-family": "regular",
+                "text-align": "center",
+            },
+            typeInputContainerDdown: {
+                "position": "absolute",
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "width": "180px",
+                "max-height": "100px",
+                "padding": "10px",
+                "background-color": "var(--gray10)",
+                "border": "2px solid var(--blue100)",
+                "border-radius": "10px",
+                "top": "40px",
+                "overflow-y": "auto",
+                "overflow-x": "hidden",
+                "transition": "0.2s",
+            },
+            typeInputContainerDdownItem: {
+                "cursor": "pointer",
+                "text-align": "center",
+                "margin-bottom": "5px",
+                "width": "100%",
+                "height": "20px",
+                "font-family": "medium",
+                "border": "2px solid transparent",
+                "border-radius": "8px",
+                "transition": "0.2s",
+            },
+            elementsResultContainer: {
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "height": "640px",
+                "padding": "20px",
+                "overflow-y": "auto",
+                "overflow-x": "hidden",
+            },
+            canvaz: {
+                "position": "absolute",
+                "top": "0px",
+                "width": "100%",
+                "height": "100%",
+            },
+            navList: {
+                "display": "flex",
+                "flex-direction": "row",
+                "justify-content": "space-between",
+                "padding-left": "20px",
+                "padding-right": "20px",
+            },
+            navListItemsWrapp: {
+                "display": "flex",
+                "flex-direction": "row",
+                "justify-content": "space-between",
+                "width": "auto",
+                /* width: 120px; */
+            },
+            navListItem: {
+                "max-height": "60px",
+                "min-height": "60px",
+            },
+            navLogo: {
+                "position": "relative",
+                "top": "-60px",
+            },
+            logo: {
+                "line-height": "0px",
+                "font-size": "40px",
+                "text-transform": "uppercase",
+                "letter-spacing": -"1px",
+                "color": "var(--gray200)",
+                "font-family": "bold",
+            },
+            containerMin: {
+                "width": "250px",
+                "height": "80px",
+                "border-radius": "20px",
+                "border": "2px solid var(--gray20)",
+            },
+            resultsButtonMin: {
+                "padding": "10px 30px",
+                "width": "200px",
+            },
+            buttonMin: {
+                "padding": "10px 30px",
+                "width": "200px",
+                "word-wrap": "break-word",
+                "border-radius": "15px",
+                "color": "var(--gray150)",
+                "border": "1px solid var(--gray20)",
+            },
+            buttonMinBoard: {
+                "padding": "10px 10px",
+                "width": "100%",
+                "height": "100%",
+                "overflow": "hidden",
+                "text-overflow": "ellipsis",
+                "border": "1px solid var(--gray20)",
+                "border-radius": "15px",
+                "color": "var(--gray150)",
+                "font-size": "14px",
+            },
+            containerMinBoard: {
+                "width": "calc(100% - 4px)",
+                "height": "calc(100% - 4px)",
+                "border-radius": "20px",
+                "border": "2px solid var(--gray20)",
+            },
+            navMinBoard: {
+                "width": "calc(100% - 4px)",
+                "height": "calc(100% - 4px)",
+                "border-radius": "15px",
+                "border": "2px solid var(--gray20)",
+            },
+            navMin: {
+                "width": "230px",
+                "height": "40px",
+                "border-radius": "15px",
+                "border": "2px solid var(--gray20)",
+                "padding": "0px 5px",
+            },
+            navMinList: {
+                "display": "flex",
+                "flex-direction": "row",
+                "justify-content": "space-between",
+                "align-items": "center",
+                "height": "100%",
+            },
+            navMinListItemBrand: {
+                "width": "auto",
+                "display": "flex",
+                "flex-direction": "row",
+                "align-items": "center",
+                "margin-left": "5px",
+            },
+            navMinListItemLogo: {
+                "width": "30px",
+                "height": "30px",
+                "border-radius": "10px",
+                "background-color": "var(--blue200)",
+            },
+            navMinListItemHeader: {
+                "margin-left": "10px",
+            },
+            navMinListItemTitle: {
+                "font-family": "bold",
+            },
+            navMinListButtons: {
+                "display": "flex",
+                "flex-direction": "row",
+                "justify-content": "space-between",
+                "align-items": "center",
+                "margin-right": "5px",
+            },
+            navMinListItemBtn: {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "center",
+                "align-items": "center",
+                "width": "30px",
+                "height": "15px",
+                "border-radius": "5px",
+                "border": "2px solid var(--gray20)",
+                "transition": "0.2s",
+                "text-align": "center",
+            },
+            navMinListItemBtnBoard: {
+                "position": "relative",
+                "margin-right": "10px"
+            },
+            navMinListItemLine: {
+                "background": "var(--gray20)",
+                "width": "26px",
+                "height": "2px",
+                "border-radius": "1px",
+            },
+            asideMin: {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "space-around",
+                "align-items": "center",
+                "width": "230px",
+                "height": "380px",
+                "padding": "10px",
+                "border": "2px solid var(--gray20)",
+                "border-radius": "20px",
+            },
+            asideMinTitle: {
+                "line-height": "0px",
+                "color": "var(--gray150)",
+                "font-family": "bold",
+            },
+            asideMinContent: {
+                "height": "230px",
+                "width": "100%",
+            },
+            asideMinList: {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "space-between",
+                "align-items": "center",
+                "height": "100%",
+            },
+            asideMinListItem: {
+                "display": "flex",
+                "flex-direction": "column",
+                "align-items": "center",
+                "justify-content": "center",
+                "border-radius": "10px",
+                "border": "2px solid var(--gray20)",
+                "height": "30px",
+                "width": "100%",
+                "transition": "0.2s",
+            },
+            asideMinListItemLine: {
+                "background": "var(--gray20)",
+                "width": "90%",
+                "height": "3px",
+                "border-radius": "1px",
+            },
+            footer: {
+
+                "width": "230px",
+                "height": "50px",
+            },
+            footerList: {
+                "display": "flex",
+                "flex-direction": "row",
+                "justify-content": "space-around",
+                "width": "100%",
+                "height": "100%",
+            },
+            footerListItem: {
+                "width": "50px",
+                "height": "50px",
+                "border-radius": "15px",
+                "border": "2px solid var(--gray20)",
+                "transition": " 0.2s",
+            },
+            inputMin: {
+                "border-radius": "10px",
+                "width": "200px",
+                "height": "30px",
+            },
+            componentWrapp: {
+                position: "absolute",
+            },
+            resizerCorner: {
+                "position": "absolute",
+                "width": "15px",
+                "height": "15px",
+                "background-color": "transparent",
+            },
+            resizerLine: {
+                "position": "absolute",
+                "background-color": "transparent",
+            },
+            seCursor: {
+                "cursor": "se-resize",
+            },
+            neCursor: {
+                "cursor": "ne-resize",
+            },
+            eCursor: {
+                "cursor": "e-resize",
+            },
+            sCursor: {
+                "cursor": "s-resize",
+            },
+            leftTop: {
+                "left": "-10px",
+                "top": "-10px",
+            },
+            rightTop: {
+                "right": "-10px",
+                "top": "-10px",
+            },
+            rightBottom: {
+                "right": "-10px",
+                "bottom": "-10px",
+            },
+            leftBottom: {
+                "left": "-10px",
+                "bottom": "-10px",
+            },
+            left: {
+                'left': "-10px",
+                'top': "5px",
+                'width': "15px",
+                'height': "calc(100% - 10px)",
+            },
+            top: {
+                "left": "5px",
+                "top": "-10px",
+                "height": "15px",
+                "width": "calc(100% - 10px)",
+            },
+            right: {
+                "right": "-10px",
+                "top": "5px",
+                "width": "15px",
+                "height": "calc(100% - 10px)",
+            },
+            bottom: {
+                "left": "5px",
+                "bottom": "-10px",
+                "width": "calc(100% - 10px)",
+                "height": "15px",
+            },
+            newComponent: {
+                "position": "absolute",
+                "left": "50%",
+                "top": "50%",
+                "box-shadow": "3px 3px 0px 0px var(--red100)," +
+                    "-3px -3px 0px 0px var(--red100)," +
+                    "3px -3px 0px 0px var(--red100)," +
+                    "-3px 3px 0px 0px var(--red100)",
+                "transition": "box-shadow 0.2s",
+            },
+            widthHeightAtStartContainer: {
+                "width": "250px",
+                "height": "80px",
+            },
+            widthHeightAtStartNav: {
+                "width": "320px",
+                "height": "40px",
+            },
+            borderRadius20px: {
+                "border-radius": "20px",
+            },
+            borderRadius15px: {
+                "border-radius": "15px",
+            },
+            imageWrapp: {
+                "position": "relative",
+                "width": "100px",
+                "height": "100px",
+                "border-radius": "15px",
+                "overflow": "hidden",
+            },
+            imageMin: {
+                "position": "absolute",
+                "width": "calc(100% + 2px)",
+                "height": "calc(100% + 2px)",
+                "left": "-1px",
+                "top": "-1px",
+                "background-color": "var(--gray20)",
+            },
         },
-        footerListItem: {
-            "width": "50px",
-            "height": "50px",
-            "border-radius": "15px",
-            "border": "2px solid var(--gray20)",
-            "transition": " 0.2s",
-        },
-        inputMin: {
-            "border-radius": "10px",
-            "width": "200px",
-            "height": "30px",
-        },
-        componentWrapp: {
-            position: "absolute",
-        },
-        resizerCorner: {
-            "position": "absolute",
-            "width": "15px",
-            "height": "15px",
-            "background-color": "transparent",
-        },
-        resizerLine: {
-            "position": "absolute",
-            "background-color": "transparent",
-        },
-        seCursor: {
-            "cursor": "se-resize",
-        },
-        neCursor: {
-            "cursor": "ne-resize",
-        },
-        eCursor: {
-            "cursor": "e-resize",
-        },
-        sCursor: {
-            "cursor": "s-resize",
-        },
-        leftTop: {
-            "left": "-10px",
-            "top": "-10px",
-        },
-        rightTop: {
-            "right": "-10px",
-            "top": "-10px",
-        },
-        rightBottom: {
-            "right": "-10px",
-            "bottom": "-10px",
-        },
-        leftBottom: {
-            "left": "-10px",
-            "bottom": "-10px",
-        },
-        left: {
-            'left': "-10px",
-            'top': "5px",
-            'width': "15px",
-            'height': "calc(100% - 10px)",
-        },
-        top: {
-            "left": "5px",
-            "top": "-10px",
-            "height": "15px",
-            "width": "calc(100% - 10px)",
-        },
-        right: {
-            "right": "-10px",
-            "top": "5px",
-            "width": "15px",
-            "height": "calc(100% - 10px)",
-        },
-        bottom: {
-            "left": "5px",
-            "bottom": "-10px",
-            "width": "calc(100% - 10px)",
-            "height": "15px",
-        },
-        newComponent: {
-            "position": "absolute",
-            "left": "50%",
-            "top": "50%",
-            "box-shadow": "3px 3px 0px 0px var(--red100)," +
-                "-3px -3px 0px 0px var(--red100)," +
-                "3px -3px 0px 0px var(--red100)," +
-                "-3px 3px 0px 0px var(--red100)",
-            "transition": "box-shadow 0.2s",
-        },
-        widthHeightAtStartContainer: {
-            "width": "250px",
-            "height": "80px",
-        },
-        widthHeightAtStartNav: {
-            "width": "320px",
-            "height": "40px",
-        },
-        borderRadius20px: {
-            "border-radius": "20px",
-        },
-        borderRadius15px: {
-            "border-radius": "15px",
-        },
-        imageWrapp: {
-            "position": "relative",
-            "width": "100px",
-            "height": "100px",
-            "border-radius": "15px",
-            "overflow": "hidden",
-        },
-        imageMin: {
-            "position": "absolute",
-            "width": "calc(100% + 2px)",
-            "height": "calc(100% + 2px)",
-            "left": "-1px",
-            "top": "-1px",
-            "background-color": "var(--gray20)",
-        },
+        media: {
+            2100: {
+
+            },
+            other: {
+
+            }
+
+        }
     },
 }
-
-//   <!-- <aside class="left-aside aside">
-//     <header class="left-aside__header">
-//       <h3 class="left-aside__title">
-//         детали
-//       </h3>
-//     </header>
-
-//     <main class="left-aside__main">
-//       <ul class="left-aside__list nostyle-list">
-//         <li class="left-aside__list-item">
-//           <header class="left-aside__list-item-header">
-//             <h4 class="left-aside__liste-item-title">кнопка</h4>
-//           </header>
-
-//           <div class="left-aside__inputs-container">
-//             <label class="left-aside__input-label" for="width">ширина</label>
-//             <input name="width" class="left_aside__input input nostyle-input" type="text">
-//             <label class="left-aside__input-label" for="height">высота</label>
-//             <input name="height" class="left_aside__input input nostyle-input" type="text">
-//             <label class="left-aside__input-label" for="text">текст</label>
-//             <input name="text" class="left_aside__input input nostyle-input" type="text">
-//           </div>
-//         </li>
-//       </ul>
-//     </main>
-
-//   </aside> -->
-
-
-// .left-aside {
-//     position: absolute;
-//     height: 100%;
-//     width: 300px;
-//     min-height: 800px;
-//     border-radius: 30px;
-//     border: 2px solid var(--gray20);
-//     /* z-index: 9; */
-// }
-
-// .left-aside__header {
-//     height: 50px;
-//     width: 100%;
-//     text-align: center;
-// }
-
-
-// .left-aside__title {
-//     font-family: bold;
-//     line-height: 0px;
-//     text-transform: uppercase;
-//     color: var(--gray200);
-// }
-
-// .left-aside__main {
-//     height: 90%;
-// }
-
-// .left-aside__list {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: flex-start;
-//     align-items: center;
-// }
-
-// .left-aside__list-item {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     margin-bottom: 15px;
-//     width: 260px;
-//     min-height: 50px;
-//     padding: 10px;
-//     border: 2px solid var(--gray20);
-//     word-break: break-all;
-//     border-radius: 15px;
-// }
-
-// .left-aside__list-item-header {
-//     width: 100%;
-//     text-align: center;
-//     height: 20px;
-// }
-
-// .left-aside__liste-item-title {
-//     font-family: medium;
-//     margin-top: 5px;
-//     line-height: 0px;
-// }
-
-// .left-aside__inputs-container {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     height: auto;
-//     padding: 5px 0px;
-// }
-
-// .left_aside__input {
-//     margin-bottom: 10px;
-//     height: 30px;
-//     border-radius: 10px;
-// }
-
-// .left-aside__input-label {
-//     font-size: 15px;
-//     font-family: regular;
-// }
