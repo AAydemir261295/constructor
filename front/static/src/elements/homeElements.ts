@@ -7,11 +7,11 @@ export const homeElements = {
                     {
                         ele: "main", styles: ["mainContainer"], childs: [
                             {
-                                ele: "div", css:["hidden"], styles: ["expander", "leftAsideExpander", "pointer"], options: { id: "left-aside-show" }, childs: [
+                                ele: "div", css: ["hidden"], styles: ["expander", "leftAsideExpander", "pointer"], options: { id: "left-aside-show" }, childs: [
                                     {
-                                        ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
-                                            { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
-                                            { ele: "path", options: { d: "M1 6V4C1 2.34315 2.34315 1 4 1H6C7.65685 1 9 2.34315 9 4V6C9 7.65685 7.65685 9 6 9H4C2.34315 9 1 7.65685 1 6Z" }, xmlns: "http://www.w3.org/2000/svg" }
+                                        ele: "svg", options: { width: 37, height: 22, fill: "none" }, xmlns: "http://www.w3.org/2000/svg", childs: [
+                                            { ele: "path", options: { d: "M6 21H31C33.7614 21 36 18.7614 36 16V6C36 3.23858 33.7614 1 31 1H6M6 21C3.23857 21 1 18.7614 1 16V6C1 3.23858 3.23857 1 6 1M6 21H11V1H6", stroke: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg" },
+                                            { ele: "path", options: { d: "M11 1V21H6C3.23857 21 1 18.7614 1 16V6C1 3.23858 3.23857 1 6 1H11Z", fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg" }
                                         ]
                                     }
                                 ]
@@ -21,9 +21,8 @@ export const homeElements = {
                                     {
                                         ele: "div", styles: ["expander", "leftAsideExpanderInner", "pointer"], options: { id: "left-aside-hide" }, childs: [
                                             {
-                                                ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
-                                                    { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
-                                                    { ele: "path", options: { d: "M1 6V4C1 2.34315 2.34315 1 4 1H6C7.65685 1 9 2.34315 9 4V6C9 7.65685 7.65685 9 6 9H4C2.34315 9 1 7.65685 1 6Z" }, xmlns: "http://www.w3.org/2000/svg" }
+                                                ele: "svg", options: { width: 37, height: 22, fill: "none" }, xmlns: "http://www.w3.org/2000/svg", childs: [
+                                                    { ele: "path", options: { d: "M6 21H31C33.7614 21 36 18.7614 36 16V6C36 3.23858 33.7614 1 31 1H6M6 21C3.23857 21 1 18.7614 1 16V6C1 3.23858 3.23857 1 6 1M6 21H11V1H6", stroke: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg" },
                                                 ]
                                             }
                                         ]
@@ -49,11 +48,11 @@ export const homeElements = {
                                 ]
                             },
                             {
-                                ele: "div", css:["hidden"], styles: ["expander", "rightAsideExpander", "pointer"], options: { id: "right-aside-show" }, childs: [
+                                ele: "div", css: ["hidden"], styles: ["expander", "rightAsideExpander", "pointer"], options: { id: "right-aside-show" }, childs: [
                                     {
-                                        ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
-                                            { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
-                                            { ele: "path", options: { d: "M1 6V4C1 2.34315 2.34315 1 4 1H6C7.65685 1 9 2.34315 9 4V6C9 7.65685 7.65685 9 6 9H4C2.34315 9 1 7.65685 1 6Z" }, xmlns: "http://www.w3.org/2000/svg" }
+                                        ele: "svg", options: { width: 37, height: 22, fill: "none" }, xmlns: "http://www.w3.org/2000/svg", childs: [
+                                            { ele: "path", options: { d: "M31 21H6C3.23858 21 1 18.7614 1 16V6C1 3.23858 3.23858 1 6 1H31M31 21C33.7614 21 36 18.7614 36 16V6C36 3.23858 33.7614 1 31 1M31 21H26V1H31", stroke: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg" },
+                                            { ele: "path", options: { d: "M26 1V21H31C33.7614 21 36 18.7614 36 16V6C36 3.23858 33.7614 1 31 1H26Z", fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg" }
                                         ]
                                     }
                                 ]
@@ -63,9 +62,8 @@ export const homeElements = {
                                     {
                                         ele: "div", styles: ["expander", "rightAsideExpanderInner", "pointer"], options: { id: "right-aside-hide" }, childs: [
                                             {
-                                                ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
-                                                    { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
-                                                    { ele: "path", options: { d: "M1 6V4C1 2.34315 2.34315 1 4 1H6C7.65685 1 9 2.34315 9 4V6C9 7.65685 7.65685 9 6 9H4C2.34315 9 1 7.65685 1 6Z" }, xmlns: "http://www.w3.org/2000/svg" }
+                                                ele: "svg", options: { width: 37, height: 22, fill: "none" }, xmlns: "http://www.w3.org/2000/svg", childs: [
+                                                    { ele: "path", options: { d: "M31 21H6C3.23858 21 1 18.7614 1 16V6C1 3.23858 3.23858 1 6 1H31M31 21C33.7614 21 36 18.7614 36 16V6C36 3.23858 33.7614 1 31 1M31 21H26V1H31", stroke: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg" },
                                                 ]
                                             }
                                         ]
@@ -430,8 +428,6 @@ export const homeElements = {
             "height": "30px",
             "border-radius": "8px",
             "background-color": "var(--blue100)",
-            "opacity": "0.3",
-            "transition": "opacity 0.2s",
             "z-index": "11",
         },
         navExpander: {

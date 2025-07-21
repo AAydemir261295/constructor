@@ -15,7 +15,7 @@ export class HomePage extends MyPage {
     myConstructor;
     rightAside;
     leftAside;
-    navigation;
+    // navigation;
     components;
 
 
