@@ -1,23 +1,14 @@
-import Window from "/js/libs/window/Window.js";
 
 export default class MyDom {
     constructor() {
-        // this.dom = document;
         this.body = document.body;
-        this.window = new Window();
     }
 
     stylez;
-    media;
-    currentWindowMediaType;
     body;
-    window;
 
-    setStylez(styles, media) {
+    setStylez(styles) {
         this.stylez = styles;
-        this.media = media;
-        this.currentWindowMediaType = this.window.getMediaType();
-        console.log(this.currentWindowMediaType);
     }
 
 
@@ -141,10 +132,8 @@ export default class MyDom {
 
 
     async addStyles(ele, classList) {
-        let styles = this.stylez[this.currentWindowMediaType];
-
         classList.forEach((className) => {
-            var cssBlock = styles[className];
+            var cssBlock = this.stylez[className];
             if (cssBlock == undefined) {
                 console.log(className);
             }
@@ -155,17 +144,7 @@ export default class MyDom {
         })
     }
 
-    async addListeners(ele, listeners) {
-        listeners.forEach(listener => {
-            let events = Object.keys(listener);
-            events.forEach(event => {
-                ele.addEventListener(event, (ev) => {
-                    let styles = Object.keys(listener[event]);
-                    styles.forEach(cssProp => ele.style[cssProp] = listener[event][cssProp])
-                })
-            })
-        })
-    }
+
 
 
     svgs = ["svg", "path"];
@@ -183,9 +162,6 @@ export default class MyDom {
                 let options = eleData.options;
                 var keys = Object.keys(options);
                 keys.forEach(k => ele[k] = options[k]);
-            }
-            if (eleData.hasOwnProperty("listeners")) {
-                this.addListeners(ele, eleData.listeners)
             }
             return ele;
         } else {

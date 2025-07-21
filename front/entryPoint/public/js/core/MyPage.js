@@ -4,7 +4,7 @@ class MyPage {
         this.csrf = csrf;
         this.domInteractions = domInteractions;
         this.pageData = pageData;
-        this.domInteractions.setStylez(pageData.stylez, pageData.media);
+        this.domInteractions.setStylez(pageData.stylez);
 
     }
 

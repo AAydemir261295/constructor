@@ -26,38 +26,15 @@ class Aside {
     showAside() {
         if (!this.isActive) {
             this.isActive = true;
-            this.showBtn.classList.add("invisible");
-
-            setTimeout(() => {
-                this.showBtn.classList.add("hidden");
-            }, 200);
-
-            setTimeout(() => {
-                this.ele.classList.remove("hidden");
-
-                setTimeout(() => {
-                    this.ele.classList.remove("invisible");
-                }, 10);
-            }, 200)
+            this.showBtn.classList.add("hidden");
+            this.ele.classList.remove("hidden");
         }
     }
 
     hideAside() {
         this.isActive = false;
-
-        this.ele.classList.add("invisible");
-
-        setTimeout(() => {
-            this.ele.classList.add("hidden");
-        }, 200);
-
-        setTimeout(() => {
-            this.showBtn.classList.remove("hidden");
-
-            setTimeout(() => {
-                this.showBtn.classList.remove("invisible");
-            }, 10);
-        }, 200)
+        this.ele.classList.add("hidden");
+        this.showBtn.classList.remove("hidden");
     }
 
 

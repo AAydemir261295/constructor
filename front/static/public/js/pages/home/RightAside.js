@@ -37,17 +37,9 @@ class RightAside extends Aside {
             this.currentItem = itemName;
             this.resultElements.forEach((ele, q) => {
                 if (q == idx) {
-                    setTimeout(() => {
-                        this.resultElements[q].classList.remove("hidden");
-                        setTimeout(() => {
-                            this.resultElements[q].classList.remove("invisible");
-                        }, 10)
-                    }, 200);
+                    this.resultElements[q].classList.remove("hidden");
                 } else {
-                    this.resultElements[q].classList.add("invisible");
-                    setTimeout(() => {
-                        this.resultElements[q].classList.add("hidden");
-                    }, 200)
+                    this.resultElements[q].classList.add("hidden");
                 }
             })
         }
