@@ -42,17 +42,10 @@ class MyPage {
 
     showPage() {
         this.container.classList.remove("hidden");
-        setTimeout(() => {
-            this.container.classList.remove("invisible");
-        }, 10);
-
     }
 
     hidePage() {
-        this.container.classList.add("invisible");
-        setTimeout(() => {
-            this.container.classList.add("hidden");
-        }, 200)
+        this.container.classList.add("hidden");
     }
 
 }
