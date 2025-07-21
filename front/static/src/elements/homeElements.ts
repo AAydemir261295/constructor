@@ -3,11 +3,11 @@ export const homeElements = {
         main: {
             tree:
             {
-                ele: "main", css: ["main", "hidden", "invisible"], styles: ["main"], childs: [
+                ele: "main", css: ["main", "hidden"], styles: ["main"], childs: [
                     {
                         ele: "main", styles: ["mainContainer"], childs: [
                             {
-                                ele: "div", styles: ["expander", "leftAsideExpander", "pointer"], options: { id: "left-aside-show" }, childs: [
+                                ele: "div", css:["hidden"], styles: ["expander", "leftAsideExpander", "pointer"], options: { id: "left-aside-show" }, childs: [
                                     {
                                         ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
                                             { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
@@ -17,7 +17,7 @@ export const homeElements = {
                                 ]
                             },
                             {
-                                ele: "aside", css: ["hidden", "invisible"], styles: ["aside", "leftAside"], options: { id: "left-aside" }, childs: [
+                                ele: "aside", css: [], styles: ["aside", "leftAside"], options: { id: "left-aside" }, childs: [
                                     {
                                         ele: "div", styles: ["expander", "leftAsideExpanderInner", "pointer"], options: { id: "left-aside-hide" }, childs: [
                                             {
@@ -49,7 +49,7 @@ export const homeElements = {
                                 ]
                             },
                             {
-                                ele: "div", styles: ["expander", "rightAsideExpander", "pointer"], options: { id: "right-aside-show" }, childs: [
+                                ele: "div", css:["hidden"], styles: ["expander", "rightAsideExpander", "pointer"], options: { id: "right-aside-show" }, childs: [
                                     {
                                         ele: "svg", options: { width: 38, height: 10, fill: "var(--gray10)" }, xmlns: "http://www.w3.org/2000/svg", childs: [
                                             { ele: "path", options: { d: "M12 6V4C12 2.34315 13.3431 1 15 1H34C35.6569 1 37 2.34315 37 4V6C37 7.65685 35.6569 9 34 9H15C13.3431 9 12 7.65685 12 6Z" }, xmlns: "http://www.w3.org/2000/svg" },
@@ -59,7 +59,7 @@ export const homeElements = {
                                 ]
                             },
                             {
-                                ele: "aside", css: ["hidden", "invisible"], styles: ["aside", "rightAside"], options: { id: "right-aside" }, childs: [
+                                ele: "aside", css: [], styles: ["aside", "rightAside"], options: { id: "right-aside" }, childs: [
                                     {
                                         ele: "div", styles: ["expander", "rightAsideExpanderInner", "pointer"], options: { id: "right-aside-hide" }, childs: [
                                             {
@@ -82,7 +82,7 @@ export const homeElements = {
                                                 ele: "div", styles: ["typeInputContainer"], childs: [
                                                     { ele: "input", css: ["menu-input", "input", "nostyle-input"], styles: ["typeInputContainerInput"], options: { placeholder: "выберите элемент", name: "elements-input" } },
                                                     {
-                                                        ele: "ul", css: ["invisible", "hidden", "nostyle-list"], styles: ["typeInputContainerDdown"], options: { id: "elements-input-ddown" }, childs: [
+                                                        ele: "ul", css: ["hidden", "nostyle-list"], styles: ["typeInputContainerDdown"], options: { id: "elements-input-ddown" }, childs: [
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "изображение" } },
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "контейнер" } },
                                                             { ele: "li", css: ["ddown-item"], styles: ["typeInputContainerDdownItem"], options: { innerText: "кнопка" } },
@@ -96,13 +96,13 @@ export const homeElements = {
                                     {
                                         ele: "div", styles: ["elementsResultContainer"], options: { id: "elements-result" }, childs: [
                                             {
-                                                ele: "div", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["imageWrapp"], childs: [
+                                                ele: "div", css: ["pointer", "hidden", "result-element", "hideable"], styles: ["imageWrapp"], childs: [
                                                     { ele: "img", styles: ["imageMin"] }
                                                 ]
                                             },
-                                            { ele: "div", css: ["pointer", "hidden", "invisible", "result-element", "hideable"], styles: ["containerMin"], },
-                                            { ele: "button", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "btn-submit", "nostyle-btn"], styles: ["buttonMin", "resultsButtonMin"], options: { type: "button", innerText: "текст" } },
-                                            { ele: "input", css: ["pointer", "hidden", "invisible", "hideable", "result-element", "input", "nostyle-input"], styles: ["inputMin"], options: { placeholder: "поле ввода", type: "text", readOnly: true } },
+                                            { ele: "div", css: ["pointer", "hidden", "result-element", "hideable"], styles: ["containerMin"], },
+                                            { ele: "button", css: ["pointer", "hidden", "hideable", "result-element", "btn-submit", "nostyle-btn"], styles: ["buttonMin", "resultsButtonMin"], options: { type: "button", innerText: "текст" } },
+                                            { ele: "input", css: ["pointer", "hidden", "hideable", "result-element", "input", "nostyle-input"], styles: ["inputMin"], options: { placeholder: "поле ввода", type: "text", readOnly: true } },
                                         ]
                                     }
                                 ]
@@ -120,7 +120,7 @@ export const homeElements = {
                     //     ]
                     // },
                     // {
-                    //     ele: "header", css: ["hidden", "invisible"], styles: ["homeHeader"], options: { id: "navigation" }, childs: [
+                    //     ele: "header", css: ["hidden"], styles: ["homeHeader"], options: { id: "navigation" }, childs: [
                     //         {
                     //             ele: "nav", styles: ["nav"], childs: [
                     //                 {
@@ -245,7 +245,7 @@ export const homeElements = {
                 },
                 asideItems: {
                     "кнопка": {
-                        ele: "li", css: ["hidden", "invisible"], styles: ["leftAsideListItem"], childs: [
+                        ele: "li", css: ["hidden"], styles: ["leftAsideListItem"], childs: [
                             {
                                 ele: "header", styles: ["leftAsideListItemHeader"], childs: [
                                     { ele: "h4", styles: ["leftAsideListItemTitle"], options: { innerText: "кнопка" } }
@@ -269,7 +269,7 @@ export const homeElements = {
                         ]
                     },
                     "контейнер": {
-                        ele: "li", css: ["hidden", "invisible"], styles: ["leftAsideListItem"], childs: [
+                        ele: "li", css: ["hidden"], styles: ["leftAsideListItem"], childs: [
                             {
                                 ele: "header", styles: ["leftAsideListItemHeader"], childs: [
                                     { ele: "h4", styles: ["leftAsideListItemTitle"], options: { innerText: "контейнер" } }
@@ -292,7 +292,7 @@ export const homeElements = {
                         ]
                     },
                     "изображение": {
-                        ele: "li", css: ["hidden", "invisible"], styles: ["leftAsideListItem"], childs: [
+                        ele: "li", css: ["hidden"], styles: ["leftAsideListItem"], childs: [
                             {
                                 ele: "header", styles: ["leftAsideListItemHeader"], childs: [
                                     { ele: "h4", styles: ["leftAsideListItemTitle"], options: { innerText: "кнопка" } }
@@ -332,21 +332,21 @@ export const homeElements = {
             "position": "relative",
             "width": "100%",
             "height": "100%",
-            "min-height": "850px",
         },
         container: {
             "position": "fixed",
             "width": "100%",
             "height": "inherit",
-            "min-height": "850px",
-            "z-index": "10",
+            "min-height": "350px",
             "background-color": "var(--gray10)",
+            "z-index": "10",
+            "overflow": "auto",
         },
         aside: {
             "position": "absolute",
             "height": "calc(100% - 40px)",
             "width": "300px",
-            "min-height": "850px",
+            "min-height": "350px",
             "border-radius": "30px",
             "border": "2px solid var(--gray20)",
             "background-color": "var(--gray10)",

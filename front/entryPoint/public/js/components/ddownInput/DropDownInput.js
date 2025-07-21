@@ -18,20 +18,11 @@ class DropDownInput {
 
     show() {
         this.ddownRef.classList.remove("hidden");
-
-        setTimeout(() => {
-            this.ddownRef.classList.remove("invisible");
-        }, 10)
     }
 
     hide() {
-        this.ddownRef.classList.add("invisible");
-        setTimeout(() => {
-            this.ddownRef.classList.add("hidden");
-        }, 200)
+        this.ddownRef.classList.add("hidden");
     }
-
-
 
     showItems(...args) {
         let idx = args[0];
