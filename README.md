@@ -1,6 +1,7 @@
 javascript postgresql, <br>
 над csrf не заморачивался, <br>
 авторизация по почте не закончена <br>
+не доделал полный перенос css в js
 
 
 database auth <br>
