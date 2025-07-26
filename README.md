@@ -1,3 +1,4 @@
-javascript postgresql,
-над csrf не заморачивался,
-авторизация по почте не закончена
+javascript postgresql, <br>
+над csrf не заморачивался, <br>
+авторизация по почте не закончена <br>
+
