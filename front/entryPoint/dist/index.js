@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var cookie_parser_1 = __importDefault(require("cookie-parser"));
 var otherRoutes_1 = __importDefault(require("./routes/otherRoutes"));
-var staticPath = "/home/ayberk/qk/constructor/front/entryPoint/public";
+var staticPath = "/home/qk/work/constructor/front/entryPoint/public";
 var app = (0, express_1.default)();
 app.set('view engine', 'ejs');
 app.use((0, cookie_parser_1.default)());

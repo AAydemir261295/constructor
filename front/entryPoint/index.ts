@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import otherRoutes from "./routes/otherRoutes";
 
 
-const staticPath = "/home/ayberk/qk/constructor/front/entryPoint/public";
+const staticPath = "/home/qk/work/constructor/front/entryPoint/public";
 const app = express();
 
 
